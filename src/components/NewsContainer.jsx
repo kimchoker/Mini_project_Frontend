@@ -51,16 +51,12 @@ const NewsContainer = (props) => {
   return (
     <NewsBlock>
       <Images
-        src="https://lgcxydabfbch3774324.cdn.ntruss.com/KBO_FILE/news%2fimages%2f2023%2f05%2f03%2f202305032154775192_64525ad1cf077.jpg"
+        src={props.exp.news_Image_Url}
         alt=""
       />
       <Text onClick={()=>{getTheValue(props.exp.news_No)}}>
         <h2><b>{props.exp.news_Title}</b></h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-          earum atque repellat eaque suscipit aliquid facere quisquam at
-          blanditiis illo, sapiente dolorum temporibus.
-        </p>
+        <p>{props.exp.news_Short_Content}</p>
       </Text>
     </NewsBlock>
   );

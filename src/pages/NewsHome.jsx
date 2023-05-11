@@ -61,11 +61,11 @@ const NewsHome = () => {
     return (
         <NewsBlock> 
             <h1 className="News">NEWS</h1>
+            {console.log(news)}
             <NewsGrey>  
                 {currentPost && currentPost.map(news => {
                     return(
-                        <NewsContainer  exp = {{news_No : news.news_No,
-                             news_Title : news.news_Title}} />
+                        <NewsContainer  exp = {{news_No : news.news_No, news_Title : news.news_Title, news_Image_Url : news.news_Image_Url, news_Short_Content : news.news_Short_Content}} />
                     )
                 })}
             </NewsGrey>
