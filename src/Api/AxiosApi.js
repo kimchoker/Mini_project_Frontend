@@ -82,6 +82,18 @@ const AxiosApi = {
             id: id
         };
         return await axios.post(Backend + "/delete", del);
+    },
+
+    // 비밀번호 찾기
+    findPw : async(id) => {
+        const data = {
+            id: id,
+        };
+
+        const response =  axios.post(Backend + "findPw", data);
+        const isSent = response.data.isSent;
+
+        return isSent;
     }
 }
 

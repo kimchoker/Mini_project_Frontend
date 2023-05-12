@@ -212,20 +212,6 @@ const SignUp = () => {
         }
     }
 
-    // 이메일(아이디) 중복확인
-    const onClickIdCheck = async() => {
-        console.log("axios 날리기전 " + inputId);
-        const mailCheck = await AxiosApi.memberRegCheck(inputId);
-        console.log(mailCheck);
-        if(mailCheck.data === true) {
-            setIdMessage("사용 가능한 아이디입니다.")
-            setIsId(true);
-        } else {
-            setIdMessage("이미 사용중인 아이디입니다.")
-            setIsId(false); 
-        }
-    }   
-
 
 
     // 비밀번호 정규식 확인
@@ -268,14 +254,30 @@ const SignUp = () => {
             setIsNickName(false);    
         } else {
             setNickNameMessage("올바른 형식 입니다.");
-            setIsNickName(true);
+            
         }
     }
+
+    // 이메일(아이디) 중복확인
+    const onClickIdCheck = async() => {
+        console.log("axios 날리기전 " + inputId);
+        const mailCheck = await AxiosApi.memberRegCheck(inputId);
+        console.log(mailCheck);
+        if(mailCheck.data === true) {
+            setIdMessage("사용 가능한 아이디입니다.")
+            setIsId(true);
+        } else {
+            setIdMessage("이미 사용중인 아이디입니다.")
+            setIsId(false); 
+        }
+    }   
+
 
      // 닉네임 중복확인
      const onClickNickNameCheck = async() => {
         const nickNameCheck = await AxiosApi.memberNickname(inputNickName);
-        if(nickNameCheck === true) {
+        console.log(nickNameCheck);
+        if(nickNameCheck.data === true) {
             setNickNameMessage("사용 가능한 닉네임입니다.")
             setIsNickName(true);
         } else {
