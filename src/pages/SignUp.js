@@ -63,6 +63,8 @@ const Container = styled.div`
         height: auto; 
         line-height : normal; 
         padding: .8em .5em; 
+        background-color: #395144;
+        color: white;
         font-family: inherit; /* 폰트 상속 */
         border: 1px solid #999;
         border-radius: 18px; /* iSO 둥근모서리 제거 */
@@ -99,7 +101,7 @@ const Container = styled.div`
     width: 400px; /* 원하는 너비 설정 */
     height: 50px;
     color: white;
-    background-color: orange;
+    background-color: #395144;
     font-size: 15px;
     font-weight: 400;
     border-radius: 18px;

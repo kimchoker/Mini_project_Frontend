@@ -85,16 +85,16 @@ const AxiosApi = {
     },
 
     // 비밀번호 찾기
-    findPw : async(id) => {
+    findPw: async (id) => {
         const data = {
-            id: id,
+          id: id
         };
-
-        const response =  axios.post(Backend + "findPw", data);
-        const isSent = response.data.isSent;
-
+      
+        const response = await axios.post(Backend + "/findpw", data);
+        const isSent = response.data;
+        console.log(isSent);
         return isSent;
-    }
+      }
 }
 
 export default AxiosApi;
