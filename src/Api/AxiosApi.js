@@ -54,6 +54,7 @@ const AxiosApi = {
     // 회원조회 
 
     memberGet : async(id) => {
+        
         return await axios.get(Backend + `/member?id=${id}`);
         
     },
@@ -82,7 +83,19 @@ const AxiosApi = {
             id: id
         };
         return await axios.post(Backend + "/delete", del);
-    }
+    },
+
+    // 비밀번호 찾기
+    findPw: async (id) => {
+        const data = {
+          id: id
+        };
+      
+        const response = await axios.post(Backend + "/findpw", data);
+        const isSent = response.data;
+        console.log(isSent);
+        return isSent;
+      }
 }
 
 export default AxiosApi;

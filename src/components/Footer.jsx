@@ -26,7 +26,7 @@ function Footer() {
     const FooterNaviBar = styled.div`
         display: flex;
         position: fixed;
-        background-color: #6f2727;
+        background-color: #704F4F;
         bottom: 0;
         left: 0;
         width: 100vw;
@@ -48,7 +48,7 @@ function Footer() {
             </DesktopFooter>
 
             <FooterNaviBar>
-
+                
             </FooterNaviBar>
         </FooterBlock>
 

@@ -47,8 +47,8 @@ const MobileLogo = styled.div`
     margin-top: 25px;
     height: 50px;
     .logo{
-      width: 200px;
-      height: 75px;
+      width: 160px;
+    height: 75px;
 }
 
 @media (min-width: 768px) {
@@ -177,6 +177,11 @@ function Navigation() {
     { name: "SCHEDULE", address: "/schedule" },
 
     ];
+
+    const logout = () => {
+      handleLogout();
+      window.location.href = '/';
+    }
   
 
   return (
@@ -190,9 +195,10 @@ function Navigation() {
       <LoginBarBlock>
             
       {isLoggedIn ? (
+        
         <>
-          <Link to="/profile" className="shortcut">내 정보</Link>
-          <button onClick={handleLogout}>로그아웃</button>
+          <Link to="/mypage" className="shortcut">내 정보</Link>
+          <button onClick={logout}>로그아웃</button>
         </>
       ) : (
         <>
