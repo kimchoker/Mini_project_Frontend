@@ -67,12 +67,11 @@ const AxiosApi = {
 
     // 회원가입
     
-    memberReg : async(id, pwd, name, email) => {
+    memberReg : async(id, pwd, nickname) => {
         const member ={
             id : id,
             pwd: pwd,
-            name: name,
-            mail: email
+            nickname: nickname,
     };
     return await axios.post(Backend + "/new", member);
     },
@@ -95,7 +94,24 @@ const AxiosApi = {
         const isSent = response.data;
         console.log(isSent);
         return isSent;
+      },
+
+      // 내정보 수정하기
+      editInfo: async (updatedData) => {
+        const { id, pwd, nickname, favTeam } = updatedData;
+      
+        const response = await axios.post(Backend + "/editinfo", {
+        	id: id,
+          pwd: pwd,
+          nickname: nickname,
+          favTeam: favTeam
+        });
+      
+        const isUpdated = response.data;
+        console.log(isUpdated);
+        return isUpdated;
       }
+      
 }
 
 export default AxiosApi;
