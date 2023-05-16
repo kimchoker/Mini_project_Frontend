@@ -110,6 +110,7 @@ const Modal = (props) => {
                 <main>{children}</main>
                 <footer>
                     {type && <button onClick={confirm}>확인</button>}
+                    <button onClick={close}>확인</button>
                     <button onClick={close}>취소</button>
                 </footer>
             </section>

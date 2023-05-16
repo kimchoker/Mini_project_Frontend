@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AxiosApi from "../Api/AxiosApi";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import search from "../components/styles/images/search.png";
-import Pagination from "../utils/Pagination";
 import axios from "axios";
-import Home from "./Home";
-
+import Pagination from "../utils/Pagination";
 
 const Container = styled.div`
 
@@ -116,15 +115,13 @@ const Container = styled.div`
     }
     
     .write button {
-        width: 90px;
-        height: 35px;
         background-color:#008CBA;
         color: #fff;
         border: none;
-        padding: 5px 5px;
-        margin: 5px 5px;
+        padding: 10px 20px;
+        margin: 2px 2px;
         border-radius: 5px;
-        margin-left : 2px;
+        margin-left : 20px;
         margin-right: 2px;
         cursor: pointer;
     }
@@ -177,19 +174,16 @@ const Container = styled.div`
 `;
 
 
+const Search = () => {
+    const navigate = useNavigate();
 
-const Homeplate = () => {
-    const navigate = useNavigate("");
-
-    const [board, setBoard] = useState([]);
+    const [board, setBoard] = useState("");
     const [boardNo, setBoardNo] = useState("");
     const [boardTitle, setBoardTitle] = useState("");
-    const [boardDate, setBoardDate] = useState("");
-    const [boardContent, setBoardContent] = useState("");
+    const [boardDate, setBoardDate] = useState(""); 
 
-
-    const [title, setTitle] = useState("");
     const [word, setWord] = useState("");
+    const [title, setTitle] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
@@ -197,7 +191,6 @@ const Homeplate = () => {
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPost = board.slice(firstPostIndex, lastPostIndex);
-
 
     useEffect(()=> {
         const Board = async() => {
@@ -216,24 +209,19 @@ const Homeplate = () => {
     }, []);
 
     const onSubmit = async () => {
-       if(word.trim() === "") {
+        if(word.trim()=== "") {
             return;
         }
 
         navigate("/homeplate/search/" + word);
     };
 
-    const getBoardNo = () => {
-        navigate("/homeplate/contents" + title);
+    const getBoardNo = () =>{
+        navigate("/homeplate/contents/"+title);
     }
 
-    const handleTitleClick = async(title) => {
-        const rsp = await AxiosApi.HomeContent("ALL");
-        const boardContent =  rsp.data;
-        setBoardContent(boardContent);
-    }
 
-    return (
+    return(
         <Container>
             <h1>.</h1>
             <br />
@@ -255,7 +243,6 @@ const Homeplate = () => {
                                         <td>날짜</td>
                                     </tr>
                                 </thead>
-
                                 {boardNo && boardNo.map((boardNo, index)=>(
                                     <tr key = {index} onClick={()=>getBoardNo(boardNo)}>
                                         <th>{boardNo}</th>
@@ -263,23 +250,24 @@ const Homeplate = () => {
                                         <th>{boardDate[index]}</th>
                                     </tr>
                                 ))}
-                               </table>
-                           </div>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
             <footer>
 
-             <div className="search-container">
+
+            <div className="search-container">
                 <input onChange={(e) => {
                     setWord(e.target.value);
-                    console.log(word);
-                }} 
+                }}
                 onKeyPress={(e)=>{
                     if(e.key === 'Enter') {
                         onSubmit();
                     }
-                }}placeholder="검색어를 입력하세요." value={word}/>
+                }} placeholder="검색어를 입력하세요."/>
+
 
                 <button type="submit" onClick={()=> {
                     onSubmit();
@@ -293,15 +281,15 @@ const Homeplate = () => {
                 boardTitle: board.boardTitle,
                 boardDate: board.boardDate,
             }))}
-            
-            <Pagination totalPosts={board.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage}/>
-
+                
+            <Pagination totalPosts={board.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage}/>    
+                
                 <div className="write">
                     <button onClick={()=>navigate('/homeplate/write')}>글쓰기</button>
                 </div>
             </footer>
-        </Container> 
-       
+        </Container>
     );
 };
-export default Homeplate;
+
+export default Search;
