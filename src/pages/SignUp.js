@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
-import { async } from "q";
 
 
 const Container = styled.div`

@@ -48,7 +48,7 @@ function Footer() {
             </DesktopFooter>
 
             <FooterNaviBar>
-
+                
             </FooterNaviBar>
         </FooterBlock>
 

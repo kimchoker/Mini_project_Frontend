@@ -167,7 +167,7 @@ const FindPw = () => {
     
         // 팝업
      const [modalOpen, setModalOpen] = useState(false);
-     const [modalText, setModelText] = useState("");
+     const [modalText, setModalText] = useState("");
 
      
 
@@ -195,11 +195,11 @@ const FindPw = () => {
         try {
           const isSent = await AxiosApi.findPw(inputId);
           if (isSent === true) {
-            setModelText("이메일이 전송되었습니다.");
+            setModalText("이메일이 전송되었습니다.");
             setModalOpen(true);
             console.log(isSent);
           } else {
-            setModelText("존재하지 않는 아이디입니다.");
+            setModalText("존재하지 않는 아이디입니다.");
             setModalOpen(true);
             console.log(isSent);
           }

@@ -11,6 +11,7 @@ import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
 import View from "./pages/View";
+import MyPage from "./pages/MyPage";
 
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/findpw" element={<FindPw />} />
             <Route path="/newshome/view" element={<View/>} />
+            <Route path="/mypage" element={<MyPage />} />
           </Routes>
         <Footer />
       </BrowserRouter>

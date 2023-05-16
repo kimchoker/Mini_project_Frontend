@@ -54,6 +54,7 @@ const AxiosApi = {
     // 회원조회 
 
     memberGet : async(id) => {
+        
         return await axios.get(Backend + `/member?id=${id}`);
         
     },

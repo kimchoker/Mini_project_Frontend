@@ -93,17 +93,13 @@ import Modal from "../utils/Modal";
     const Login = () => {
 
         const context = useContext(UserContext);
-        const { setUserId, setPassword, handleLogin } = context;
+        const { setUserId, setPassword ,handleLogin } = context;
         const navigate = useNavigate(); // 라우터 이동을 하기 위해서 
 
         // 키보드 입력 
         const [inputId, setInputId] = useState("");
         const [inputPw, setInputPw] = useState("");
-
-        // 오류 메시지 출력
-        const [idMsg, setIdMsg] = useState("");
-        const [pwMsg, setPwMsg] = useState("");
-
+				
         //팝업 처리
         const [modalOpen, setModalopen] = useState(false);
         const closeModal = () => {
@@ -113,27 +109,27 @@ import Modal from "../utils/Modal";
         const onClickLogin = async() => {
             // 로그인을 위한 axios 호출
             const response = await AxiosApi.memberLogin(inputId, inputPw);
+        
             console.log(response.data);
             if(response.data === true) {
-      
               setUserId(inputId);
               setPassword(inputPw);
               handleLogin();
               navigate("/");
             } else {
-                console.log("로그인 에러");
-                setModalopen(true);
+              console.log("로그인 에러");
+              setModalopen(true);
             }
           }
 
-          const onChangeId = (e) => {
-            setInputId(e.target.value);
+      	const onChangeId = (e) => {
+          setInputId(e.target.value);
         }
     
         const onChangePw = (e) => {
-            const passwordCurrent = e.target.value;
-            setInputPw(passwordCurrent)
-          }
+          const passwordCurrent = e.target.value;
+          setInputPw(passwordCurrent)
+        }
 
 
         return (
@@ -146,7 +142,7 @@ import Modal from "../utils/Modal";
                 </div>
 
                 <div className="item2">
-                    <Input placeholder="비밀번호"  value ={inputPw} onChange={onChangePw} />
+                    <Input type="password" placeholder="비밀번호"  value ={inputPw} onChange={onChangePw} />
                 </div>
                 <div className="item2">
                     <button className="login_button"  onClick={onClickLogin}>LOGIN</button>
