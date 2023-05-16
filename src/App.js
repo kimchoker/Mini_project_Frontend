@@ -9,8 +9,11 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
-import FindPw from "./pages/FindPassword";
+import FindPw from "./pages/ FindPw";
 import View from "./pages/View";
+import Write from "./pages/Write";
+import Search from "./pages/HomePlateSearch";
+import HomeContent from "./pages/HomeContents";
 import MyPage from "./pages/MyPage";
 
 
