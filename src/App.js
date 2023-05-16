@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
-import FindPw from "./pages/ FindPw";
+import FindPw from "./pages/FindPassword";
 import View from "./pages/View";
 import Write from "./pages/Write";
 import Search from "./pages/HomePlateSearch";
@@ -53,8 +53,16 @@ export default function App() {
           <Schedule />
           <Footer />
         </>} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/findpw" element={<FindPw />} />
+        <Route path="/signup" element={<>
+          <Navigation />
+          <SignUp />
+          <Footer /> 
+        </>} />
+        <Route path="/findpw" element={<>
+          <Navigation />
+          <FindPw />
+          <Footer />
+        </>} />
         <Route path="/newshome/view" element={<>
           <Navigation />
           <View />
