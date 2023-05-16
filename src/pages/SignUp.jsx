@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
-import { async } from "q";
 
 
 const Container = styled.div`
@@ -63,6 +62,8 @@ const Container = styled.div`
         height: auto; 
         line-height : normal; 
         padding: .8em .5em; 
+        background-color: #395144;
+        color: white;
         font-family: inherit; /* 폰트 상속 */
         border: 1px solid #999;
         border-radius: 18px; /* iSO 둥근모서리 제거 */
@@ -99,7 +100,7 @@ const Container = styled.div`
     width: 400px; /* 원하는 너비 설정 */
     height: 50px;
     color: white;
-    background-color: orange;
+    background-color: #395144;
     font-size: 15px;
     font-weight: 400;
     border-radius: 18px;
@@ -212,20 +213,6 @@ const SignUp = () => {
         }
     }
 
-    // 이메일(아이디) 중복확인
-    const onClickIdCheck = async() => {
-        console.log("axios 날리기전 " + inputId);
-        const mailCheck = await AxiosApi.memberRegCheck(inputId);
-        console.log(mailCheck);
-        if(mailCheck.data === true) {
-            setIdMessage("사용 가능한 아이디입니다.")
-            setIsId(true);
-        } else {
-            setIdMessage("이미 사용중인 아이디입니다.")
-            setIsId(false); 
-        }
-    }   
-
 
 
     // 비밀번호 정규식 확인
@@ -268,14 +255,30 @@ const SignUp = () => {
             setIsNickName(false);    
         } else {
             setNickNameMessage("올바른 형식 입니다.");
-            setIsNickName(true);
+            
         }
     }
+
+    // 이메일(아이디) 중복확인
+    const onClickIdCheck = async() => {
+        console.log("axios 날리기전 " + inputId);
+        const mailCheck = await AxiosApi.memberRegCheck(inputId);
+        console.log(mailCheck);
+        if(mailCheck.data === true) {
+            setIdMessage("사용 가능한 아이디입니다.")
+            setIsId(true);
+        } else {
+            setIdMessage("이미 사용중인 아이디입니다.")
+            setIsId(false); 
+        }
+    }   
+
 
      // 닉네임 중복확인
      const onClickNickNameCheck = async() => {
         const nickNameCheck = await AxiosApi.memberNickname(inputNickName);
-        if(nickNameCheck === true) {
+        console.log(nickNameCheck);
+        if(nickNameCheck.data === true) {
             setNickNameMessage("사용 가능한 닉네임입니다.")
             setIsNickName(true);
         } else {
