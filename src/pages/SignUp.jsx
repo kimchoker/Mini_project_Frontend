@@ -13,19 +13,20 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
 
   h2 {
     margin-right: 600px;
     margin-bottom: 100px;
+    font-weight: bold;
   }
-.sign {
-    
-    font: normal normal bold 24px/35px Poppins;
-    display: flex;
-    letter-spacing: 0px;
-    color: #313131;
-    opacity: 1;
-}
+	.sign {
+			
+		display: flex;
+		letter-spacing: 0px;
+		color: #313131;
+		opacity: 1;
+	}
 
   .item1 {
     margin-top: 100px;
@@ -60,32 +61,31 @@ const Container = styled.div`
     display: flex;
     align-items: center;
 
-    .check {
+  .check {
         
-        width: 80px; 
-        height: auto; 
-        line-height : normal; 
-        padding: .8em .5em; 
-        background-color: #395144;
-        color: white;
-        font-family: inherit; /* 폰트 상속 */
-        border: 1px solid #999;
-        border-radius: 18px; /* iSO 둥근모서리 제거 */
-        outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
-        cursor: pointer;
-    }
+    width: 80px; 
+    height: auto; 
+    line-height : normal; 
+    padding: .8em .5em; 
+    background-color: #395144;
+    color: white;
+    font-family: inherit; /* 폰트 상속 */
+    border: 1px solid #999;
+    border-radius: 18px; /* iSO 둥근모서리 제거 */
+    outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+    cursor: pointer;
   }
+}
 
-  .hint {
-      display: flex;
-      margin-top: -5px;
-      margin-bottom: 10px;
-      
-      justify-content:right;
-      align-items:center;
-      font-size: 12px;
-      color: #999;
-  }
+.hint {
+  display: flex;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  justify-content:right;
+  align-items:center;
+  font-size: 12px;
+  color: #999;
+}
   /* .success {
     color: royalblue;
   }
@@ -135,7 +135,6 @@ const Container = styled.div`
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 50px;
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 26px;
     font-weight: bold;
     width: 400px; /* 원하는 너비 설정 */

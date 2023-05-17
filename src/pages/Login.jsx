@@ -20,11 +20,18 @@ import css from "styled-components";
         align-items: center;
         height: 100vh;
         width: 100vw;
-        font-family: 'Nanum Gothic', sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
 
         .field {
             width: 100%;
             height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .field {
+                display: none;
+            }
+            background-color: #395144;
         }
     `;
 
@@ -175,7 +182,7 @@ import css from "styled-components";
                             <Input type="password" placeholder="비밀번호"  value ={inputPw} onChange={onChangePw} />
                         </div>
                         <div className="item2">
-                            <button className="login_button"  onClick={onClickLogin}>LOGIN</button>
+                            <button className="login_button"  onClick={onClickLogin}>로그인</button>
                         </div>
                         <div className="else">
                             <Link to="/findpw" className="elseLink1" >비밀번호 찾기</Link>
