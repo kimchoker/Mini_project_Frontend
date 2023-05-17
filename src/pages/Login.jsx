@@ -24,7 +24,9 @@ import css from "styled-components";
 
         .field {
             width: 100%;
-            height: auto;
+            height: 100vh; /* 뷰포트의 세로 크기에 맞게 조정 */
+            object-fit: cover;
+            
         }
 
         @media (max-width: 768px) {
