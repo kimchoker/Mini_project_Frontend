@@ -54,7 +54,6 @@ const AxiosApi = {
     // 회원조회 
 
     memberGet : async(id) => {
-        
         return await axios.get(Backend + `/member?id=${id}`);
         
     },
@@ -84,18 +83,15 @@ const AxiosApi = {
         };
         return await axios.post(Backend + "/delete", del);
     },
-
-    // 비밀번호 찾기
-    findPw: async (id) => {
-        const data = {
-          id: id
-        };
-      
-        const response = await axios.post(Backend + "/findpw", data);
-        const isSent = response.data;
-        console.log(isSent);
-        return isSent;
-      }
+    Homeplate: async(boardTitle) => {
+        return await axios.get(Backend + `/homeplate?boardTitle=${boardTitle}`);
+    },
+    HomeContent : async(boardNo) => {
+        return await axios.get(Backend + `/homeplate/contents?boardNo=${boardNo}`);
+    },
+    HomeSearch : async(boardTitle) => {
+        return await axios.get(Backend + `/homeplate/search?boardTitle=${boardTitle}`);
+    }
 }
 
 export default AxiosApi;

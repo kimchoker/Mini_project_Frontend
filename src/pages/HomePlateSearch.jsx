@@ -29,7 +29,7 @@ const Container = styled.div`
 
     th {
         text-align: center;
-        height: 65px;
+        height: 40px;
     }
 
     th, td {
@@ -213,11 +213,11 @@ const Search = () => {
             return;
         }
 
-        navigate("/homeplate/search/" + word);
+        navigate(`/homeplate/search/${word}`);
     };
 
-    const getBoardNo = () =>{
-        navigate("/homeplate/contents/"+title);
+    const getBoardNo = (selectBoardNo) =>{
+        navigate(`/homeplate/contents/${selectBoardNo}`);
     }
 
 
