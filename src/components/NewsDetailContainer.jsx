@@ -5,20 +5,28 @@ const NewsBlock = styled.div`
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
-    background-color: #d6d6d6;
+    background-color: #f6f6f6;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
     padding: 40px;
+  h1{
+    font-family: 'Nanum_Gothic';
+    border-bottom: 2px solid black;
+    padding-bottom: 40px;
+  }
+  p{
+    font-family: 'Nanum_Gothic';
+  }
 `;
 
 const NewsDetailPage = (props) => {
     return(
         <NewsBlock>
             <h1>{props.exp.news_Title}</h1>
-            <img src="https://firebasestorage.googleapis.com/v0/b/miniproject-5e4db.appspot.com/o/Img01.jpg?alt=media&token=fbfe0360-0873-4e3d-9dbe-1077bf52f415" alt="Error" />
-            <p>{props.exp.news_Content}</p>
+            <img src={props.exp.news_Image_Url}alt="Error" />
+            <p>{props.exp.news_Long_Content}</p>
         </NewsBlock>
     );
 }

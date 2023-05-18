@@ -3,7 +3,7 @@ import AxiosApi from "../Api/AxiosApi";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import search from "../components/styles/images/search.png";
+import search from "../images/search.png";
 import axios from "axios";
 import Pagination from "../utils/Pagination";
 

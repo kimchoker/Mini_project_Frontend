@@ -1,4 +1,4 @@
-import logo from "./styles/images/Logo.png"
+import logo from "../images/Logo.png"
 import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
 import styled from "styled-components";

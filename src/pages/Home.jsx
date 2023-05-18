@@ -1,17 +1,14 @@
 import styled from "styled-components";
-import Doosan from "../components/styles/images/Doosan.png"
-import SSG from "../components/styles/images/SSG.png"
-import Hamhwa from "../components/styles/images/Hanhwa.png"
-import Heroes from "../components/styles/images/Heroes.png"
-import KIA from "../components/styles/images/KIA.png"
-import KT from "../components/styles/images/KT.png"
-import LG from "../components/styles/images/LG.png"
-import NC from "../components/styles/images/NC.png"
-import Samsung from "../components/styles/images/Samsung.png"
-import Lotte from "../components/styles/images/Lotte.png"
-import { useState } from "react";
-import { useEffect } from "react";
-import AxiosApi from "../Api/AxiosApi";
+import Doosan from "../images/Doosan.png"
+import SSG from "../images/SSG.png"
+import Hamhwa from "../images/Hanhwa.png"
+import Heroes from "../images/Heroes.png"
+import KIA from "../images/KIA.png"
+import KT from "../images/KT.png"
+import LG from "../images/LG.png"
+import NC from "../images/NC.png"
+import Samsung from "../images/Samsung.png"
+import Lotte from "../images/Lotte.png"
 
 const Homeblock = styled.div`
   display: block;
@@ -84,12 +81,7 @@ const StandingBlock = styled.div`
         th {
             height: 45px;
         }
-
-
 `;
-
-
-
 
     const TeamShortcut = styled.div`
         position: absolute;
@@ -111,15 +103,6 @@ const StandingBlock = styled.div`
     `;
 
 const Home = () => {
-    const [teamRanking, setTeamRanking] = useState("");
-
-    useEffect (()=>{
-        const teamRanking = async() => {
-            const rsp = await AxiosApi.getTeamRanking("ALL");
-            if(rsp.status===200) setTeamRanking(rsp.data);
-        }
-        teamRanking();
-    }, [])
 
      return (
         <Homeblock>
@@ -143,17 +126,6 @@ const Home = () => {
                             <th>승차</th>
                         </tr>
                     </table>
-                        
-                    {teamRanking && teamRanking.map(team =>(
-                        <table key={team.team_Name}>
-                            <tr>
-                                <th>{team.team_Name}</th>
-                                <th>{team.team_Win}</th>
-                                <th>{team.team_Lose}</th>
-                                <th>{team.team_Win_Ratio}</th>
-                            </tr>
-                        </table>
-                    ))}
                 </StandingBlock>
             </Container>
             <TeamShortcut>

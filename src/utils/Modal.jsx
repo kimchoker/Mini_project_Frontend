@@ -25,7 +25,8 @@ const ModalStyle = styled.div`
   }
   .modal > section {
     width: 90%;
-    max-width: 450px;
+    max-width: 350px;
+    text-align: center;
     margin: 0 auto;
     border-radius: 0.3rem;
     background-color: #fff;
@@ -35,9 +36,11 @@ const ModalStyle = styled.div`
   }
   .modal > section > header {
     position: relative;
+    text-align: left;
     padding: 16px 64px 16px 16px;
-    background-color: #f1f1f1;
+    background-color: #395144;
     font-weight: 700;
+    color: white;
   }
   .modal > section > header button {
     position: absolute;
@@ -52,8 +55,7 @@ const ModalStyle = styled.div`
   }
   .modal > section > main {
     padding: 16px;
-    border-bottom: 1px solid #dee2e6;
-    border-top: 1px solid #dee2e6;
+    
   }
   .modal > section > footer {
     padding: 12px 16px;
@@ -62,7 +64,7 @@ const ModalStyle = styled.div`
   .modal > section > footer button {
     padding: 6px 12px;
     color: #fff;
-    background-color: #6c757d;
+    background-color: #395144;
     border-radius: 5px;
     font-size: 13px;
   }
@@ -109,7 +111,7 @@ const Modal = (props) => {
                 </header>
                 <main>{children}</main>
                 <footer>
-                    {type && <button onClick={confirm}>확인</button>}
+                    {type && <button onClick={confirm}>취소</button>}
                     <button onClick={close}>확인</button>
                 </footer>
             </section>

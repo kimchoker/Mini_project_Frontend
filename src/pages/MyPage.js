@@ -175,8 +175,13 @@ const Select = styled.select`
   font-family: inherit; /* 폰트 상속 */
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
+	text-align: center;
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+	
 `;
+
+
+
 
 const Desc = styled.p`
 	float: left;
@@ -195,8 +200,9 @@ const MyPage = () => {
 		const [inputConPw, setInputConPw] = useState("");
 		const [inputNickName, setInputNickName] = useState("");
 		const [inputFavTeam, setInputFavTeam] = useState("");
-
-
+    const [originFavTeam, setOriginFavTeam] = useState("");
+    const [originNickname, setOriginNicknme] = useState("");
+    const originPwd = password;
 
 		useEffect(() => {
 			const fetchOriginInfo = async () => {
@@ -205,15 +211,20 @@ const MyPage = () => {
 					const data = response.data;
 					setInputNickName(data[0].nickname);
 					setInputFavTeam(data[0].favTeam);
+          setOriginFavTeam(data[0].favTeam);
+          setOriginNicknme(data[0].nickname);
+          
 				} catch (error) {
 					console.log(error);
 				}
 			};
 	
 			fetchOriginInfo();
+      
 		}, [userId]);
 
-		
+    
+
     
 
     // 오류 메시지
@@ -317,10 +328,32 @@ const MyPage = () => {
 
     
 
-    const onClickEdit = async() => {
-				setModalText("내 정보 수정이 완료되었습니다.");
-        modalOpen(true);        
-    }
+    const onClickEdit = async () => {
+      try {
+        
+        const updatedData = {
+          id: userId,
+          pwd: inputNewPw || originPwd,
+          nickname: inputNickName,
+          favTeam: inputFavTeam
+        };
+         console.log(inputFavTeam);
+    
+        // editInfo 함수 호출
+        const isUpdated = await AxiosApi.editInfo(updatedData);
+    
+        if (isUpdated) {
+          setModalText("내 정보 수정이 완료되었습니다.");
+        } else {
+          setModalText("내 정보 수정에 실패하였습니다.");
+        }
+    
+        setModalOpen(true);
+      } catch (error) {
+        console.error("내 정보 수정 에러:", error);
+      }
+    };
+    
 
 
     return(
@@ -345,7 +378,7 @@ const MyPage = () => {
         
         <div className="item4">
 				<Desc>응원구단</Desc>
-        <Select>
+				<Select value={inputFavTeam} onChange={(e) => setInputFavTeam(e.target.value)}>
 						<option value="0">응원하는 구단을 선택하세요</option>
             <option value="1">SSG 랜더스</option>
             <option value="2">두산 베어스</option>
@@ -368,7 +401,7 @@ const MyPage = () => {
 				</div>
 				<div className="hint">
 						{inputNowPw.length > 0 && (
-										<span className={`message ${isNowPw ? 'success' : 'error'}`}>{nowPwMessage}</span>)}
+							<span>{nowPwMessage}</span>)}
 				</div>
         <div className="item1">
 					
@@ -376,7 +409,7 @@ const MyPage = () => {
         </div>
         <div className="hint">
                 {inputNewPw.length > 0 && (
-                <span className={`message ${isNewPw ? 'success' : 'error'}`}>{pwMessage}</span>)}
+                <span>{pwMessage}</span>)}
         </div>
         <div className="item1">
 					
@@ -384,13 +417,13 @@ const MyPage = () => {
         </div>
         <div className="hint">
                 {inputConPw.length > 0 && (
-                <span className={`message ${isConPw ? 'success' : 'error'}`}>{conPwMessage}</span>)}
+                <span>{conPwMessage}</span>)}
         </div>
 
-        <div className="item2">
-            {(isNowPw && isNewPw && isConPw && isNickName) ? 
-            <button className="enable-button" onClick={onClickEdit}>저장하기</button> :
-            <button className="disable-button">SIGN UP</button>}
+        <div className="item1">
+            {((isNowPw && isNewPw && isConPw) || (isNickName && inputNickName !== originNickname) || (inputFavTeam !== originFavTeam)) ? 
+            <button className="enable-button" onClick={onClickEdit}>수정완료</button> :
+            <button className="disable-button">수정완료</button>}
             <Modal open={modalOpen} close={closeModal} header="Bench Clearing">{modalText}</Modal>
         </div>
         

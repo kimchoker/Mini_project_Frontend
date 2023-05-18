@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import search from "../components/styles/images/search.png";
+import search from "../images/search.png";
 import Pagination from "../utils/Pagination";
 import axios from "axios";
 import Home from "./Home";

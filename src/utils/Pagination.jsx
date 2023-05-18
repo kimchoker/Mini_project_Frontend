@@ -10,7 +10,7 @@ const ButtonBox = styled.div`
     font-family: 'inter';
     transform: skew(-10deg);
     font-weight: bold;
-    color: #6f2727;
+    color: #395144;
     font-family: 'inter';
     font-weight: 800;
     font-size: 30px;

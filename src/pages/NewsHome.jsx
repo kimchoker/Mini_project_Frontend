@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import NewsContainer from"../components/NewsContainer";
-import Pagination from "../utils/Pagination";
-
+import NewsNavi from "../components/NewsNavi";
+import Test from "./Navbar"
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import Pagination from "../components/Paginatoin";
 const NewsBlock = styled.div`
 
     display: flex;
@@ -23,6 +26,7 @@ const NewsBlock = styled.div`
     }
     .News {
         font-family: 'inter';
+        font-size: 45px;
         transform: skew(-10deg);
         color: #6f2727;
     }
@@ -30,10 +34,11 @@ const NewsBlock = styled.div`
 `;
 
 const NewsGrey = styled.div`
+    border-radius: 8px;
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
-    background-color: #d6d6d6;
+    width: 1200px;
+    background-color: #f6f6f6;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,36 +46,62 @@ const NewsGrey = styled.div`
     padding: 40px;
 `;
 
-const NewsHome = () => {
-    const [news, setNews] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postPerpage, setPosetPerPage] = useState(8);
-   
-    useEffect (()=>{
-        const news = async() => {
-            const rsp = await AxiosApi.getNews("ALL");
-            if(rsp.status === 200)  setNews(rsp.data);
-        }
-        news();
-    },[])
 
-    const lastPostIndex = currentPage * postPerpage;
-    const firtPostIndex = lastPostIndex - postPerpage
-    const currentPost = news.slice(firtPostIndex, lastPostIndex);
-    
-    return (
-        <NewsBlock> 
-            <h1 className="News">NEWS</h1>
-            {console.log(news)}
-            <NewsGrey>  
-                {currentPost && currentPost.map(news => {
-                    return(
-                        <NewsContainer  exp = {{news_No : news.news_No, news_Title : news.news_Title, news_Image_Url : news.news_Image_Url, news_Short_Content : news.news_Short_Content}} />
-                    )
-                })}
-            </NewsGrey>
-            <Pagination totalPosts={news.length} postsPerPage={postPerpage} setCurrentPage={setCurrentPage}/>
-        </NewsBlock> 
-    )
+const NewsHome = () => {
+  const [news, setNews] = useState([]);
+  const [category, setCategory] = useState('All');
+  const [resetNews, setResetNews] = useState(false);
+  const [totalPage, setTotlaPage] = useState(0);
+  useEffect(() => {
+    const News = async () => {
+      const rsp = await AxiosApi.getShortDetailNews(category ,1);
+      if (rsp.status === 200) setNews(rsp.data);
+    }
+    News();
+  }, [category,resetNews]);
+
+  useEffect(() => {
+    const getTotalPage = async () => {
+      const rsp = await AxiosApi.getNewsSize(category);
+      if(rsp.status===200)  setTotlaPage(rsp.data);
+    }
+    getTotalPage();
+  },[category,resetNews]);
+
+  const onSelect = useCallback(category => {
+    setCategory(category);
+    setResetNews(true); 
+  }, []);
+  const onEnter = useCallback(category =>{
+      setCategory(category);
+      setResetNews(true)
+  },[])
+  
+  return (
+    <NewsBlock>
+      <h1 className="News">NEWS</h1>
+      <NewsNavi category={category} onSelect={onSelect} onEnter={onEnter}/>
+      <NewsGrey>
+      {news.length === 0 ? (
+        <h2>{category}와 일치하는 검색결과는 없습니다.</h2>
+          ) : (
+          news.map((newsItem) => (
+          <NewsContainer
+            key={newsItem.news_No}
+              exp={{
+                news_No: newsItem.news_No,
+                news_Title: newsItem.news_Title,
+                news_Image_Url: newsItem.news_Image_Url,
+                news_Short_Content: newsItem.news_Short_Content
+            }}
+          />
+        ))
+      )}
+      </NewsGrey>
+      <Pagination value={totalPage}/>
+    </NewsBlock>
+  );
 }
+
 export default NewsHome;
+  

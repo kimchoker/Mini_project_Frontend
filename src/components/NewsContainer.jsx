@@ -1,14 +1,14 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NewsBlock = styled.div`
   width: auto;
   height: auto;
   display: flex;
-  background-color: white;
+  background-color: #f6f6f6;
   box-shadow: 10px 10px 10px rgb(180, 180, 180);
-  
+  border-radius: 8px;
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
@@ -18,27 +18,31 @@ const NewsBlock = styled.div`
 
 
 const Images = styled.img`
-  width: 200px;
-  height: 120px;
+  width: 200px; 
+  height: 120px; 
   margin: 10px;
+  object-fit: cover;
 `;
+
 
 const Text = styled.div`
   display: flex;
   flex-direction: column;
-  h1 {
+  justify-content: center;
+  padding: 0px;
+  h2 {
+    font-family: 'Nanum_Gothic';
     display: inline-block;
     position: relative;
+    margin: 10px 0px;
   }
-
   h2:hover {
     color: #6f2727;
   }
+  p{
+    font-family: 'Nanum_Gothic';
+  }
 `;
-
-
-
-
 
 const NewsContainer = (props) => {
   const navigate = useNavigate();
@@ -52,10 +56,10 @@ const NewsContainer = (props) => {
     <NewsBlock>
       <Images
         src={props.exp.news_Image_Url}
-        alt=""
+        alt="Error"
       />
       <Text onClick={()=>{getTheValue(props.exp.news_No)}}>
-        <h2><b>{props.exp.news_Title}</b></h2>
+        <h2>{props.exp.news_Title}</h2>
         <p>{props.exp.news_Short_Content}</p>
       </Text>
     </NewsBlock>
