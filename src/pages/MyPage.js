@@ -147,7 +147,10 @@ const Container = styled.div`
     border: orange;
   }
 
-	
+	@media(max-width: 768px) {
+    
+  }
+  
 `;
 
 const Input = styled.input`
