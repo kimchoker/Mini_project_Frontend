@@ -17,8 +17,8 @@ const NewsBlock = styled.div`
     align-items: center;
     gap: 30px;
     @font-face {
-    font-family: "inter";
-    src: url(./fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+        font-family: "inter";
+        src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
     }
     .News {
         font-family: 'inter';

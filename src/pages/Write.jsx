@@ -131,16 +131,16 @@ const Write = () => {
         navigate('/homeplate');
     }
 
-    const fileInput = useRef(null);
+    // const fileInput = useRef(null);
    
     //첨부파일
-    const handleUpload = () => {
-        fileInput.current.click();
-    };
+    // const handleUpload = () => {
+    //     fileInput.current.click();
+    // };
 
-    const handleFileSelect = (e) => {
-        const file = e.target.files[0];
-    };
+    // const handleFileSelect = (e) => {
+    //     const file = e.target.files[0];
+    // };
     
     
     const [fontSize, setFontSize] = useState('10px');
@@ -168,17 +168,17 @@ const Write = () => {
     }
 
     // 파일읽기
-    const handleFileRead = (e) => {
-        const content = e.target.result;
-        setFileCotent(content);
-    }
+    // const handleFileRead = (e) => {
+    //     const content = e.target.result;
+    //     setFileCotent(content);
+    // }
 
     // 파일첨부
-    const handleFileChosen = (file) => {
-        const fileReader = new FileReader();
-        fileReader.onload = handleFileRead;
-        fileReader.readAsText(file);
-    }
+    // const handleFileChosen = (file) => {
+    //     const fileReader = new FileReader();
+    //     fileReader.onload = handleFileRead;
+    //     fileReader.readAsText(file);
+    // }
 
     return(
         
@@ -229,7 +229,7 @@ const Write = () => {
                         </Modal>
                     </div>
                  
-                    <input type="file" ref={fileInput} style={{display:"none"}} onChange={handleFileSelect}></input>
+                    
                 </div>
                
                 <div className="content">
@@ -237,10 +237,6 @@ const Write = () => {
                 </div>
                 <br />
                 
-                <div className="form-wrapper">
-                    <input type="file" onChange={e=>handleFileChosen(e.target.files[0])}></input>
-                </div>
-
                 <div className="back">
                     <button onClick={handleBack}>목록 보기</button>
                 </div>

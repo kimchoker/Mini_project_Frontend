@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
 const ButtonBox = styled.div`
   display: flex;
   gap: 30px;
