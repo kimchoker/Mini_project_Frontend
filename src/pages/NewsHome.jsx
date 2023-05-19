@@ -46,19 +46,51 @@ const NewsGrey = styled.div`
     padding: 40px;
 `;
 
+const PageNaviDiv = styled.div`
+  display: flex;
+  list-style: none;
+  gap: 37px;
+  font-family: 'Nanum_Gothic';
+  font-weight: bold;
+  font-size: x-large;
+
+  li {
+    color: black;
+    border-right: 5px solid #395144;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    position: relative;
+    display: inline-block;
+  }
+
+  li:last-child {
+    border: none;
+  }
+
+  li:hover {
+    cursor: pointer;
+    color: #395144;
+    transform: scale(1.05);
+  }
+`;
+
+
 
 const NewsHome = () => {
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState('All');
   const [resetNews, setResetNews] = useState(false);
-  const [totalPage, setTotlaPage] = useState(0);
+  const [totalPage, setTotlaPage] = useState([]);
+  const [page, setPage] = useState(1);
+
+
   useEffect(() => {
     const News = async () => {
-      const rsp = await AxiosApi.getShortDetailNews(category ,1);
+      const rsp = await AxiosApi.getShortDetailNews(category ,page);
       if (rsp.status === 200) setNews(rsp.data);
     }
     News();
-  }, [category,resetNews]);
+  }, [category,resetNews, page]);
 
   useEffect(() => {
     const getTotalPage = async () => {
@@ -71,11 +103,19 @@ const NewsHome = () => {
   const onSelect = useCallback(category => {
     setCategory(category);
     setResetNews(true); 
+    setPage(1);
   }, []);
   const onEnter = useCallback(category =>{
       setCategory(category);
       setResetNews(true)
   },[])
+
+  const getThePageNumber = (page) => {
+    console.log(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setPage(page);
+  }
+  
   
   return (
     <NewsBlock>
@@ -98,7 +138,11 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <Pagination value={totalPage}/>
+      <PageNaviDiv>
+      {totalPage.map((page) => (
+        <li key={page} onClick={() => getThePageNumber(page)}>{page}</li>
+      ))}
+      </PageNaviDiv>
     </NewsBlock>
   );
 }

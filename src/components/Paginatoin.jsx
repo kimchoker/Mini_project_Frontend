@@ -1,23 +1,12 @@
 import React from "react";
 
 const Pagination = (props) => {
-  const totalPage = props.value;
-
-  const getThePageValue = (e) => {
-    
-  }
-  const displayPageNumber = () => {
-    const page = [];
-    for (let i = 1; i <= Math.ceil(totalPage/10); i++) {
-        page.push(<li key={i} onClick={getThePageValue}>{i}</li>);
-    }
-    return page;
-  };
+  const {value, onSelectingPage} = props;
 
   return (
     <>
+      <p>{console.log(value)}</p>
       <h1>Testing</h1>
-      {displayPageNumber()}
     </>
   );
 };

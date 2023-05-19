@@ -340,7 +340,6 @@ const SignUp = () => {
             <button className="disable-button">SIGN UP</button>}
             <Modal open={modalOpen} close={closeModal} header="오류">{modalText}</Modal>
         </div>
-        
         </Container>
     );
 };
