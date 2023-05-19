@@ -147,7 +147,14 @@ const Container = styled.div`
     border: orange;
   }
 
+<<<<<<< HEAD
+	@media(max-width: 768px) {
+    
+  }
+  
+=======
 	
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 `;
 
 const Input = styled.input`
@@ -175,6 +182,7 @@ const Select = styled.select`
   font-family: inherit; /* 폰트 상속 */
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
+<<<<<<< HEAD
 	text-align: center;
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 	
@@ -183,6 +191,11 @@ const Select = styled.select`
 
 
 
+=======
+  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+`;
+
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 const Desc = styled.p`
 	float: left;
 	font-size: 12px;
@@ -200,9 +213,14 @@ const MyPage = () => {
 		const [inputConPw, setInputConPw] = useState("");
 		const [inputNickName, setInputNickName] = useState("");
 		const [inputFavTeam, setInputFavTeam] = useState("");
+<<<<<<< HEAD
     const [originFavTeam, setOriginFavTeam] = useState("");
     const [originNickname, setOriginNicknme] = useState("");
     const originPwd = password;
+=======
+
+
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 
 		useEffect(() => {
 			const fetchOriginInfo = async () => {
@@ -211,20 +229,29 @@ const MyPage = () => {
 					const data = response.data;
 					setInputNickName(data[0].nickname);
 					setInputFavTeam(data[0].favTeam);
+<<<<<<< HEAD
           setOriginFavTeam(data[0].favTeam);
           setOriginNicknme(data[0].nickname);
           
+=======
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 				} catch (error) {
 					console.log(error);
 				}
 			};
 	
 			fetchOriginInfo();
+<<<<<<< HEAD
       
 		}, [userId]);
 
     
 
+=======
+		}, [userId]);
+
+		
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
     
 
     // 오류 메시지
@@ -328,6 +355,7 @@ const MyPage = () => {
 
     
 
+<<<<<<< HEAD
     const onClickEdit = async () => {
       try {
         
@@ -354,6 +382,12 @@ const MyPage = () => {
       }
     };
     
+=======
+    const onClickEdit = async() => {
+				setModalText("내 정보 수정이 완료되었습니다.");
+        modalOpen(true);        
+    }
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 
 
     return(
@@ -378,7 +412,11 @@ const MyPage = () => {
         
         <div className="item4">
 				<Desc>응원구단</Desc>
+<<<<<<< HEAD
 				<Select value={inputFavTeam} onChange={(e) => setInputFavTeam(e.target.value)}>
+=======
+        <Select>
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 						<option value="0">응원하는 구단을 선택하세요</option>
             <option value="1">SSG 랜더스</option>
             <option value="2">두산 베어스</option>
@@ -401,7 +439,11 @@ const MyPage = () => {
 				</div>
 				<div className="hint">
 						{inputNowPw.length > 0 && (
+<<<<<<< HEAD
 							<span>{nowPwMessage}</span>)}
+=======
+										<span className={`message ${isNowPw ? 'success' : 'error'}`}>{nowPwMessage}</span>)}
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
 				</div>
         <div className="item1">
 					
@@ -409,7 +451,11 @@ const MyPage = () => {
         </div>
         <div className="hint">
                 {inputNewPw.length > 0 && (
+<<<<<<< HEAD
                 <span>{pwMessage}</span>)}
+=======
+                <span className={`message ${isNewPw ? 'success' : 'error'}`}>{pwMessage}</span>)}
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
         </div>
         <div className="item1">
 					
@@ -417,6 +463,7 @@ const MyPage = () => {
         </div>
         <div className="hint">
                 {inputConPw.length > 0 && (
+<<<<<<< HEAD
                 <span>{conPwMessage}</span>)}
         </div>
 
@@ -424,6 +471,15 @@ const MyPage = () => {
             {((isNowPw && isNewPw && isConPw) || (isNickName && inputNickName !== originNickname) || (inputFavTeam !== originFavTeam)) ? 
             <button className="enable-button" onClick={onClickEdit}>수정완료</button> :
             <button className="disable-button">수정완료</button>}
+=======
+                <span className={`message ${isConPw ? 'success' : 'error'}`}>{conPwMessage}</span>)}
+        </div>
+
+        <div className="item2">
+            {(isNowPw && isNewPw && isConPw && isNickName) ? 
+            <button className="enable-button" onClick={onClickEdit}>저장하기</button> :
+            <button className="disable-button">SIGN UP</button>}
+>>>>>>> ce8f95956cad9f57ddc76b91b683b4c55b2ae367
             <Modal open={modalOpen} close={closeModal} header="Bench Clearing">{modalText}</Modal>
         </div>
         

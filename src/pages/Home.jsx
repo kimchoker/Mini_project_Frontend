@@ -19,6 +19,12 @@ const Homeblock = styled.div`
   margin-top: 50px;
  `;
 
+const DesktopHomeBlock = styled.div`
+    @media(max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Container = styled.div`
 	display: flex;
 	justify-content: center;
@@ -102,46 +108,68 @@ const StandingBlock = styled.div`
 
     `;
 
+const MobileHomeBlock = styled.div`
+    @media(min-width: 768px) {
+        display: none;
+    }
+    display: flex;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+
+
 const Home = () => {
 
      return (
         <Homeblock>
-            <Container>
-                <NoticeBlock>
-                    <div className="noticeHot">
-                        <h3>홈플레이트 오늘의 인기글</h3>
-                    </div>
-                    <div className="noticeFight">
-                        <h3>홈플레이트 오늘의 투기장</h3>
-                    </div>
-                </NoticeBlock>
-                <StandingBlock>
-                    <table className="indexTable">
-                        <tr className="index">
-                            <th>팀 이름</th>
-                            <th>승</th>
-                            <th>무</th>
-                            <th>패</th>
-                            <th>승률</th>
-                            <th>승차</th>
-                        </tr>
-                    </table>
-                </StandingBlock>
-            </Container>
-            <TeamShortcut>
-                <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
-                <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
-                <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/twins_main/twins_main" ><img src={LG} alt="" className="image" /></a>
-                <a href="https://www.ktwiz.co.kr/sports/site/baseball/main.do" ><img src={KT} alt="" className="image" /></a>
-                <a href="https://tigers.co.kr/" ><img src={KIA} alt="" className="image" /></a>
-                <a href="https://www.ncdinos.com/" ><img src={NC} alt="" className="image" /></a>
-                <a href="http://www.samsunglions.com/" ><img src={Samsung} alt="" className="image" /></a>
-                <a href="https://www.giantsclub.com/html/index.asp?" ><img src={Lotte} alt="" className="image" /></a>
-                <a href="https://www.doosanbears.com/" ><img src={Doosan} alt="" className="image" /></a>
-                <a href="https://www.hanwhaeagles.co.kr/index.do" ><img src={Hamhwa} alt="" className="image" /></a>
-            </TeamShortcut>
+            <DesktopHomeBlock>
+                <Container>
+                    <NoticeBlock>
+                        <div className="noticeHot">
+                            <h3>홈플레이트 오늘의 인기글</h3>
+                        </div>
+                        <div className="noticeFight">
+                            <h3>홈플레이트 오늘의 투기장</h3>
+                        </div>
+                    </NoticeBlock>
+                    <StandingBlock>
+                        <table className="indexTable">
+                            <tr className="index">
+                                <th>팀 이름</th>
+                                <th>승</th>
+                                <th>무</th>
+                                <th>패</th>
+                                <th>승률</th>
+                                <th>승차</th>
+                            </tr>
+                        </table>
+                    </StandingBlock>
+                </Container>
+                <TeamShortcut>
+                    <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
+                    <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
+                    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/twins_main/twins_main" ><img src={LG} alt="" className="image" /></a>
+                    <a href="https://www.ktwiz.co.kr/sports/site/baseball/main.do" ><img src={KT} alt="" className="image" /></a>
+                    <a href="https://tigers.co.kr/" ><img src={KIA} alt="" className="image" /></a>
+                    <a href="https://www.ncdinos.com/" ><img src={NC} alt="" className="image" /></a>
+                    <a href="http://www.samsunglions.com/" ><img src={Samsung} alt="" className="image" /></a>
+                    <a href="https://www.giantsclub.com/html/index.asp?" ><img src={Lotte} alt="" className="image" /></a>
+                    <a href="https://www.doosanbears.com/" ><img src={Doosan} alt="" className="image" /></a>
+                    <a href="https://www.hanwhaeagles.co.kr/index.do" ><img src={Hamhwa} alt="" className="image" /></a>
+                </TeamShortcut>
+            </DesktopHomeBlock>
+
+            <MobileHomeBlock>
+            
+            </MobileHomeBlock>
         </Homeblock>
         
+        
+
     )
 }
 export default Home;

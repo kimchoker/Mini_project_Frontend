@@ -47,6 +47,14 @@ export default function App() {
           <Standings />
           <Footer />
         </>} />
+        <Route path="/homeplate/write" element={<>
+          <Navigation />
+          <Write/>
+        </>}/>
+        <Route path="/homeplate/search/:word" element={<>
+          <Navigation />
+          <Search/>
+        </>}/>
         <Route path="/schedule" element={<>
           <Navigation />
           <Schedule />
@@ -55,7 +63,7 @@ export default function App() {
         <Route path="/signup" element={<>
           <Navigation />
           <SignUp />
-          <Footer /> 
+          
         </>} />
         <Route path="/findpw" element={<>
           <Navigation />

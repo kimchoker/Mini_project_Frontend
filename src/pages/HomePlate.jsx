@@ -30,7 +30,7 @@ const Container = styled.div`
 
     th {
         text-align: center;
-        height: 65px;
+        height: 40px;
     }
 
     th, td {
@@ -168,6 +168,7 @@ const Container = styled.div`
         width: 20px;
         height: 20px;
     }
+
     .homeplate {
         font-family: 'inter';
         transform: skew(-10deg);
@@ -187,8 +188,6 @@ const Homeplate = () => {
     const [boardDate, setBoardDate] = useState("");
     const [boardContent, setBoardContent] = useState("");
 
-
-    const [title, setTitle] = useState("");
     const [word, setWord] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -200,8 +199,8 @@ const Homeplate = () => {
 
 
     useEffect(()=> {
-        const Board = async() => {
-            const rsp = await AxiosApi.Homeplate("ALL")
+        const board = async() => {
+            const rsp = await AxiosApi.Homeplate("ALL");
             if(rsp.status === 200) {
                 const board = rsp.data;
                 const boardNo = board.map(boardTitle => boardTitle.boardNo);
@@ -212,26 +211,20 @@ const Homeplate = () => {
                 setBoardDate(boardDate);
             }
         };
-        Board();
+        board();
     }, []);
 
+    // 검색창
     const onSubmit = async () => {
        if(word.trim() === "") {
             return;
-        }
-
-        navigate("/homeplate/search/" + word);
+    }
+        navigate(`/homeplate/search/${word}`);
     };
 
-    const getBoardNo = () => {
-        navigate("/homeplate/contents" + title);
-    }
-
-    const handleTitleClick = async(title) => {
-        const rsp = await AxiosApi.HomeContent("ALL");
-        const boardContent =  rsp.data;
-        setBoardContent(boardContent);
-    }
+    const getBoardNo = (selectBoardNo) => {
+        navigate(`/homeplate/contents/${selectBoardNo}`);
+   }
 
     return (
         <Container>
@@ -255,7 +248,7 @@ const Homeplate = () => {
                                         <td>날짜</td>
                                     </tr>
                                 </thead>
-
+                            <tbody>
                                 {boardNo && boardNo.map((boardNo, index)=>(
                                     <tr key = {index} onClick={()=>getBoardNo(boardNo)}>
                                         <th>{boardNo}</th>
@@ -263,6 +256,8 @@ const Homeplate = () => {
                                         <th>{boardDate[index]}</th>
                                     </tr>
                                 ))}
+                            </tbody>
+
                                </table>
                            </div>
                     </div>
@@ -273,7 +268,6 @@ const Homeplate = () => {
              <div className="search-container">
                 <input onChange={(e) => {
                     setWord(e.target.value);
-                    console.log(word);
                 }} 
                 onKeyPress={(e)=>{
                     if(e.key === 'Enter') {
