@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const NavItem = styled.li`
+  font-family: 'Noto Sans KR', sans-serif;
   position: relative;
   padding: 10px;
   font-weight: bold;

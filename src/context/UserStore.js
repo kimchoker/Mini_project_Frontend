@@ -1,4 +1,7 @@
 import { createContext, useState } from "react";
+import { useEffect } from "react";
+import AxiosApi from "../Api/AxiosApi";
+import TokenAxiosApi from "../Api/TokenAxiosApi";
 
 
 export const UserContext = createContext(null);
@@ -10,16 +13,36 @@ const UserStore = (props) => {
     const [favTeam, setFavTeam] = useState("");
     const [nickname, setNickname]  = useState("");
 
-   
 
-    const handleLogin = () => {
-      // 로그인 처리 로직
-      setIsLoggedIn(true);
+    useEffect(() => {
+      const restoreSession = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          try {
+            const userInfoResponse = await TokenAxiosApi.userInfo(token);
+            const userData = userInfoResponse.data[0];
+  
+            setUserId(userData.id);
+            setPassword(userData.pwd);
+            setFavTeam(userData.favTeam);
+            setNickname(userData.nickname);
+            handleLogin();
+          } catch (error) {
+            console.error("세션 복구 중 오류 발생 : ", error);
+          }
+        }
+      };
+      restoreSession();
+    }, []);
+  
+
+    const handleLogin = async() => {
+          setIsLoggedIn(true);
       console.log("로그인 성공");
     };
   
     const handleLogout = () => {
-      // 로그아웃 처리 로직
+      localStorage.removeItem('token');
       setIsLoggedIn(false);
       setUserId("");
       setPassword("");

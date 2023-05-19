@@ -8,7 +8,7 @@ import Modal from "../utils/Modal";
 import Logo from "../images/logo-big.png"
 import Field from "../images/field2.jpg"
 import css from "styled-components";
-
+import TokenAxiosApi from "../Api/TokenAxiosApi";
 
    
   
@@ -125,7 +125,7 @@ import css from "styled-components";
     const Login = () => {
 
         const context = useContext(UserContext);
-        const { setUserId, setPassword ,handleLogin } = context;
+        const { setUserId, setPassword , setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
         const navigate = useNavigate(); // 라우터 이동을 하기 위해서 
 
         // 키보드 입력 
@@ -138,7 +138,39 @@ import css from "styled-components";
             setModalopen(false);
         }
 
-        const onClickLogin = async() => {
+        const onClickLogin = async () => {
+            try {
+            const response = await TokenAxiosApi.getToken(inputId, inputPw);
+						console.log(inputId);
+						console.log(inputPw);
+            if (response.status === 200) {
+              localStorage.setItem('token', response.data);
+              const token = localStorage.getItem('token');
+              console.log("토큰 : " + token);
+        
+              const userInfoResponse = await TokenAxiosApi.userInfo(token);
+              const userData = JSON.stringify(userInfoResponse, null, 2);
+              const userDataObject = JSON.parse(userData);
+              
+              setInputId(userDataObject.data[0].id);
+              setInputPw(inputPw);
+              setNickname(userDataObject.data[0].nickname);
+              setFavTeam(userDataObject.data[0].favTeam);
+							console.log(nickname);
+							console.log(favTeam);
+							handleLogin();
+              navigate("/");
+            } else {
+              console.log("로그인 에러");
+              setModalopen(true);
+            }
+          } catch (error) {
+            console.error("에러", error);
+            setModalopen(true);
+          }
+        };
+
+        const onClickLogin1 = async() => {
             // 로그인을 위한 axios 호출
             const response = await AxiosApi.memberLogin(inputId, inputPw);
         

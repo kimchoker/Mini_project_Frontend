@@ -9,8 +9,10 @@ import Test from "./Navbar"
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Pagination from "../components/Paginatoin";
+
 const NewsBlock = styled.div`
 
+    font-family: 'Noto Sans KR', sans-serif;
     display: flex;
     flex-direction: column;
     margin-top: 100px;
@@ -34,6 +36,7 @@ const NewsBlock = styled.div`
 `;
 
 const NewsGrey = styled.div`
+    font-family: 'Noto Sans KR', sans-serif;
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto;

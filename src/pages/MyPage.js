@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { UserContext } from "../context/UserStore";
 import { useContext } from "react";
 import { useEffect } from "react";
+import TokenAxiosApi from "../Api/TokenAxiosApi";
 
 const Container = styled.div`
   margin-top: 125px;
@@ -14,10 +15,11 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
 
 .sign {
     
-    font: normal normal bold 24px/35px Poppins;
+   
     display: flex;
     letter-spacing: 0px;
     color: #313131;
@@ -148,7 +150,7 @@ const Container = styled.div`
   }
 
 	@media(max-width: 768px) {
-    
+
   }
   
 `;
@@ -197,25 +199,26 @@ const MyPage = () => {
     
 
     const context = useContext(UserContext);
-    const { userId, password } = context;
+    const { userId, password, setPassword, favTeam, setFavTeam, nickname, setNickname } = context;
 		const [inputNowPw, setInputNowPw] = useState("");
 		const [inputNewPw, setInputNewPw] = useState("");
 		const [inputConPw, setInputConPw] = useState("");
-		const [inputNickName, setInputNickName] = useState("");
+		const [inputNickName, setInputNickname] = useState("");
 		const [inputFavTeam, setInputFavTeam] = useState("");
     const [originFavTeam, setOriginFavTeam] = useState("");
-    const [originNickname, setOriginNicknme] = useState("");
+    const [originNickname, setOriginNickname] = useState("");
     const originPwd = password;
 
 		useEffect(() => {
-			const fetchOriginInfo = async () => {
+			const fetchOriginInfo = () => {
 				try {
-					const response = await AxiosApi.memberGet(userId);
-					const data = response.data;
-					setInputNickName(data[0].nickname);
-					setInputFavTeam(data[0].favTeam);
-          setOriginFavTeam(data[0].favTeam);
-          setOriginNicknme(data[0].nickname);
+					
+					setInputNickname(nickname);
+					setInputFavTeam(favTeam);
+          setOriginFavTeam(favTeam);
+          setOriginNickname(nickname);
+          const token = localStorage.getItem('token');
+          console.log(token);
           
 				} catch (error) {
 					console.log(error);
@@ -224,7 +227,7 @@ const MyPage = () => {
 	
 			fetchOriginInfo();
       
-		}, [userId]);
+		}, []);
 
     
 
@@ -305,7 +308,7 @@ const MyPage = () => {
     // 닉네임 정규식 체크
 
     const onChangeNickName = (e) => {
-        setInputNickName(e.target.value);
+        setInputNickname(e.target.value);
         if (e.target.value.length < 2 || e.target.value.length > 12) {
             setNickNameMessage("2자리 이상 12자리 미만으로 입력해 주세요.");
             setIsNickName(false);    
@@ -343,7 +346,7 @@ const MyPage = () => {
          console.log(inputFavTeam);
     
         // editInfo 함수 호출
-        const isUpdated = await AxiosApi.editInfo(updatedData);
+        const isUpdated = await TokenAxiosApi.editInfo(updatedData);
     
         if (isUpdated) {
           setModalText("내 정보 수정이 완료되었습니다.");

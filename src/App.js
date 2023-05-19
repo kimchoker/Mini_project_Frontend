@@ -1,4 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./context/UserStore";
+import { useEffect } from "react";
+import AxiosApi from "./Api/AxiosApi";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import NewsHome from "./pages/NewsHome";
@@ -17,6 +21,7 @@ import MyPage from "./pages/MyPage";
 
 
 export default function App() {
+
   return (
     <UserStore>
     <BrowserRouter>
