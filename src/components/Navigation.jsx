@@ -37,6 +37,16 @@ const LoginBarBlock = styled.div`
         background-color: transparent;
         cursor: pointer;
       }
+
+      @media (max-width: 768px) {
+        height: 0px;
+        .shortcut {
+          display: none;
+        }
+        button {
+          display: none;
+        }
+      }
 `;
 
 const MobileLogo = styled.div`
@@ -65,8 +75,8 @@ const NavigationWrapper = styled.div`
     }
     z-index: 11;
     width: 100%;
-    height: 175px;
-    margin-top: 30px;
+    height: 150px;
+    
     position: fixed;
     display: column;
     align-items: center;
@@ -77,13 +87,13 @@ const NavigationWrapper = styled.div`
 .menu__item {
     width: 150px;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-right: 30px;
     display: flex;
     font-family: 'inter';
-    font-weight: 800;
+    font-weight: 600;
     color: #F0EBCE;
-    font-size: 1rem;
+    font-size: 0.8rem;
     justify-content: center;
     align-items: center;
     text-decoration: none;
@@ -97,7 +107,7 @@ const NavigationWrapper = styled.div`
 }
 
 @media (min-width: 768px) {
-
+    margin-top: 30px;
     width: 100%;
     height: 75px;
     position: fixed;
