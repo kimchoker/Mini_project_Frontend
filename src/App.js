@@ -12,8 +12,8 @@ import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
 import View from "./pages/View";
 import Write from "./pages/Write";
-import Search from "./pages/HomePlateSearch";
 import MyPage from "./pages/MyPage";
+import HomeContent from "./pages/HomeContents";
 
 
 export default function App() {
@@ -42,19 +42,20 @@ export default function App() {
           <HomePlate />
           <Footer />
         </>} />
-        <Route path="/standings" element={<>
+        <Route path="/homeplate/contents/:selectBoardNo" element={<>
           <Navigation />
-          <Standings />
+          <HomeContent/>
           <Footer />
         </>} />
         <Route path="/homeplate/write" element={<>
           <Navigation />
           <Write/>
         </>}/>
-        <Route path="/homeplate/search/:word" element={<>
+        <Route path="/standings" element={<>
           <Navigation />
-          <Search/>
-        </>}/>
+          <Standings />
+          <Footer />
+        </>} />
         <Route path="/schedule" element={<>
           <Navigation />
           <Schedule />
