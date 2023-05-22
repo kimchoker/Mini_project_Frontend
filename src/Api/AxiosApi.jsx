@@ -115,19 +115,28 @@ const AxiosApi = {
         };
         return await axios.post(Backend + "/delete", del);
     },
-    
-    
 
-    
+    // 글번호, 제목, 날짜 조회
     Homeplate: async(boardTitle) => {
         return await axios.get(Backend + `/homeplate?boardTitle=${boardTitle}`);
     },
+
+    // 내용 가져오기
     HomeContent : async(boardNo) => {
         return await axios.get(Backend + `/homeplate/contents?boardNo=${boardNo}`);
     },
+
+    // 제목 검색
     HomeSearch : async(boardTitle) => {
         return await axios.get(Backend + `/homeplate/search?boardTitle=${boardTitle}`);
+    },
+
+    Schedule : async(month) => {
+        return await axios.get(Backend + `/scheudle?month=${month}`);
     }
+    // Schedule : async(schedule_Date) => {
+    //     return await axios.get(Backend + `/schedule?schedule_Date=${schedule_Date}`);
+    // }
 }
 
 export default AxiosApi;

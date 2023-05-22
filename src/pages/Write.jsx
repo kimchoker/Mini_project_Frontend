@@ -108,7 +108,6 @@ const Container = styled.div`
     }
 `;
 
-
 const Write = () => {
     const navigate = useNavigate();
     
@@ -130,24 +129,10 @@ const Write = () => {
     const handleBack = () => {
         navigate('/homeplate');
     }
-
-    // const fileInput = useRef(null);
-   
-    //첨부파일
-    // const handleUpload = () => {
-    //     fileInput.current.click();
-    // };
-
-    // const handleFileSelect = (e) => {
-    //     const file = e.target.files[0];
-    // };
-    
-    
+       
     const [fontSize, setFontSize] = useState('10px');
     const [fontFamily, setFontFamily] = useState('Malgun Gothic');
-    const [fileContent, setFileCotent] = useState("");
     const [color, setColor] = useState("black");
-
 
     // 색깔변경
     const handleColorChange = (e) => {
@@ -167,21 +152,7 @@ const Write = () => {
         setFontSize(selectedValue);
     }
 
-    // 파일읽기
-    // const handleFileRead = (e) => {
-    //     const content = e.target.result;
-    //     setFileCotent(content);
-    // }
-
-    // 파일첨부
-    // const handleFileChosen = (file) => {
-    //     const fileReader = new FileReader();
-    //     fileReader.onload = handleFileRead;
-    //     fileReader.readAsText(file);
-    // }
-
     return(
-        
         <Container>
             <h5>.</h5>
             <p>HOME PLATE</p>
@@ -221,15 +192,12 @@ const Write = () => {
                         <option value="20px" style={{fontSize:'20px'}}>20px</option>
                     </select>
 
-                
                     <div className="modal">
                         <button type="submit" onClick={openModal}>작성 완료</button>
                         <Modal open={modalOpen} close={closeModal} header="알림">
                             {modalText}
                         </Modal>
                     </div>
-                 
-                    
                 </div>
                
                 <div className="content">

@@ -3,60 +3,69 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "../Api/AxiosApi";
 
+const HomeContentDiv = styled.div`
 
-
-const ContentBlock = styled.div`
-    
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
-    width: 800px;
-    height: 650px;
-    background-color: #f3f3f3;
-    border: 2px solid #ccc;
-    padding: 10px;
-    margin: 10px auto;
-
-    .back {
-        text-align: right;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    @font-face {
+        font-family: "inter";
+        src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
     }
-
-    .back button {
-        justify-content: flex-end;
-        width: 100px;
-        height: 30px;
-        background-color: #008CBA;
-        color: #fff;
-        border: none;
-        border-radius: 5%;
-        cursor: pointer;
-        font-size: 15px;
+    .Homeplate {
+        font-family: 'inter';
+        font-size: 45px;
+        transform: skew(-10deg);
+        color: #6f2727;
     }
     
-    h3 {
-        font-size: 25px;
+`;
+
+const ContentGrey = styled.div`
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    background-color: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+`;
+
+const DivContents =styled.div`
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    p{
+        border-right: 1px solid black;
+        padding-right: 40px;
     }
-    h4 {
-        font-size: 20px;
-    }
-    p {
-        font-size: 30px;
+    p:last-child{
+        border-right: none;
     }
 `;
 
-
+const Button = styled.button`
+    border: none;
+    background: none;
+    cursor: pointer;
+    &:hover{
+        color: #6f2727;
+    }
+`;
 const HomeContent = () => {
     const navigate = useNavigate("");
-
     const {selectBoardNo} = useParams();
-
     const [board, setBoard] = useState([]);
-
-    // const [boardNo, setBoardNo] = useState("");
-    const [boardContent, setBoardContent] = useState([]);
-    const [boardTitle, setBoardTitle] = useState("");
-    const [boardDate, setBoardDate] = useState("");
 
     useEffect(()=> {
         const board = async() => {
@@ -64,37 +73,35 @@ const HomeContent = () => {
             if(rsp.status === 200) {
                 const board = rsp.data;
                 setBoard(board);
-                setBoardContent(board.map((board)=>board.boardContent));
             }
         };
         board();
     }, []);
 
-    const handleBack = () => {
-        navigate('/homeplate');
+    const backToHomePlate = () => {
+        navigate("/homeplate");
     }
 
-
-    return(
-        <ContentBlock>
+    return( 
+        <HomeContentDiv>
+            <h3 className="Homeplate">HOME PLATE</h3>
+            <ContentGrey>
             {board.map((boardItem) => (
                 <div key={boardItem.boardNo}>
-                    <h3>글번호 : {boardItem.boardNo}</h3>
-                    <h3>제목 : {boardItem.boardTitle}</h3>
-                    <h3>날짜 : {boardItem.boardDate}</h3>
-                    <h4>내용</h4>
-                    <hr />
+                    <h1>{boardItem.boardTitle}</h1>
+                    <DivContents>      
+                        <p>글번호 : {boardItem.boardNo}</p>
+                        <p>날짜 : {boardItem.boardDate}</p>
+                        <p>사용자 : 아직없음</p>
+                    </DivContents>
+                    <hr/>
                     <p>{boardItem.boardContent}</p>
                 </div>
             ))}
-        
-            <footer>
-                <div className="back">
-                    <button onClick={handleBack}>목록 보기</button>
-                </div>
-            </footer>
-        </ContentBlock>
+            <Button onClick={backToHomePlate}><h3>목록으로 가기</h3></Button>
+            </ContentGrey>
+        </HomeContentDiv>
     );
-};
+};  
 
 export default HomeContent;
