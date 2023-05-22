@@ -1,8 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "./context/UserStore";
-import { useEffect } from "react";
-import AxiosApi from "./Api/AxiosApi";
+import { useLayoutEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import NewsHome from "./pages/NewsHome";
@@ -21,6 +18,19 @@ import HomeContent from "./pages/HomeContents";
 
 
 export default function App() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <UserStore>
@@ -81,10 +91,14 @@ export default function App() {
           <View />
           <Footer />
         </>} />
-        <Route path="/mypage" element={<>
+        <Route path="/mypage" element={windowWidth > 768 ? (
+        <>
           <Navigation />
           <MyPage />
-        </>} />
+        </>
+      ) : (
+        <MyPage />
+      )} />
           </Routes>
       </BrowserRouter>
     </UserStore>

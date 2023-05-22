@@ -98,7 +98,7 @@ const Container = styled.div`
     margin-top: 50px;
     margin-left: 30px;
     margin-right: 30px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 26px;
     font-weight: bold;
@@ -117,7 +117,7 @@ const Container = styled.div`
     margin-top: 50px;
     margin-left: 30px;
     margin-right: 30px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 26px;
     font-weight: bold;
@@ -135,7 +135,7 @@ const Container = styled.div`
     margin-top: 50px;
     margin-left: 30px;
     margin-right: 30px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 26px;
     font-weight: bold;
@@ -150,7 +150,109 @@ const Container = styled.div`
   }
 
 	@media(max-width: 768px) {
+   
+    margin-top: 0;
+    margin-left:-40px;
+    margin-bottom: 0;
+    background-color: #395144;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Noto Sans KR', sans-serif;
 
+    .sign {
+      color: white;
+      display: flex;
+      letter-spacing: 0px;
+      color: #313131;
+      opacity: 1;
+    }
+
+    .item1,
+    .item2,
+    .item4 {
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+
+    .item3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #999;
+      font-size: 14px;
+      color: white;
+    }
+
+    .item5 {
+      display: flex;
+      align-items: center;
+      color: white;
+
+      .check {
+        width: 80px;
+        height: auto;
+        line-height: normal;
+        padding: 0.8em 0.5em;
+        background-color: #395144;
+        color: white;
+        font-family: inherit;
+        border: 1px solid #999;
+        border-radius: 18px;
+        outline-style: none;
+        cursor: pointer;
+      }
+    }
+
+    .hint {
+      display: flex;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .enable-button,
+    .disable-button {
+      margin-top: 50px;
+      margin-left: 30px;
+      margin-right: 30px;
+      /* margin-bottom: 50px; */
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 26px;
+      font-weight: bold;
+      width: 400px;
+      height: 50px;
+      color: white;
+      font-size: 15px;
+      font-weight: 400;
+      border-radius: 18px;
+      cursor: pointer;
+    }
+
+    .enable-button {
+      background-color: #395144;
+      border: orange;
+      font-weight: 700;
+    }
+
+    .enable-button:active {
+      background-color: #999;
+      border: #999;
+    }
+
+    .disable-button {
+      background-color: #999;
+      border: orange;
+    }
+    h2 {
+      color: white;
+    }
   }
   
 `;
@@ -158,7 +260,7 @@ const Container = styled.div`
 const Input = styled.input`
   margin-left: 30px;
   margin-right: 30px;
-  width: 400px; /* 원하는 너비 설정 */
+  width: 250px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
@@ -173,7 +275,7 @@ const Input = styled.input`
 const Select = styled.select` 
   margin-left: 30px;
   margin-right: 30px;
-  width: 410px; /* 원하는 너비 설정 */
+  width: 250px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
@@ -191,6 +293,10 @@ const Select = styled.select`
 const Desc = styled.p`
 	float: left;
 	font-size: 12px;
+
+  @media(max-width: 768) {
+    color: white;
+  }
 `;
 
 

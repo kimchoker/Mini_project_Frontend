@@ -218,7 +218,7 @@ const SignUp = () => {
     
         // 팝업
      const [modalOpen, setModalOpen] = useState(false);
-     const [modalText, setModelText] = useState("중복된 아이디 입니다.");
+     const [modalText, setModalText] = useState("중복된 아이디 입니다.");
 
         // 약관동의 체크박스
 
@@ -232,6 +232,7 @@ const SignUp = () => {
 
      const closeModal = () => {
         setModalOpen(false);
+        navigate('/');  
     };
 
 
@@ -331,7 +332,11 @@ const SignUp = () => {
     
 
     const onClickLogin = async() => {
-        navigate('/');        
+        const signUp = await AxiosApi.memberReg(inputId, inputPw, inputNickName);
+        console.log(signUp);
+        setModalText("인증 이메일이 발송되었습니다.");
+        setModalOpen(true);
+              
     }
 
 
@@ -574,7 +579,7 @@ const SignUp = () => {
             {(isChecked && isId && isPw && isConPw && isNickName) ? 
             <button className="enable-button" onClick={onClickLogin}>회원가입</button> :
             <button className="disable-button">회원가입</button>}
-            <Modal open={modalOpen} close={closeModal} header="오류">{modalText}</Modal>
+            <Modal open={modalOpen} close={closeModal} header="BENCH CLEARING">{modalText}</Modal>
         </div>
         
         </Container>

@@ -32,7 +32,8 @@ const Container = styled.div`
 `;
 
 const NoticeBlock = styled.div`
-  width: 800px;
+  width: 1200px;
+  min-width: 1200px;
   height: 500px;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -41,9 +42,9 @@ const NoticeBlock = styled.div`
   position: relative;
 
   .noticeHot {
-    width: 370px;
+    width: 375px;
     height: 460px;
-    background-color: #f6f6f6;
+    background-color: #f9f9f9;
     display: inline-block;
     position: absolute;
     top: 20px;
@@ -51,43 +52,54 @@ const NoticeBlock = styled.div`
     margin-right: 20px;
   }
 
+  .noticeNew {
+    width: 375px;
+    height: 460px;
+    background-color: #f1f1f1;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    
+  }
+
   .noticeFight {
-    width: 370px;
+    width: 375px;
     height: 460px;
     background-color: #f6f6f6;
     display: inline-block;
     position: absolute;
     top: 20px;
-    right: 20px;
-    margin-left: 20px;
+    right: 412.5px;
+    
   }
 `;
 
-const StandingBlock = styled.div`
-  width: 450px;
-  height: 500px;
-  margin-left: 50px;
-  border: 1px solid #c6c6c6;
-  border-radius: 8px;
+// const StandingBlock = styled.div`
+//   width: 450px;
+//   height: 500px;
+//   margin-left: 50px;
+//   border: 1px solid #c6c6c6;
+//   border-radius: 8px;
 
-	.indexTable { 
-            width: 450px;
-            height: 45px;
-            border-collapse: collapse;
-        }
+// 	.indexTable { 
+//             width: 450px;
+//             height: 45px;
+//             border-collapse: collapse;
+//         }
 
-        .index {
-            height: 45px;
-            border-bottom: 1px solid #c6c6c6;
-        }
+//         .index {
+//             height: 45px;
+//             border-bottom: 1px solid #c6c6c6;
+//         }
         
-        tr {
-            height: 45px;
-        }
-        th {
-            height: 45px;
-        }
-`;
+//         tr {
+//             height: 45px;
+//         }
+//         th {
+//             height: 45px;
+//         }
+// `;
 
     const TeamShortcut = styled.div`
         position: absolute;
@@ -132,11 +144,16 @@ const Home = () => {
                         <div className="noticeHot">
                             <h3>홈플레이트 오늘의 인기글</h3>
                         </div>
+                        
                         <div className="noticeFight">
                             <h3>홈플레이트 오늘의 투기장</h3>
                         </div>
+
+                        <div className="noticeNew">
+                            <h3>홈플레이트 최신글 보기</h3>
+                        </div>
                     </NoticeBlock>
-                    <StandingBlock>
+                    {/* <StandingBlock>
                         <table className="indexTable">
                             <tr className="index">
                                 <th>팀 이름</th>
@@ -147,7 +164,7 @@ const Home = () => {
                                 <th>승차</th>
                             </tr>
                         </table>
-                    </StandingBlock>
+                    </StandingBlock> */}
                 </Container>
                 <TeamShortcut>
                     <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>

@@ -169,23 +169,7 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
             setModalopen(true);
           }
         };
-
-        const onClickLogin1 = async() => {
-            // 로그인을 위한 axios 호출
-            const response = await AxiosApi.memberLogin(inputId, inputPw);
         
-            console.log(response.data);
-            if(response.data === true) {
-              setUserId(inputId);
-              setPassword(inputPw);
-              handleLogin();
-              navigate("/");
-            } else {
-              console.log("로그인 에러");
-              setModalopen(true);
-            }
-          }
-
       	const onChangeId = (e) => {
           setInputId(e.target.value);
         }

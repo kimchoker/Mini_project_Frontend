@@ -116,6 +116,15 @@ const AxiosApi = {
         return await axios.post(Backend + "/delete", del);
     },
 
+    findPw: async(id) => {
+
+        const data = {
+            id: id
+        }
+        
+        return await axios.post(Backend + "/findpw", data);
+    },
+
     // 글번호, 제목, 날짜 조회
     Homeplate: async(boardTitle) => {
         return await axios.get(Backend + `/homeplate?boardTitle=${boardTitle}`);
