@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+
 
 const ScheduleDiv = styled.div`
   display: flex;
@@ -16,6 +16,7 @@ const ScheduleDiv = styled.div`
     font-family: "inter";
     src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
   }
+
   .schedule {
     font-family: "inter";
     font-size: 35px;
@@ -23,6 +24,7 @@ const ScheduleDiv = styled.div`
     text-align: center;
     color: #6f2727;
   }
+
   table {
     width: 1000px;
     border-collapse: collapse;
@@ -31,27 +33,47 @@ const ScheduleDiv = styled.div`
     margin-right: auto;
   }
 
-  th,
-  td {
+  th, td {
     text-align: center;
     border: 1px solid black;
+    font-size: 18px;
+  }
+  
+  th.date, td.date {
+    background-color: #F0CB85;
+  }
+  
+  th.time, td.time {
+    background-color: #A0DFE1;
+  }
+  
+  th.score, td.score {
+    background-color: #A48654;
+  }
+  
+  th.stadium, td.stadium {
+    background-color: #c8e6c9;
   }
 
-  .date {
-    width: 180px;
+  td.scheduleDate {
+    background-color: #F0CB85;
+  }
+  
+  td.scheduleTime {
+    background-color: #A0DFE1;
   }
 
-  .time {
-    width: 180px;
+  td.scheduleScore {
+    background-color: #A48654;
   }
 
-  .score {
-    width: 180px;
+  td.scheduleStadium {
+    background-color: #c8e6c9;
   }
 
-  .stadium {
-    width: 180px;
-  }
+  .date, .time, .score, .stadium {
+    width: 200px;
+  } 
 
   h2 {
     transform: skew(-10deg);
@@ -68,55 +90,52 @@ const ScheduleDiv = styled.div`
   .month {
     width: 80px;
     height: 30px;
+    cursor: pointer;
   }
 `;
 
 
+
+
+
 const Schedule = () => {
     const [schedule, setSchedule] = useState([]);
-    const { month } = useParams();
 
-      
-    const [selectMonth, setSelectMonth] = useState("전체보기");
-      
-    const handleMonth = (e) => {
-        const selectMonth = e.target.value;
-        setSelectMonth(selectMonth);
-    };
-
+    const [monthFilter, setMonthFilter] = useState(4);
+    
     useEffect(()=> {
-        const schedule = async() => {
-            const rsp = await AxiosApi.Schedule(month);
+        const scheduleMonth = async() => {
+            const rsp = await AxiosApi.getSchedule(monthFilter);
             if(rsp.status === 200) setSchedule(rsp.data);
+
         }
-        schedule();
-    }, []);
+        scheduleMonth();
+    }, [monthFilter]);
 
+    const handleMonth = (e) => {
+      const selectMonth = e.target.value;
+      setMonthFilter(selectMonth);
+    }
 
-    const filteredSchedule = schedule.filter((item) =>
-            item.scheduleDate.startsWith(selectMonth)
-    );
-      
-    return(
+  return(
         <ScheduleDiv>
             <div>
                 <h3 className="schedule">SCHEDULE</h3>
 
                 <div className="optionMon">
                     <h2>2023</h2>
-                    <select className="month" onChange={handleMonth} value={selectMonth}>
-                        <option value="ALL">전체보기</option>
-                        <option value="April">4월</option>
-                        <option value="May">5월</option>
-                        <option value="June">6월</option>
-                        <option value="July">7월</option>
-                        <option value="August">8월</option>
-                        <option value="September">9월</option>
+
+                    <select className="month" value={monthFilter} onChange={handleMonth}>
+                        <option value="4">4월</option>
+                        <option value="5">5월</option>
+                        <option value="6">6월</option>
+                        <option value="7">7월</option>
+                        <option value="8">8월</option>
+                        <option value="9">9월</option>
                     </select>
                 </div>
 
                 <br />
-
                 <table>
                     <thead>
                         <tr>
@@ -126,17 +145,17 @@ const Schedule = () => {
                             <th className="stadium">구장</th>
                         </tr>
                     </thead>
-                    
                     <tbody>
-                        {filteredSchedule.map((item) => ( // 배열에서 아이템 매핑
-                        <tr key={item.scheduleDate}>
-                            <td>{item.scheduleDate}</td>
-                            <td>{item.scheduleTime}</td>
-                            <td>{item.scheduleScore}</td>
-                            <td>{item.stadium}</td>
+                      {schedule.map((scheduleItem) => (
+                        <tr key={scheduleItem.id}>
+                          <td className="scheduleDate">{scheduleItem.scheduleDate}</td>
+                          <td className="scheduleTime">{scheduleItem.scheduleTime}</td>
+                          <td className="scheduleScore">{scheduleItem.scheduleScore}</td>
+                          <td className="scheduleStadium">{scheduleItem.location}</td>
                         </tr>
-                        ))}
-                    </tbody>
+                      ))}
+                  </tbody>
+
                   </table>
             </div>
         </ScheduleDiv>

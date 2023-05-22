@@ -42,7 +42,6 @@ const Container = styled.div`
     table {
         border-collapse: collapse;
         width: 1000px;
-        border-collapse: collapse;
         border: 1px solid black;
     }
 
