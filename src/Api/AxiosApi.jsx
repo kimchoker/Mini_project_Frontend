@@ -140,12 +140,13 @@ const AxiosApi = {
         return await axios.get(Backend + `/homeplate/search?boardTitle=${boardTitle}`);
     },
 
-    Schedule : async(month) => {
-        return await axios.get(Backend + `/scheudle?month=${month}`);
+    getSchedule : async(monthFilter) => {
+        return await axios.get(Backend + `/schedule?monthFilter=${monthFilter}`);
+    },
+    Standings : async(winRatio) => {
+        return await axios.get(Backend + `/standings?winRatio=${winRatio}`);
     }
-    // Schedule : async(schedule_Date) => {
-    //     return await axios.get(Backend + `/schedule?schedule_Date=${schedule_Date}`);
-    // }
+    
 }
 
 export default AxiosApi;
