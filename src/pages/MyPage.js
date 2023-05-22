@@ -218,7 +218,6 @@ const MyPage = () => {
           setOriginFavTeam(favTeam);
           setOriginNickname(nickname);
           const token = localStorage.getItem('token');
-          console.log(token);
           
 				} catch (error) {
 					console.log(error);
@@ -336,17 +335,21 @@ const MyPage = () => {
 
     const onClickEdit = async () => {
       try {
-        
+        const token = localStorage.getItem('token');
+
         const updatedData = {
           id: userId,
           pwd: inputNewPw || originPwd,
           nickname: inputNickName,
-          favTeam: inputFavTeam
+          favTeam: inputFavTeam,
+          token: token
         };
-         console.log(inputFavTeam);
+        
     
         // editInfo 함수 호출
         const isUpdated = await TokenAxiosApi.editInfo(updatedData);
+
+        
     
         if (isUpdated) {
           setModalText("내 정보 수정이 완료되었습니다.");

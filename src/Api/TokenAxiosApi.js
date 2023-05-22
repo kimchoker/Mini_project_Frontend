@@ -23,17 +23,20 @@ const TokenAxiosApi = {
     });
   },
 
-  editInfo: async (id, nickname, favTeam, token) => {
-      const editInfo = {
-        id: id,
-        nickname: nickname,
-        favTeam: favTeam
+  editInfo: async (data) => {
+
+      const updatedData = {
+        id: data.id,
+        pwd: data.pwd,
+        nickname: data.nickname,
+        favTeam: data.favTeam,
+        token: data.token
       };
-    
-      return await axios.post(Backend + "/editinfo", editInfo, {
+      console.log(data.token);
+      return await axios.post(Backend + "/editinfo", updatedData, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Authorization': 'Bearer ' + data.token
         }
       });
     },
