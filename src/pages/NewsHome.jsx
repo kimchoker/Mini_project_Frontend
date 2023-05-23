@@ -5,9 +5,6 @@ import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import NewsContainer from"../components/NewsContainer";
 import NewsNavi from "../components/NewsNavi";
-import Test from "./Navbar"
-import { useSearchParams } from "react-router-dom";
-import axios from "axios";
 import Pagination from "../components/Paginatoin";
 
 const NewsBlock = styled.div`

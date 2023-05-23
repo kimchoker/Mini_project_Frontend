@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function NavItem(props) {
-    const { data, offNav } = props;
+    const { data } = props;
     const { name, address } = data;
   
     return (

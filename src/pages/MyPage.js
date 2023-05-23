@@ -275,7 +275,7 @@ const Input = styled.input`
 const Select = styled.select` 
   margin-left: 30px;
   margin-right: 30px;
-  width: 250px; /* 원하는 너비 설정 */
+  width: 260px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
@@ -299,13 +299,22 @@ const Desc = styled.p`
   }
 `;
 
+const MyWriting = styled.div`
+  margin-top: 30px;
+  width: 800px;
+  height: 400px;
+  margin-bottom: 100px;
+  border: 1px solid #d6d6d6;
+  border-radius: 18px;
+`;
+
 
 const MyPage = () => {
 
     
 
     const context = useContext(UserContext);
-    const { userId, password, setPassword, favTeam, setFavTeam, nickname, setNickname } = context;
+    const { userId, password, favTeam,  nickname } = context;
 		const [inputNowPw, setInputNowPw] = useState("");
 		const [inputNewPw, setInputNewPw] = useState("");
 		const [inputConPw, setInputConPw] = useState("");
@@ -541,7 +550,10 @@ const MyPage = () => {
             <button className="disable-button">수정완료</button>}
             <Modal open={modalOpen} close={closeModal} header="Bench Clearing">{modalText}</Modal>
         </div>
-        
+        <h2>내 작성글</h2>
+        <MyWriting>
+
+        </MyWriting>
         </Container>
     );
 };

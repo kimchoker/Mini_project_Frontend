@@ -123,7 +123,7 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
     const Login = () => {
 
         const context = useContext(UserContext);
-        const { setUserId, setPassword , setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
+        const { setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
         const navigate = useNavigate(); // 라우터 이동을 하기 위해서 
 
         // 키보드 입력 

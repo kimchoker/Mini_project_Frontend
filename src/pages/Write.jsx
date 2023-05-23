@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate} from "react-router-dom";
-import AxiosApi from "../Api/AxiosApi";
+import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 
 
