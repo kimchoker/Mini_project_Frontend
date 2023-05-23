@@ -148,6 +148,28 @@ const Container = styled.div`
     border-radius: 18px;
     border: orange;
   }
+  .delete-button {
+      margin-top: 20px;
+      margin-left: 30px;
+      margin-right: 30px;
+      /* margin-bottom: 50px; */
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 26px;
+      font-weight: bold;
+      width: 400px;
+      height: 50px;
+      color: white;
+      border: none;
+      font-size: 15px;
+      font-weight: 400;
+      border-radius: 18px;
+      background-color: red;
+      cursor: pointer;
+  }
+  .delete-button:active {
+    background-color: #999;
+    
+  }
 
 	@media(max-width: 768px) {
    
@@ -260,7 +282,7 @@ const Container = styled.div`
 const Input = styled.input`
   margin-left: 30px;
   margin-right: 30px;
-  width: 250px; /* 원하는 너비 설정 */
+  width: 400px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
@@ -269,13 +291,17 @@ const Input = styled.input`
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 
+  @media(max-width: 768px) {
+    width: 250px;
+  }
+
   
 `;
 
 const Select = styled.select` 
   margin-left: 30px;
   margin-right: 30px;
-  width: 260px; /* 원하는 너비 설정 */
+  width: 400px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
@@ -284,7 +310,10 @@ const Select = styled.select`
   border-radius: 18px; /* iSO 둥근모서리 제거 */
 	text-align: center;
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
-	
+  
+  @media(max-width: 768px) {
+    width: 260px;
+  }
 `;
 
 
@@ -468,6 +497,8 @@ const MyPage = () => {
     
         if (isUpdated) {
           setModalText("내 정보 수정이 완료되었습니다.");
+          setOriginFavTeam(inputFavTeam);
+          setOriginNickname(inputNickName);
         } else {
           setModalText("내 정보 수정에 실패하였습니다.");
         }
@@ -476,6 +507,22 @@ const MyPage = () => {
       } catch (error) {
         console.error("내 정보 수정 에러:", error);
       }
+    };
+
+    const onclickDelete = async() => {
+      const token = localStorage.getItem('token');
+
+      const deleteData = {
+        id: userId,
+        token: token
+      }
+
+      const isDeleted = await AxiosApi.memberDel(deleteData);
+
+      if(isDeleted) {
+        setModalText("회원 탈퇴에 성공했습니다.");
+      } 
+      setModalOpen(true);
     };
     
 
@@ -549,6 +596,10 @@ const MyPage = () => {
             <button className="enable-button" onClick={onClickEdit}>수정완료</button> :
             <button className="disable-button">수정완료</button>}
             <Modal open={modalOpen} close={closeModal} header="Bench Clearing">{modalText}</Modal>
+        </div>
+
+        <div className="item1">
+          <button className="delete-button" onClick={onclickDelete}>회원탈퇴</button>
         </div>
         <h2>내 작성글</h2>
         <MyWriting>

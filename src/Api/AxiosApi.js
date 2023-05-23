@@ -109,11 +109,12 @@ const AxiosApi = {
     },
 
     // 회원 탈퇴
-    memberDel: async(id) => {
-        const del = {
-            id: id
+    memberDel: async(data) => {
+        const deleteData = {
+            id: data.id,
+            token: data.token
         };
-        return await axios.post(Backend + "/delete", del);
+        return await axios.post(Backend + "/del", deleteData);
     },
 
     findPw: async(id) => {

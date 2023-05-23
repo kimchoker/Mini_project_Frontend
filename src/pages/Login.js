@@ -144,7 +144,7 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
             if (response.status === 200) {
               localStorage.setItem('token', response.data);
               const token = localStorage.getItem('token');
-            
+              console.log(token);  
         
               const userInfoResponse = await TokenAxiosApi.userInfo(token);
               const userData = JSON.stringify(userInfoResponse, null, 2);
