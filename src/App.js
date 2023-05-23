@@ -81,11 +81,15 @@ export default function App() {
           <SignUp />
           
         </>} />
-        <Route path="/findpw" element={<>
+        <Route path="/findpw" element={ windowWidth > 768 ? (
+        <>
           <Navigation />
           <FindPw />
-          <Footer />
-        </>} />
+          
+        </>
+        ) : ( 
+            <FindPw />
+        )} />
         <Route path="/newshome/view" element={<>
           <Navigation />
           <View />

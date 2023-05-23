@@ -117,11 +117,9 @@ const AxiosApi = {
     },
 
     findPw: async(id) => {
-
         const data = {
             id: id
-        }
-        
+        };
         return await axios.post(Backend + "/findpw", data);
     },
 

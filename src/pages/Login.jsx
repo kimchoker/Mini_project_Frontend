@@ -2,12 +2,10 @@ import React from "react"
 import styled from "styled-components"
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AxiosApi from "../Api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Modal from "../utils/Modal";
 import Logo from "../images/logo-big.png"
 import Field from "../images/field2.jpg"
-import css from "styled-components";
 import TokenAxiosApi from "../Api/TokenAxiosApi";
 
    
@@ -146,7 +144,7 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
             if (response.status === 200) {
               localStorage.setItem('token', response.data);
               const token = localStorage.getItem('token');
-              console.log("토큰 : " + token);
+            
         
               const userInfoResponse = await TokenAxiosApi.userInfo(token);
               const userData = JSON.stringify(userInfoResponse, null, 2);
@@ -161,11 +159,11 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
 							handleLogin();
               navigate("/");
             } else {
-              console.log("로그인 에러");
+              
               setModalopen(true);
             }
           } catch (error) {
-            console.error("에러", error);
+            
             setModalopen(true);
           }
         };
