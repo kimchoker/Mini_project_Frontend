@@ -251,17 +251,18 @@ const Container = styled.div`
       font-family: 'Noto Sans KR', sans-serif;
       font-size: 26px;
       font-weight: bold;
-      width: 400px;
+      width: 250px;
       height: 50px;
       color: white;
       font-size: 15px;
       font-weight: 400;
       border-radius: 18px;
-      cursor: pointer;
+      
     }
 
     .enable-button {
       background-color: #395144;
+      cursor: pointer;
       border: orange;
       font-weight: 700;
     }
@@ -277,6 +278,9 @@ const Container = styled.div`
     }
     h2 {
       color: white;
+    }
+    .delete-button{
+      width: 250px;
     }
   }
   
@@ -338,6 +342,14 @@ const MyWriting = styled.div`
   margin-bottom: 100px;
   border: 1px solid #d6d6d6;
   border-radius: 18px;
+
+  @media(max-width: 768px){
+    width: 400px;
+    height: 400px;
+    margin-left: 35px;
+    margin-right: 0px;
+    background-color: white;
+  }
 `;
 
 

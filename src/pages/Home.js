@@ -11,6 +11,7 @@ import Samsung from "../images/Samsung.png"
 import Lotte from "../images/Lotte.png"
 
 const Homeblock = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
   display: block;
   text-align: center;
   width: 100vw;
@@ -101,24 +102,24 @@ const NoticeBlock = styled.div`
 //         }
 // `;
 
-    const TeamShortcut = styled.div`
-        position: absolute;
-        top: 700px;
-        right: 100px;
-        width: 80vw;
-        display: inline-block;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-        
-        .image {
-            width: 90px;
-            height: 65px;
-            margin-right: 2vw;
-            
-        }
-
-    `;
+const TeamShortcut = styled.div`
+  position: absolute;
+  top: 750px; /* 원하는 수직 위치를 여기에 설정하세요 */
+  left: 51%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  
+  .image {
+    width: 90px;
+    height: 65px;
+    margin-right: 2vw;
+  }
+`;
 
 const MobileHomeBlock = styled.div`
     @media(min-width: 768px) {
