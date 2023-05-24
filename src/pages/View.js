@@ -46,7 +46,7 @@ const NewsGrey = styled.div`
 const View = () => {
   const location = useLocation();
   const newsId = location.state.id;
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState([0]);
 
   useEffect(()=>{
     const news = async()=>{
@@ -54,20 +54,15 @@ const View = () => {
       if(rsp.status === 200) setNews(rsp.data);
     }
     news();
-  },[])
+  },[newsId])
 
 
 
     return (
       <NewsBlock>
         <h1 className="News">NEWS</h1>
-        <NewsNavi/>
         <NewsGrey>
-        {
-          news.map((news) =>(
-              <NewsDetailContainer exp={{news_Title : news.news_Title, news_Image_Url : news.news_Image_Url, news_Long_Content : news.news_Long_Content}}/>
-          ))
-        }
+            <NewsDetailContainer exp={{news_Title : news[0].news_Title, news_Image_Url : news[0].news_Image_Url, news_Long_Content : news[0].news_Long_Content}}/>
         </NewsGrey>
       </NewsBlock>
   );

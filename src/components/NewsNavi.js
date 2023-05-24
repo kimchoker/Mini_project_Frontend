@@ -4,33 +4,35 @@ import { styled } from "styled-components";
 
 const NewsNaviDiv = styled.div`
   display: flex;
-  list-style: none;
-  gap: 37px;
-  font-family: 'Nanum_Gothic';
-  font-weight: bold;
-  font-size: x-large;
-
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
   li {
-    color: black;
-    border-right: 5px solid #395144;
-    padding-right: 30px;
-    padding-bottom: 10px;
-    position: relative;
-    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    list-style: none;
+    font-size: 20px;
   }
-
-  li:last-child {
-    border: none;
-  }
-
   li:hover {
     cursor: pointer;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  input{
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
   }
 `;
 
-const NewsNavi = ({ onSelect, category, onEnter }) => {
-  const location = useLocation();
-  const isNewsHomeRoute = location.pathname === "/newshome";
+const NewsNavi = ({ onSelect, onEnter }) => {
 
   const newsMenu = [
     { name: "All", value: "전체 보기" },
@@ -41,21 +43,15 @@ const NewsNavi = ({ onSelect, category, onEnter }) => {
 
   return (
     <NewsNaviDiv>
-      <ul>
-        {newsMenu.map((newsItem) => (
-          <li key={newsItem.name}>
-            {isNewsHomeRoute ? (
-              <span onClick={() => onSelect(newsItem.name)}>
+      {newsMenu.map((newsItem) => (
+        <ul key={newsItem.name}>
+            <div>
+              <li onClick={() => onSelect(newsItem.name)}>
                 {newsItem.value}
-              </span>
-            ) : (
-              <Link to="/NewsHome" onClick={() => onSelect(newsItem.name)}>
-                {newsItem.value}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
+              </li>
+            </div>
+        </ul>
+      ))}
       <input
         type="text"
         onKeyPress={(event) => {

@@ -14,10 +14,6 @@ const HomeContentDiv = styled.div`
     justify-content: flex-start;
     align-items: center;
     gap: 30px;
-    @font-face {
-        font-family: "inter";
-        src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
-    }
     .Homeplate {
         font-family: 'inter';
         font-size: 45px;
@@ -83,24 +79,9 @@ const HomeContent = () => {
     }
 
     return( 
-        <HomeContentDiv>
-            <h3 className="Homeplate">HOME PLATE</h3>
-            <ContentGrey>
-            {board.map((boardItem) => (
-                <div key={boardItem.boardNo}>
-                    <h1>{boardItem.boardTitle}</h1>
-                    <DivContents>      
-                        <p>글번호 : {boardItem.boardNo}</p>
-                        <p>날짜 : {boardItem.boardDate}</p>
-                        <p>사용자 : 아직없음</p>
-                    </DivContents>
-                    <hr/>
-                    <p>{boardItem.boardContent}</p>
-                </div>
-            ))}
-            <Button onClick={backToHomePlate}><h3>목록으로 가기</h3></Button>
-            </ContentGrey>
-        </HomeContentDiv>
+        <>
+            <h1>아자아자 화이팅</h1>
+        </>
     );
 };  
 
