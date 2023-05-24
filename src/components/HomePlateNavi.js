@@ -31,13 +31,12 @@ const NewsNaviDiv = styled.div`
   }
 `;
 
-const NewsNavi = ({ onSelect, onEnter }) => {
+const HomePlateNavi = ({ onSelect, onEnter }) => {
 
   const newsMenu = [
     { name: "All", value: "전체 보기" },
-    { name: "LatestNews", value: "최신순" },
-    { name: "LikeNews", value: "좋아요순" },
-    { name: "ComentNews", value: "댓글순" },
+    { name: "Latest", value: "최신순" },
+    { name: "Latest", value: "글쓰기" },
   ];
 
   return (
@@ -63,4 +62,4 @@ const NewsNavi = ({ onSelect, onEnter }) => {
   );
 };
 
-export default NewsNavi;
+export default HomePlateNavi;

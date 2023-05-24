@@ -79,32 +79,6 @@ const NoticeBlock = styled.div`
   }
 `;
 
-// const StandingBlock = styled.div`
-//   width: 450px;
-//   height: 500px;
-//   margin-left: 50px;
-//   border: 1px solid #c6c6c6;
-//   border-radius: 8px;
-
-// 	.indexTable { 
-//             width: 450px;
-//             height: 45px;
-//             border-collapse: collapse;
-//         }
-
-//         .index {
-//             height: 45px;
-//             border-bottom: 1px solid #c6c6c6;
-//         }
-        
-//         tr {
-//             height: 45px;
-//         }
-//         th {
-//             height: 45px;
-//         }
-// `;
-
 const TeamShortcut = styled.div`
   position: absolute;
   top: 750px; /* 원하는 수직 위치를 여기에 설정하세요 */
@@ -159,11 +133,11 @@ const Home = () => {
                         <div className="noticeHot">
                             <h3>홈플레이트 오늘의 인기글</h3>
                         </div>
-                        
+     
                         <div className="noticeFight">
                             <h3>홈플레이트 오늘의 투기장</h3>
                         </div>
-
+        
                         <div className="noticeNew">
                             <h3>홈플레이트 최신글 보기</h3>
                             <table>
@@ -171,7 +145,7 @@ const Home = () => {
                                 <tr>
                                   <th>보드 번호</th>
                                   <th>제목</th>
-                                  <th>별명</th>
+                                  <th>글쓴이</th>
                                   <th>날짜</th>
                                 </tr>
                               </thead>

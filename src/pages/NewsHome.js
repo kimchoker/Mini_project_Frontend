@@ -69,6 +69,7 @@ const NewsHome = () => {
   const onEnter = useCallback(category =>{
       setCategory(category);
       setResetNews(true)
+      setPage(1);
   },[])
     
   return (
@@ -92,7 +93,7 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <Pagination totalData={totalPage} setCurrentPage={setPage}/>
+      <Pagination currentPage={page} totalData={totalPage} setCurrentPage={setPage}/>
     </NewsBlock>
   );
 }
