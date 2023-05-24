@@ -68,11 +68,6 @@ const MobileLogo = styled.div`
 `;
 
 const NavigationWrapper = styled.div`
-
-    @font-face {
-    font-family: "inter";
-    src: url(./fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
-    }
     z-index: 11;
     width: 100%;
     height: 150px;
@@ -82,24 +77,22 @@ const NavigationWrapper = styled.div`
     align-items: center;
     top: 0;
     background-color: #395144;
-    
-
-.menu__item {
-    width: 150px;
-    height: 50px;
-    margin-top: 15px;
-    margin-right: 30px;
-    display: flex;
-    font-family: 'inter';
-    font-weight: 600;
-    color: #F0EBCE;
-    font-size: 0.8rem;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transform: skew(-10deg);
-    text-align: center;
-  }
+    .menu__item {
+      width: 150px;
+      height: 50px;
+      margin-top: 15px;
+      margin-right: 30px;
+      display: flex;
+      font-family: 'inter';
+      font-weight: 600;
+      color: #F0EBCE;
+      font-size: 0.8rem;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transform: skew(-10deg);
+      text-align: center;
+    }
   .menu__item:hover {
     transition: all 0.1s linear;
     font-size: 1.1rem;
