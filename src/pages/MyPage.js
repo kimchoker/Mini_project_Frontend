@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import Modal from "../utils/Modal";
-import AxiosApi from "../Api/AxiosApi";
-import styled from "styled-components";
 import { UserContext } from "../context/UserStore";
 import { useContext } from "react";
 import { useEffect } from "react";
 import TokenAxiosApi from "../Api/TokenAxiosApi";
+import { Navigate } from "react-router-dom";
+import Modal from "../utils/Modal";
+import AxiosApi from "../Api/AxiosApi";
+import styled from "styled-components";
+
+
 
 const Container = styled.div`
   margin-top: 125px;
@@ -343,7 +346,7 @@ const MyPage = () => {
     
 
     const context = useContext(UserContext);
-    const { userId, password, favTeam,  nickname } = context;
+    const { userId, setUserId, password, favTeam,  nickname, handleLogout } = context;
 		const [inputNowPw, setInputNowPw] = useState("");
 		const [inputNewPw, setInputNewPw] = useState("");
 		const [inputConPw, setInputConPw] = useState("");
@@ -353,24 +356,29 @@ const MyPage = () => {
     const [originNickname, setOriginNickname] = useState("");
     const originPwd = password;
 
-		useEffect(() => {
-			const fetchOriginInfo = () => {
-				try {
-					
-					setInputNickname(nickname);
-					setInputFavTeam(favTeam);
-          setOriginFavTeam(favTeam);
-          setOriginNickname(nickname);
-          const token = localStorage.getItem('token');
+    const restoreSession = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await TokenAxiosApi.userInfo(token);
+            setUserId(response.data[0].id);
+            setInputNickname(response.data[0].nickname)
+            setOriginNickname(response.data[0].nickname);
+            setOriginFavTeam(response.data[0].favTeam);
+            setInputFavTeam(response.data[0].favTeam);
           
-				} catch (error) {
-					console.log(error);
-				}
-			};
-	
-			fetchOriginInfo();
-      
-		}, []);
+        } catch (error) {
+          console.error("세션 복구 중 오류 발생 : ", error);
+        }
+      }
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        await restoreSession(); // restoreSession 비동기로 처리
+      }
+      fetchData(); // fetchData 함수 호출
+    }, []); 
 
     
 
@@ -396,7 +404,7 @@ const MyPage = () => {
 
 		const [modalOpen, setModalOpen] = useState(false);
 		const [modalText, setModalText] = useState("");
-
+    const [type, setType] = useState("");
     
 		const closeModal = () => {
         setModalOpen(false);
@@ -465,7 +473,6 @@ const MyPage = () => {
      // 닉네임 중복확인
      const onClickNickNameCheck = async() => {
         const nickNameCheck = await AxiosApi.memberNickname(inputNickName);
-        console.log(nickNameCheck);
         if(nickNameCheck.data === true) {
             setNickNameMessage("사용 가능한 닉네임입니다.");
             setIsNickName(true);
@@ -505,25 +512,35 @@ const MyPage = () => {
     
         setModalOpen(true);
       } catch (error) {
-        console.error("내 정보 수정 에러:", error);
+        setModalText("내 정보 수정 에러:", error);
+        setModalOpen(true);
       }
     };
 
-    const onclickDelete = async() => {
+    const onclickDelete = () => {
+      setType("open");
+      setModalText("정말로 탈퇴하시겠습니까?");
+      setModalOpen(true);
+    };
+    
+    const realDelete = async() => {
+      setModalOpen(false);
+      setType("");
+      setModalOpen(true);
       const token = localStorage.getItem('token');
-
       const deleteData = {
         id: userId,
         token: token
       }
 
       const isDeleted = await AxiosApi.memberDel(deleteData);
-
+        
       if(isDeleted) {
         setModalText("회원 탈퇴에 성공했습니다.");
       } 
       setModalOpen(true);
-    };
+      handleLogout()
+    }
     
 
 
@@ -595,7 +612,7 @@ const MyPage = () => {
             {((isNowPw && isNewPw && isConPw) || (isNickName && inputNickName !== originNickname) || (inputFavTeam !== originFavTeam)) ? 
             <button className="enable-button" onClick={onClickEdit}>수정완료</button> :
             <button className="disable-button">수정완료</button>}
-            <Modal open={modalOpen} close={closeModal} header="Bench Clearing">{modalText}</Modal>
+            <Modal open={modalOpen} type={type} confirm={realDelete} close={closeModal} header="Bench Clearing">{modalText} </Modal>
         </div>
 
         <div className="item1">

@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
 import { useEffect } from "react";
 import TokenAxiosApi from "../Api/TokenAxiosApi";
+import { Navigate } from "react-router-dom";
+import Modal from "../utils/Modal";
 
 
 export const UserContext = createContext(null);
@@ -12,40 +14,48 @@ const UserStore = (props) => {
     const [favTeam, setFavTeam] = useState("");
     const [nickname, setNickname]  = useState("");
 
+    const [modalOpen, setModalOpen] = useState(false);
+		const [modalText, setModalText] = useState("");
+
+
+    const restoreSession = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await TokenAxiosApi.userInfo(token);
+          setUserId(response.data[0].id);
+          setPassword(response.data[0].pwd);
+          setNickname(response.data[0].nickname);
+          setFavTeam(response.data[0].favTeam);
+          handleLogin();          // restoreSession 처리 완료 후 handleLogin 호출
+        } catch (error) {
+          console.log("세션 복구 중 오류 발생 : ", error);
+          handleLogout();
+          Navigate("/");
+        }
+      }
+    };
+
+    
+
+    const handleLogin = () => {
+          setIsLoggedIn(true);
+    };
 
     useEffect(() => {
-      const restoreSession = async () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-          try {
-            const userInfoResponse = await TokenAxiosApi.userInfo(token);
-            const userData = userInfoResponse.data[0];
+      const fetchData = async () => {
+        await restoreSession(); // restoreSession 비동기로 처리
+      }
+      fetchData(); // fetchData 함수 호출
+    }, []); 
   
-            setUserId(userData.id);
-            setPassword(userData.pwd);
-            setFavTeam(userData.favTeam);
-            setNickname(userData.nickname);
-            handleLogin();
-          } catch (error) {
-            console.error("세션 복구 중 오류 발생 : ", error);
-          }
-        }
-      };
-      restoreSession();
-    }, []);
-  
-
-    const handleLogin = async() => {
-          setIsLoggedIn(true);
-      console.log("로그인 성공");
-    };
   
     const handleLogout = () => {
       localStorage.removeItem('token');
       setIsLoggedIn(false);
       setUserId("");
       setPassword("");
-      console.log("로그아웃 완료");
+      
     };
   
     return (

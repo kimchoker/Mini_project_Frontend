@@ -123,7 +123,7 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
     const Login = () => {
 
         const context = useContext(UserContext);
-        const { setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
+        const { setUserId, setPassword,  setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
         const navigate = useNavigate(); // 라우터 이동을 하기 위해서 
 
         // 키보드 입력 
@@ -150,8 +150,8 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
               const userData = JSON.stringify(userInfoResponse, null, 2);
               const userDataObject = JSON.parse(userData);
               
-              setInputId(userDataObject.data[0].id);
-              setInputPw(inputPw);
+              setUserId(inputId);
+              setPassword(inputPw);
               setNickname(userDataObject.data[0].nickname);
               setFavTeam(userDataObject.data[0].favTeam);
 							console.log(nickname);
