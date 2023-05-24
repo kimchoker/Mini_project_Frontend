@@ -4,7 +4,6 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import NewsHome from "./pages/NewsHome";
 import Schedule from "./pages/Schedule";
-import Standings from "./pages/Standings";
 import HomePlate from "./pages/HomePlate";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
@@ -69,11 +68,6 @@ export default function App() {
         <Route path="/standings" element={<>
           <Navigation />
           <Standings />
-          <Footer />
-        </>} />
-        <Route path="/schedule" element={<>
-          <Navigation />
-          <Schedule />
           <Footer />
         </>} />
         <Route path="/signup" element={<>
