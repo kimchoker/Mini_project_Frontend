@@ -13,14 +13,14 @@ const NewsNaviDiv = styled.div`
     font-weight: bold;
     list-style: none;
     font-size: 23px;
-    color: #395144; /* Set the default color */
+    color: #395144; 
   }
   li:hover {
     cursor: pointer;
     transform: scale(1.05);
     cursor: pointer;
   }
-  li.selected { /* Apply the red color to the selected item */
+  li.selected { 
     color: #704F4F;
   }
   input {

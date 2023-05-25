@@ -49,7 +49,6 @@ const NewsHome = () => {
     const getShortDetailNews = async () => {
       const rsp = await AxiosApi.getShortDetailNews(category ,currentPage);
       if (rsp.status === 200) setNews(rsp.data);
-      console.log("getShortDetailNews");
     }
     getShortDetailNews();
   }, [category, currentPage]);
@@ -58,7 +57,6 @@ const NewsHome = () => {
     const getNewsPages = async () => {
       const rsp = await AxiosApi.getNewsPages(category);
       if(rsp.status===200)  setTotlaData(rsp.data);
-      console.log("getTotalPage init");
     }
     getNewsPages();
   },[category]);
@@ -68,7 +66,6 @@ const NewsHome = () => {
     setCurrentPage(1);
     setMaxPageNumberLimit(5);
     setMinPageNumberLimit(0);
-    console.log("onSelect inti");
   }, []);
 
   const onEnter = useCallback(category =>{
@@ -76,7 +73,6 @@ const NewsHome = () => {
       setCurrentPage(1);
       setMaxPageNumberLimit(5);
       setMinPageNumberLimit(0);
-      console.log("onEnter inti");
   },[])
     
   return (

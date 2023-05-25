@@ -20,6 +20,19 @@ const AxiosApi = {
       return await axios.get(Backend + `/Latest?cat=${boardNo}`);
     },
 
+    getBoard : async(cat, page) => {
+      return await axios.get(Backend + `/Homeplate?cat=${cat}&page=${page}`)
+    },
+
+    getBoardPage : async(cat) => {
+      return await axios.get(Backend + `/Homeplate/TotalPage?cat=${cat}`)
+    },
+
+    getLongBoard : async(boardNo) =>{
+      return await axios.get(Backend + `/Homeplate/View?board_No=${boardNo}`); 
+   }, 
+    
+
     getSchedule : async(monthFilter) => {
       return await axios.get(Backend + `/schedule?monthFilter=${monthFilter}`);
     },
@@ -27,7 +40,8 @@ const AxiosApi = {
     getWeekly : async(monthFilter) => {
       return await axios.get(Backend + `/weekly?monthFilter=${monthFilter}`);
     },
-    
+
+
     // 로그인
     memberLogin: async(id, pw) => {
         const loginData = {
