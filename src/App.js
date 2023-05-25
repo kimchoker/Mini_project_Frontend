@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
 import View from "./pages/NewsView";
 import MyPage from "./pages/MyPage";
+import Weekly from "./pages/Weekly";
 
 export default function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -43,6 +44,16 @@ export default function App() {
           <NewsHome />
           <Footer />
         </>} />
+        <Route path="/weekly" element={<>
+          <Navigation/>
+          <Weekly/>
+          <Footer/>
+        </>}/>
+        <Route path="/schedule" element={<>
+          <Navigation/>
+          <Schedule/>
+          <Footer/>
+        </>}/>
         <Route path="/newshome/View" element={<>
           <Navigation />
           <View />
