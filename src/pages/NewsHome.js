@@ -40,7 +40,6 @@ const NewsGrey = styled.div`
 const NewsHome = () => {
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState('All');
-  const [resetNews, setResetNews] = useState(false);
   const [totalPage, setTotlaPage] = useState();
   const [page, setPage] = useState(1);
 
@@ -49,32 +48,38 @@ const NewsHome = () => {
     const getShortDetailNews = async () => {
       const rsp = await AxiosApi.getShortDetailNews(category ,page);
       if (rsp.status === 200) setNews(rsp.data);
+      console.log("getShortDetailNews");
     }
     getShortDetailNews();
-  }, [category,resetNews, page]);
+  }, [category, page]);
 
   useEffect(() => {
     const getNewsPages = async () => {
       const rsp = await AxiosApi.getNewsPages(category);
       if(rsp.status===200)  setTotlaPage(rsp.data);
+      console.log("getTotalPage init");
     }
     getNewsPages();
-  },[category,resetNews]);
+  },[category]);
 
   const onSelect = useCallback(category => {
     setCategory(category);
-    setResetNews(true); 
     setPage(1);
+    console.log("onSelect inti");
   }, []);
   const onEnter = useCallback(category =>{
       setCategory(category);
-      setResetNews(true)
       setPage(1);
+      console.log("onEnter inti");
   },[])
+
+
     
   return (
     <NewsBlock>
       <h1 className="News">NEWS</h1>
+      <p>{category}</p>
+      <p>{page}</p>
       <NewsNavi category={category} onSelect={onSelect} onEnter={onEnter}/>
       <NewsGrey>
       {news.length === 0 ? (
@@ -93,6 +98,7 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
+      <p>{page}</p>
       <Pagination currentPage={page} totalData={totalPage} setCurrentPage={setPage}/>
     </NewsBlock>
   );

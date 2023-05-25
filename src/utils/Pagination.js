@@ -21,16 +21,15 @@ const PageNaviUl = styled.ul`
   }
   .selected {
     color: #395144;
-    transform: scale(1.05);
   }
 `;
 
-const Pagination = ({ currentPage, totalData, setCurrentPage }) => {
+const Pagination = ({ currentPage, totalData, setCurrentPage}) => {
   const [pageNumberLimit, setPagerNumberLimit] = useState(5);
-  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
-  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const pages = [];
   const TotalPage = Math.ceil(totalData / 10);
+
+
 
   for (let i = 1; i <= TotalPage; i++) {
     pages.push(i);
@@ -41,7 +40,18 @@ const Pagination = ({ currentPage, totalData, setCurrentPage }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const getMaxBoundaries = () => {
+    for(let i = 1; i < Math.ceil(TotalPage / pageNumberLimit) ; i++){
+      if(currentPage < i * pageNumberLimit){
+        return i * pageNumberLimit;
+      }
+    }
+  }
+  const maxPageNumberLimit = getMaxBoundaries();
+  const minPageNumberLimit = getMaxBoundaries() - pageNumberLimit;
+
   const renderPageNumber = pages.map((number) => {
+    console.log(maxPageNumberLimit);
     if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
       const isCurrentPage = number === parseInt(currentPage);
       return (
@@ -62,16 +72,12 @@ const Pagination = ({ currentPage, totalData, setCurrentPage }) => {
   const handleNext = () => {
     if (TotalPage >= minPageNumberLimit + pageNumberLimit) {
       setCurrentPage(maxPageNumberLimit + 1);
-      setMinPageNumberLimit(maxPageNumberLimit);
-      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
   const handlePrev = () => {
     if (minPageNumberLimit - pageNumberLimit >= 0) {
       setCurrentPage(minPageNumberLimit - pageNumberLimit + 1);
-      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
-      setMaxPageNumberLimit(minPageNumberLimit);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
