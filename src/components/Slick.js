@@ -15,6 +15,13 @@ const SliderContainer = styled.div`
 		transform: skew(-10deg);
 		color: #395144;
 	}
+
+	@media(max-width: 768px) {
+		
+		margin-left: 25px;
+		width: 100%;
+		padding-bottom: 80%;
+	}
 `;
 
 // 슬라이더 내부 요소에 대한 스타일 정의
