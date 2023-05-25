@@ -12,6 +12,7 @@ import Lotte from "../images/Lotte.png"
 import { useState } from "react";
 import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
+import SimpleSlider from "../components/Slick";
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
@@ -36,52 +37,53 @@ const Container = styled.div`
 `;
 
 const NoticeBlock = styled.div`
-  width: 1200px;
-  min-width: 1200px;
-  height: 500px;
+  width: 440px;
+  min-width: 440px;
+  height: 600px;
   margin-right: 20px;
   margin-bottom: 20px;
   border: 1px solid #c6c6c6;
   border-radius: 8px;
-  position: relative;
+  position: absolute;
+  left: 900px;
 
-  .noticeHot {
-    width: 375px;
-    height: 460px;
-    background-color: #f9f9f9;
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    margin-right: 20px;
+  h3{
+    
+    top: 10px;
+    
   }
 
   .noticeNew {
-    width: 375px;
+    width: 400px;
     height: 460px;
-    background-color: #f1f1f1;
     display: inline-block;
     position: absolute;
     top: 20px;
     right: 20px;
-    
-  }
 
-  .noticeFight {
-    width: 375px;
-    height: 460px;
-    background-color: #f6f6f6;
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    right: 412.5px;
-    
-  }
+    .tr {
+      width: 350px;
+      text-align: center;
+    }
+  }  
+`;
+
+const WeeklyLineup = styled.div`
+  width: 600px;
+  height: 600px;
+  border: 1px solid #c6c6c6;
+  border-radius: 8px;
+  position: absolute;
+  left: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 `;
 
 const TeamShortcut = styled.div`
   position: absolute;
-  top: 750px; /* 원하는 수직 위치를 여기에 설정하세요 */
+  top: 850px; /* 원하는 수직 위치를 여기에 설정하세요 */
   left: 51%;
   transform: translateX(-50%);
   display: flex;
@@ -129,24 +131,19 @@ const Home = () => {
         <Homeblock>
             <DesktopHomeBlock>
                 <Container>
+                  <WeeklyLineup>
+                    <SimpleSlider>
+
+                    </SimpleSlider>
+                  </WeeklyLineup>
                     <NoticeBlock>
-                        <div className="noticeHot">
-                            <h3>홈플레이트 오늘의 인기글</h3>
-                        </div>
-     
-                        <div className="noticeFight">
-                            <h3>홈플레이트 오늘의 투기장</h3>
-                        </div>
-        
+                    <h3>홈플레이트 최신글 보기</h3>
                         <div className="noticeNew">
-                            <h3>홈플레이트 최신글 보기</h3>
+                            
                             <table>
                               <thead>
                                 <tr>
-                                  <th>보드 번호</th>
-                                  <th>제목</th>
-                                  <th>글쓴이</th>
-                                  <th>날짜</th>
+                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>

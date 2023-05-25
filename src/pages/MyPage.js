@@ -4,7 +4,6 @@ import { UserContext } from "../context/UserStore";
 import { useContext } from "react";
 import { useEffect } from "react";
 import TokenAxiosApi from "../Api/TokenAxiosApi";
-import { Navigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";

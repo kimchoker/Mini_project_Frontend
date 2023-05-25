@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
-import View from "./pages/View";
+import View from "./pages/NewsView";
 import MyPage from "./pages/MyPage";
 
 export default function App() {

@@ -3,7 +3,6 @@ import { useLocation} from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "../Api/AxiosApi";
 import NewsDetailContainer from "../components/NewsDetailContainer";
-import NewsNavi from "../components/NewsNavi";
 
 const NewsBlock = styled.div`
 
