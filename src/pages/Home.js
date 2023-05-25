@@ -150,10 +150,8 @@ const Home = () => {
                               {latestBoard && latestBoard.map((latestBoard) => {
                                 return (
                                   <tr key={latestBoard.boardNo}>
-                                    <th>{latestBoard.boardNo}</th>
                                     <th>{latestBoard.boardTitle}</th>
                                     <th>{latestBoard.nickName}</th>
-                                    <th>{latestBoard.boardDate}</th>
                                   </tr>
                                 );
                               })}

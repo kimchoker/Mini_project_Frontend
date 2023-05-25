@@ -21,7 +21,7 @@ const SliderContainer = styled.div`
 const SliderItem = styled.div`
   width: 480px;
   height: 480px;
-	
+	background-color: aliceblue;
 `;
 
 export default class SimpleSlider extends Component {

@@ -69,10 +69,7 @@ const MobileLogo = styled.div`
 
 const NavigationWrapper = styled.div`
 
-    @font-face {
-    font-family: "inter";
-    src: url(./fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
-    }
+    font-family: 'Inter', sans-serif;
     z-index: 11;
     width: 100%;
     height: 150px;
@@ -183,7 +180,7 @@ function Navigation() {
     
     { name: "NEWS", address: "/newshome" },
     { name: "HOME PLATE", address: "/homeplate" },
-    { name: "STANDINGS", address: "/standings" },
+    { name: "WEEKLY LINEUP", address: "/weekly" },
     { name: "SCHEDULE", address: "/schedule" },
 
     ];
