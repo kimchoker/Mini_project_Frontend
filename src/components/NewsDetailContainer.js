@@ -11,13 +11,10 @@ const NewsBlock = styled.div`
     align-items: center;
     gap: 40px;
     padding: 40px;
+    font-family: 'Noto Sans KR', sans-serif;
   h1{
-    font-family: 'Nanum_Gothic';
     border-bottom: 2px solid black;
     padding-bottom: 40px;
-  }
-  p{
-    font-family: 'Nanum_Gothic';
   }
 `;
 

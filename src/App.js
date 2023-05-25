@@ -11,10 +11,7 @@ import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
 import View from "./pages/View";
-import Write from "./pages/Write";
 import MyPage from "./pages/MyPage";
-import HomeContent from "./pages/HomeContents";
-
 
 export default function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -58,23 +55,21 @@ export default function App() {
         </>} />
         <Route path="/homeplate/contents/:selectBoardNo" element={<>
           <Navigation />
-          <HomeContent/>
+          
           <Footer />
         </>} />
         <Route path="/homeplate/write" element={<>
           <Navigation />
-          <Write/>
+          
         </>}/>
         <Route path="/signup" element={<>
           <Navigation />
           <SignUp />
-          
         </>} />
         <Route path="/findpw" element={ windowWidth > 768 ? (
         <>
           <Navigation />
           <FindPw />
-          
         </>
         ) : ( 
             <FindPw />

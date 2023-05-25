@@ -1,42 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const ButtonBox = styled.div`
+const PageNaviUl = styled.ul`
   display: flex;
   gap: 30px;
-  button {
-    border: none;
-    background-color: transparent;
-    font-family: 'inter';
-    transform: skew(-10deg);
+  li {
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    font-size: 20px;
     font-weight: bold;
-    color: #395144;
-    font-family: 'inter';
-    font-weight: 800;
-    font-size: 30px;
-    transform: skew(-10deg);
+    border-right: 3px solid #395144;
+    padding-right: 30px;
+    cursor: pointer;
   }
-  button:hover{
-    transition: all 0.1s linear;
-    font-size: 35px;
-    text-shadow: white 2px 2px;
+  li:last-child {
+    border-right: none;
+  }
+  li:hover {
+    transform: scale(1.05);
+  }
+  .selected {
+    color: #395144;
+    transform: scale(1.05);
   }
 `;
 
+const Pagination = ({ currentPage, totalData, setCurrentPage }) => {
+  const [pageNumberLimit, setPagerNumberLimit] = useState(5);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+  const pages = [];
+  const TotalPage = Math.ceil(totalData / 10);
 
-const Pagination = (props) => {
-  let pages = [];
-
-  for (let i = 1; i <= Math.ceil(props.totalPosts / props.postsPerPage); i++) {
+  for (let i = 1; i <= TotalPage; i++) {
     pages.push(i);
   }
-  
+
+  const handleClick = (event) => {
+    setCurrentPage(event.target.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderPageNumber = pages.map((number) => {
+    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+      const isCurrentPage = number === parseInt(currentPage);
+      return (
+        <li
+          key={number}
+          id={number}
+          className={isCurrentPage ? "selected" : ""}
+          onClick={handleClick}
+        >
+          {number}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+
+  const handleNext = () => {
+    if (TotalPage >= minPageNumberLimit + pageNumberLimit) {
+      setCurrentPage(maxPageNumberLimit + 1);
+      setMinPageNumberLimit(maxPageNumberLimit);
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  const handlePrev = () => {
+    if (minPageNumberLimit - pageNumberLimit >= 0) {
+      setCurrentPage(minPageNumberLimit - pageNumberLimit + 1);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+      setMaxPageNumberLimit(minPageNumberLimit);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <ButtonBox>
-      {pages.map((page, index) => (
-        <button key={index} onClick={() => props.setCurrentPage(page)}>{page}</button>
-      ))}
-    </ButtonBox>
+    <PageNaviUl>
+      <li onClick={handlePrev}>&lt;</li>
+      {renderPageNumber}
+      <li onClick={handleNext}>&gt;</li>
+    </PageNaviUl>
   );
 };
 

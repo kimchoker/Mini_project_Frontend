@@ -24,23 +24,16 @@ const Images = styled.img`
   object-fit: cover;
 `;
 
-
 const Text = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: 'Noto Sans KR', sans-serif;
   padding: 0px;
   h2 {
-    font-family: 'Nanum_Gothic';
     display: inline-block;
     position: relative;
     margin: 10px 0px;
-  }
-  h2:hover {
-    color: #6f2727;
-  }
-  p{
-    font-family: 'Nanum_Gothic';
   }
 `;
 

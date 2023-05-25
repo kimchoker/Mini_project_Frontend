@@ -9,6 +9,9 @@ import LG from "../images/LG.png"
 import NC from "../images/NC.png"
 import Samsung from "../images/Samsung.png"
 import Lotte from "../images/Lotte.png"
+import { useState } from "react";
+import { useEffect } from "react";
+import AxiosApi from "../Api/AxiosApi";
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
@@ -76,32 +79,6 @@ const NoticeBlock = styled.div`
   }
 `;
 
-// const StandingBlock = styled.div`
-//   width: 450px;
-//   height: 500px;
-//   margin-left: 50px;
-//   border: 1px solid #c6c6c6;
-//   border-radius: 8px;
-
-// 	.indexTable { 
-//             width: 450px;
-//             height: 45px;
-//             border-collapse: collapse;
-//         }
-
-//         .index {
-//             height: 45px;
-//             border-bottom: 1px solid #c6c6c6;
-//         }
-        
-//         tr {
-//             height: 45px;
-//         }
-//         th {
-//             height: 45px;
-//         }
-// `;
-
 const TeamShortcut = styled.div`
   position: absolute;
   top: 750px; /* 원하는 수직 위치를 여기에 설정하세요 */
@@ -136,6 +113,17 @@ const MobileHomeBlock = styled.div`
 
 
 const Home = () => {
+  const [latestBoard, setLatestBoard] = useState();
+
+  useEffect(()=>{
+    const getLatestBoard = async() =>{
+      const rsp = await AxiosApi.getLatestBoard("All");
+      if(rsp.status === 200) setLatestBoard(rsp.data);
+    }
+    getLatestBoard();
+    console.log("LatestBoard active")
+  },[])
+  
 
      return (
         <Homeblock>
@@ -145,27 +133,38 @@ const Home = () => {
                         <div className="noticeHot">
                             <h3>홈플레이트 오늘의 인기글</h3>
                         </div>
-                        
+     
                         <div className="noticeFight">
                             <h3>홈플레이트 오늘의 투기장</h3>
                         </div>
-
+        
                         <div className="noticeNew">
                             <h3>홈플레이트 최신글 보기</h3>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>보드 번호</th>
+                                  <th>제목</th>
+                                  <th>글쓴이</th>
+                                  <th>날짜</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {latestBoard && latestBoard.map((latestBoard) => {
+                                return (
+                                  <tr key={latestBoard.boardNo}>
+                                    <th>{latestBoard.boardNo}</th>
+                                    <th>{latestBoard.boardTitle}</th>
+                                    <th>{latestBoard.nickName}</th>
+                                    <th>{latestBoard.boardDate}</th>
+                                  </tr>
+                                );
+                              })}
+                              </tbody>
+                            </table>                            
                         </div>
                     </NoticeBlock>
-                    {/* <StandingBlock>
-                        <table className="indexTable">
-                            <tr className="index">
-                                <th>팀 이름</th>
-                                <th>승</th>
-                                <th>무</th>
-                                <th>패</th>
-                                <th>승률</th>
-                                <th>승차</th>
-                            </tr>
-                        </table>
-                    </StandingBlock> */}
+
                 </Container>
                 <TeamShortcut>
                     <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
@@ -185,9 +184,6 @@ const Home = () => {
             
             </MobileHomeBlock>
         </Homeblock>
-        
-        
-
     )
 }
 export default Home;

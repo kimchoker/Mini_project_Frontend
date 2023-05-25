@@ -4,38 +4,22 @@ import axios from "axios";
 const Backend = "http://localhost:8111"; // 시연시에는 실제 ip로 바꿔야함
 
 const AxiosApi = {
-
-    // 뉴스 번호로 뉴스 정보 Get 방식 가져오기
-    getNews : async(news_no) => {
-        return await axios.get(Backend + `/News?news_no=${news_no}`);
+    getShortDetailNews : async(category, page) => {
+        return await axios.get(Backend + `/News?cat=${category}&page=${page}`);
     },
 
-    
-
-    getNewsInfo : async(news_no) => {
-        return await axios.get(Backend + `/News/View?news_no=${news_no}`);
-    },
-    
-    // 팀 랭킹 Get 방식
-
-    getTeamRanking : async(team) => {
-        return await axios.get(Backend + `/?team=${team}`);
+    getNewsPages : async(category) => {
+        return await axios.get(Backend + `/News/TotalPage?cat=${category}`)
     },
 
-    // 뉴스 타이틀 뉴스 번호 Get 방식 가죠오기
+    getLongDetailNews : async(newsId) =>{
+       return await axios.get(Backend + `/News/View?news_no=${newsId}`); 
+    }, 
 
-    getNews : async(news_no) => {
-        return await axios.get(Backend + `/News?news_no=${news_no}`);
+    getLatestBoard : async(boardNo) =>{
+      return await axios.get(Backend + `/Latest?cat=${boardNo}`);
     },
-
-    // 뉴스 번호로 뉴스 정보 Get 방식 가죠오기
-
-    getNewsInfo : async(news_no) => {
-        return await axios.get(Backend + `/News/View?news_no=${news_no}`);
-    },
-
     // 로그인
-
     memberLogin: async(id, pw) => {
         const loginData = {
           id: id,
@@ -122,30 +106,7 @@ const AxiosApi = {
             id: id
         };
         return await axios.post(Backend + "/findpw", data);
-    },
-
-    // 글번호, 제목, 날짜 조회
-    Homeplate: async(boardTitle) => {
-        return await axios.get(Backend + `/homeplate?boardTitle=${boardTitle}`);
-    },
-
-    // 내용 가져오기
-    HomeContent : async(boardNo) => {
-        return await axios.get(Backend + `/homeplate/contents?boardNo=${boardNo}`);
-    },
-
-    // 제목 검색
-    HomeSearch : async(boardTitle) => {
-        return await axios.get(Backend + `/homeplate/search?boardTitle=${boardTitle}`);
-    },
-
-    getSchedule : async(monthFilter) => {
-        return await axios.get(Backend + `/schedule?monthFilter=${monthFilter}`);
-    },
-    Standings : async(winRatio) => {
-        return await axios.get(Backend + `/standings?winRatio=${winRatio}`);
     }
-    
 }
 
 export default AxiosApi;
