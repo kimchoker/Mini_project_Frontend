@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import SimpleSlider from "../components/Slick";
+import { useNavigate } from "react-router-dom";
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
@@ -81,6 +82,10 @@ const NoticeBlock = styled.div`
     th {
       border-bottom: 1px solid #c6c6c6;
     }
+    th:hover {
+      color: navy;
+      cursor: pointer;
+    }
     tr {
       height: 30px;
     }
@@ -146,7 +151,8 @@ const MobileHomeBlock = styled.div`
 
 const Home = () => {
   const [latestBoard, setLatestBoard] = useState();
-
+  const navigate = useNavigate();
+  
   useEffect(()=>{
     const getLatestBoard = async() =>{
       const rsp = await AxiosApi.getLatestBoard("All");
@@ -154,7 +160,12 @@ const Home = () => {
     }
     getLatestBoard();
     console.log("LatestBoard active")
+
+    
   },[])
+    const getTheValue = (id) => {
+      navigate("/homeplate/View",{state:{id:id}});
+    }
   
 
      return (
@@ -181,7 +192,7 @@ const Home = () => {
                               {latestBoard && latestBoard.map((latestBoard) => {
                                 return (
                                   <tr key={latestBoard.boardNo}>
-                                    <th>{latestBoard.boardTitle}</th>
+                                    <th onClick = {() => {getTheValue(latestBoard.boardNo)}}>{latestBoard.boardTitle}</th>
                                     <th>{latestBoard.nickName}</th>
                                   </tr>
                                 );
