@@ -12,10 +12,7 @@ const WeeklyDiv = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #f2f2f2;
-    @font-face {
-        font-family: "inter";
-        src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
-    }
+    font-family: 'Noto Sans KR', sans-serif;
     
     .weekBest {
         display: flex;
@@ -35,7 +32,7 @@ const WeeklyDiv = styled.div`
     }
 
     h2 {
-        color: #6f2727;
+        color: #395144;
         transform: skew(-10deg);
         font-size: 30px;
     }
@@ -66,8 +63,41 @@ const WeeklyDiv = styled.div`
     }
 
     .image:hover {
-        transform: scale(2.05);
+        transform: scale(1.85);
     }
+
+    @media (max-width: 768px) {
+    .image {
+      width: auto; /* Full width on mobile */
+      height: 200px; /* Maintain aspect ratio */
+      margin-right: 0;
+      object-fit: cover;
+    }
+
+    h2 {
+        font-size: 35px;
+        color: #395144;
+    }
+    .imgae:hover {
+        transform: scale(0.5);
+    }
+
+    .image-container {
+        font-size: 15px;
+    }
+
+    .date-container {
+        flex-direction: column;
+        font-size: 14px;
+        align-items: flex-start;
+        margin-bottom : 0;
+        gap: 10px;
+    }
+
+    .date-container span {
+        white-space: nowrap;
+    }
+  }
 `;
 
 
@@ -86,8 +116,8 @@ const Weekly = () => {
 
     return (
         <WeeklyDiv>
+            <br/>
             <h2>Weekly Best Line-Up</h2>
-            <br />
             
             <select className="month" value={monthFilter} onChange={(e)=>setMonthFilter(e.target.value)}>
                 <option value="4">4월</option>
