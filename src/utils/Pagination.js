@@ -7,8 +7,9 @@ const PageNaviUl = styled.ul`
   li {
     font-family: 'Noto Sans KR', sans-serif;
     list-style: none;
-    font-size: 20px;
+    font-size: 27px;
     font-weight: bold;
+    color: #395144;
     border-right: 3px solid #395144;
     padding-right: 30px;
     cursor: pointer;
@@ -20,15 +21,15 @@ const PageNaviUl = styled.ul`
     transform: scale(1.05);
   }
   .selected {
-    color: #395144;
+    color: #704F4F;
   }
 `;
 
-const Pagination = ({ currentPage, totalData, setCurrentPage}) => {
+const Pagination = ({ currentPage, totalData, setCurrentPage, maxPageNumberLimit, minPageNumberLimit, setMinPageNumberLimit, setMaxPageNumberLimit}) => {
   const [pageNumberLimit, setPagerNumberLimit] = useState(5);
+
   const pages = [];
   const TotalPage = Math.ceil(totalData / 10);
-
 
 
   for (let i = 1; i <= TotalPage; i++) {
@@ -40,18 +41,7 @@ const Pagination = ({ currentPage, totalData, setCurrentPage}) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const getMaxBoundaries = () => {
-    for(let i = 1; i < Math.ceil(TotalPage / pageNumberLimit) ; i++){
-      if(currentPage < i * pageNumberLimit){
-        return i * pageNumberLimit;
-      }
-    }
-  }
-  const maxPageNumberLimit = getMaxBoundaries();
-  const minPageNumberLimit = getMaxBoundaries() - pageNumberLimit;
-
   const renderPageNumber = pages.map((number) => {
-    console.log(maxPageNumberLimit);
     if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
       const isCurrentPage = number === parseInt(currentPage);
       return (
@@ -72,12 +62,16 @@ const Pagination = ({ currentPage, totalData, setCurrentPage}) => {
   const handleNext = () => {
     if (TotalPage >= minPageNumberLimit + pageNumberLimit) {
       setCurrentPage(maxPageNumberLimit + 1);
+      setMinPageNumberLimit(maxPageNumberLimit);
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
   const handlePrev = () => {
     if (minPageNumberLimit - pageNumberLimit >= 0) {
       setCurrentPage(minPageNumberLimit - pageNumberLimit + 1);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+      setMaxPageNumberLimit(minPageNumberLimit);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };

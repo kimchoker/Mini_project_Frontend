@@ -12,7 +12,7 @@ const NewsNaviDiv = styled.div`
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
     list-style: none;
-    font-size: 20px;
+    font-size: 25px;
   }
   li:hover {
     cursor: pointer;
@@ -35,9 +35,7 @@ const NewsNavi = ({ onSelect, onEnter }) => {
 
   const newsMenu = [
     { name: "All", value: "전체 보기" },
-    { name: "LatestNews", value: "최신순" },
-    { name: "LikeNews", value: "좋아요순" },
-    { name: "ComentNews", value: "댓글순" },
+    { name: "LatestNews", value: "최신순" }
   ];
 
   return (

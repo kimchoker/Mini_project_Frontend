@@ -40,23 +40,25 @@ const NewsGrey = styled.div`
 const NewsHome = () => {
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState('All');
-  const [totalPage, setTotlaPage] = useState();
-  const [page, setPage] = useState(1);
+  const [totalData, setTotlaData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
 
   useEffect(() => {
     const getShortDetailNews = async () => {
-      const rsp = await AxiosApi.getShortDetailNews(category ,page);
+      const rsp = await AxiosApi.getShortDetailNews(category ,currentPage);
       if (rsp.status === 200) setNews(rsp.data);
       console.log("getShortDetailNews");
     }
     getShortDetailNews();
-  }, [category, page]);
+  }, [category, currentPage]);
 
   useEffect(() => {
     const getNewsPages = async () => {
       const rsp = await AxiosApi.getNewsPages(category);
-      if(rsp.status===200)  setTotlaPage(rsp.data);
+      if(rsp.status===200)  setTotlaData(rsp.data);
       console.log("getTotalPage init");
     }
     getNewsPages();
@@ -64,12 +66,16 @@ const NewsHome = () => {
 
   const onSelect = useCallback(category => {
     setCategory(category);
-    setPage(1);
+    setCurrentPage(1);
+    setMaxPageNumberLimit(5);
+    setMinPageNumberLimit(0);
     console.log("onSelect inti");
   }, []);
   const onEnter = useCallback(category =>{
       setCategory(category);
-      setPage(1);
+      setCurrentPage(1);
+      setMaxPageNumberLimit(5);
+      setMinPageNumberLimit(0);
       console.log("onEnter inti");
   },[])
 
@@ -79,7 +85,6 @@ const NewsHome = () => {
     <NewsBlock>
       <h1 className="News">NEWS</h1>
       <p>{category}</p>
-      <p>{page}</p>
       <NewsNavi category={category} onSelect={onSelect} onEnter={onEnter}/>
       <NewsGrey>
       {news.length === 0 ? (
@@ -98,8 +103,7 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <p>{page}</p>
-      <Pagination currentPage={page} totalData={totalPage} setCurrentPage={setPage}/>
+      <Pagination currentPage={currentPage} totalData={totalData} setCurrentPage={setCurrentPage} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} setMaxPageNumberLimit={setMaxPageNumberLimit} setMinPageNumberLimit={setMinPageNumberLimit}/>
     </NewsBlock>
   );
 }
