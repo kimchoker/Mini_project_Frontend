@@ -19,6 +19,15 @@ const AxiosApi = {
     getLatestBoard : async(boardNo) =>{
       return await axios.get(Backend + `/Latest?cat=${boardNo}`);
     },
+
+    getSchedule : async(monthFilter) => {
+      return await axios.get(Backend + `/schedule?monthFilter=${monthFilter}`);
+    },
+
+    getWeekly : async(monthFilter) => {
+      return await axios.get(Backend + `/weekly?monthFilter=${monthFilter}`);
+    },
+    
     // 로그인
     memberLogin: async(id, pw) => {
         const loginData = {
