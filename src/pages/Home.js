@@ -37,6 +37,9 @@ const Container = styled.div`
 `;
 
 const NoticeBlock = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
   width: 440px;
   min-width: 440px;
   height: 600px;
@@ -46,6 +49,7 @@ const NoticeBlock = styled.div`
   border-radius: 8px;
   position: absolute;
   left: 900px;
+
 
   h3{
     
@@ -61,11 +65,28 @@ const NoticeBlock = styled.div`
     top: 20px;
     right: 20px;
 
-    .tr {
-      width: 350px;
+    table {
+      margin-top: -25px;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
-  }  
+    
+  }
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+
+    th {
+      border-bottom: 1px solid #c6c6c6;
+    }
+    tr {
+      height: 30px;
+    }
+  }
+
+
 `;
 
 const WeeklyLineup = styled.div`
@@ -137,13 +158,14 @@ const Home = () => {
                     </SimpleSlider>
                   </WeeklyLineup>
                     <NoticeBlock>
-                    <h3>홈플레이트 최신글 보기</h3>
+                    
+                    <div className="divline"></div>
                         <div className="noticeNew">
                             
                             <table>
                               <thead>
                                 <tr>
-                                  <th></th>
+                                  <th colSpan="2"><h2>홈플레이트 최신글 보기</h2></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -176,7 +198,11 @@ const Home = () => {
             </DesktopHomeBlock>
 
             <MobileHomeBlock>
-            
+              <WeeklyLineup>
+                <SimpleSlider>
+
+                </SimpleSlider>
+              </WeeklyLineup>
             </MobileHomeBlock>
         </Homeblock>
     )

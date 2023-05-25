@@ -69,7 +69,8 @@ const MobileLogo = styled.div`
 
 const NavigationWrapper = styled.div`
 
-    font-family: 'Inter', sans-serif;
+    /* font-family: 'Inter', sans-serif; */
+    font-family: 'Noto Sans KR', sans-serif;
     z-index: 11;
     width: 100%;
     height: 150px;
@@ -87,7 +88,7 @@ const NavigationWrapper = styled.div`
     margin-top: 15px;
     margin-right: 30px;
     display: flex;
-    font-family: 'inter';
+    
     font-weight: 600;
     color: #F0EBCE;
     font-size: 0.8rem;
@@ -132,7 +133,7 @@ const NavigationWrapper = styled.div`
     margin-top: 0;
     margin-right: 50px;
     display: flex;
-    font-family: 'inter';
+    font-family: 'Inter', sans-serif
     font-weight: 800;
     
     font-size: 20px;

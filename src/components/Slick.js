@@ -7,9 +7,9 @@ import 'slick-carousel/slick/slick-theme.css';
 // 슬라이더 컨테이너에 대한 스타일 정의
 const SliderContainer = styled.div`
   font-family: 'Inter', sans-serif;
-	width: 400px; /* 슬라이더의 너비 */
-  height: 400px; /* 슬라이더의 높이 */
-  margin-top: -200px;
+	width: 500px; /* 슬라이더의 너비 */
+  height: 500px; /* 슬라이더의 높이 */
+  margin-top: -100px;
 
 	h2 {
 		transform: skew(-10deg);
@@ -21,7 +21,24 @@ const SliderContainer = styled.div`
 const SliderItem = styled.div`
   width: 480px;
   height: 480px;
-	background-color: aliceblue;
+	
+
+	div {
+		width: 480px;
+  	height: 480px;
+	}
+	.a {
+		background-color: blue;
+	}
+	.b {
+		background-color: red;
+	}
+	.c {
+		background-color: yellow;
+	}
+	.d {
+		background-color: aliceblue;
+	}
 `;
 
 export default class SimpleSlider extends Component {
@@ -39,16 +56,28 @@ export default class SimpleSlider extends Component {
         <h2>Weekly Best Lineup</h2>
         <Slider {...settings}>
           <SliderItem>
-            <h3>1</h3>
+						<div className="a">
+							<h3>1</h3>
+						</div>
+            
           </SliderItem>
           <SliderItem>
-            <h3>2</h3>
+						<div className="b">
+							<h3>2</h3>
+						</div>
+            
           </SliderItem>
           <SliderItem>
-            <h3>3</h3>
+						<div className="c">
+							<h3>3</h3>
+						</div>
+            
           </SliderItem>
           <SliderItem>
-            <h3>4</h3>
+						<div className="d">
+							<h3>4</h3>
+						</div>
+            
           </SliderItem>
         </Slider>
       </SliderContainer>
