@@ -12,14 +12,13 @@ const ScheduleDiv = styled.div`
   height: auto;
   justify-content: center;
   align-items: center;
-  @font-face {
-    font-family: "inter";
-    src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
-  }
+  gap: 30px;
+  font-family: 'Noto Sans KR', sans-serif;
+  
 
   .schedule {
     font-family: "inter";
-    font-size: 35px;
+    font-size: 45px;
     transform: skew(-10deg);
     text-align: center;
     color: #6f2727;
@@ -32,59 +31,41 @@ const ScheduleDiv = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
+  thead{
+    background-color: #6f2727;
+    color: white;
+  }
 
   th, td {
     text-align: center;
     border: 1px solid black;
     font-size: 18px;
   }
-  
-  th.date, td.date {
-    background-color: #F0CB85;
-  }
-  
-  th.time, td.time {
-    background-color: #A0DFE1;
-  }
-  
-  th.score, td.score {
-    background-color: #A48654;
-  }
-  
-  th.stadium, td.stadium {
-    background-color: #c8e6c9;
-  }
-
-  td.scheduleDate {
-    background-color: #F0CB85;
-  }
-  
-  td.scheduleTime {
-    background-color: #A0DFE1;
-  }
-
-  td.scheduleScore {
-    background-color: #A48654;
-  }
-
-  td.scheduleStadium {
-    background-color: #c8e6c9;
-  }
-
   .date, .time, .score, .stadium {
     width: 200px;
   } 
-
-  h2 {
-    transform: skew(-10deg);
-  }
-
   .optionMon {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    color: #6f2727;
+    list-style: none;
+    gap: 50px;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 30px;
+
+    li{
+        border-right: 5px solid #395144;
+        padding-right: 40px;
+    }
+    li:last-child{
+        border: none;
+    }
+    li:hover{
+        cursor: pointer;
+        color: #395144;
+        transform: scale(1.05);
+    }
   }
 
   .month {
@@ -92,11 +73,26 @@ const ScheduleDiv = styled.div`
     height: 30px;
     cursor: pointer;
   }
+
+  .scheduleDate {
+    font-weight: bold;
+    background-color: #f2f2f2;
+  }
+
+  .scheduleGroup {
+    border-top: 2px solid #000;
+    margin-top: 20px;
+  }
+
+  th {
+    background-color: #395144;
+    color: white;
+  }
+  
+  .date, .time, .match, .stadium {
+     width: 200px;
+  }
 `;
-
-
-
-
 
 const Schedule = () => {
     const [schedule, setSchedule] = useState([]);
@@ -112,52 +108,51 @@ const Schedule = () => {
         scheduleMonth();
     }, [monthFilter]);
 
-    const handleMonth = (e) => {
-      const selectMonth = e.target.value;
-      setMonthFilter(selectMonth);
+    const getTheValue = (value) => {
+        setMonthFilter(value);
     }
 
-  return(
+    return(
         <ScheduleDiv>
-            <div>
-                <h3 className="schedule">SCHEDULE</h3>
-
+                <h1 className="schedule">SCHEDULE</h1>
                 <div className="optionMon">
-                    <h2>2023</h2>
-
-                    <select className="month" value={monthFilter} onChange={handleMonth}>
-                        <option value="4">4월</option>
-                        <option value="5">5월</option>
-                        <option value="6">6월</option>
-                        <option value="7">7월</option>
-                        <option value="8">8월</option>
-                        <option value="9">9월</option>
-                    </select>
+                    <li onClick={() => getTheValue(4)}>4월</li>
+                    <li onClick={() => getTheValue(5)}>5월</li>
+                    <li onClick={() => getTheValue(6)}>6월</li>
+                    <li onClick={() => getTheValue(7)}>7월</li>
+                    <li onClick={() => getTheValue(8)}>8월</li>
+                    <li onClick={() => getTheValue(9)}>9월</li>
                 </div>
-
-                <br />
                 <table>
-                    <thead>
-                        <tr>
-                            <th className="date">날짜</th>
-                            <th className="time">시간</th>
-                            <th className="score">경기</th>
-                            <th className="stadium">구장</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {schedule.map((scheduleItem) => (
-                        <tr key={scheduleItem.id}>
-                          <td className="scheduleDate">{scheduleItem.scheduleDate}</td>
-                          <td className="scheduleTime">{scheduleItem.scheduleTime}</td>
-                          <td className="scheduleScore">{scheduleItem.scheduleScore}</td>
-                          <td className="scheduleStadium">{scheduleItem.location}</td>
-                        </tr>
-                      ))}
-                  </tbody>
 
-                  </table>
-            </div>
+                  <tbody>
+                    {schedule.map((scheduleItem, index) => {
+                      const isGroupStart = index % 5 === 0;
+                      const scheduleGroupClass = isGroupStart ? 'scheduleGroup' : '';
+
+                      return (
+                        <React.Fragment key={scheduleItem.id}>
+                              {isGroupStart && (
+                                <tr className={scheduleGroupClass}>
+                                  <th className="date">날짜</th>
+                                  <th className="time">시간</th>
+                                  <th className="match">경기</th>
+                                  <th className="stadium">구장</th>
+                                </tr>
+                              )}
+                              <tr>
+                                {isGroupStart && (
+                                  <td className="scheduleDate" rowSpan={5}>{scheduleItem.scheduleDate}</td>
+                                )}
+                                <td className="scheduleTime">{scheduleItem.scheduleTime}</td>
+                                <td className="scheduleScore">{scheduleItem.scheduleScore}</td>
+                                <td className="scheduleStadium">{scheduleItem.location}</td>
+                              </tr>
+                        </React.Fragment>
+                          );
+                        })}
+                  </tbody>
+              </table>
         </ScheduleDiv>
     );
 }
