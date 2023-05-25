@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AxiosApi from "../Api/AxiosApi";
+
 
 // 슬라이더 컨테이너에 대한 스타일 정의
 const SliderContainer = styled.div`
   font-family: 'Inter', sans-serif;
-	width: 500px; /* 슬라이더의 너비 */
+	width: 550px; /* 슬라이더의 너비 */
   height: 500px; /* 슬라이더의 높이 */
   margin-top: -100px;
 
@@ -28,28 +30,17 @@ const SliderContainer = styled.div`
 const SliderItem = styled.div`
   width: 480px;
   height: 480px;
-	
+	margin-left: 15px;
 
 	div {
 		width: 480px;
   	height: 480px;
 	}
-	.a {
-		background-color: blue;
-	}
-	.b {
-		background-color: red;
-	}
-	.c {
-		background-color: yellow;
-	}
-	.d {
-		background-color: aliceblue;
-	}
+	
 `;
 
-export default class SimpleSlider extends Component {
-  render() {
+const Slide = () => {
+
     const settings = {
       dots: true,
       infinite: true,
@@ -58,36 +49,37 @@ export default class SimpleSlider extends Component {
       slidesToScroll: 1
     };
 
+		const today = new Date();
+		const month = today.getMonth();
+
+		const [weekly, setWeekly] = useState([]);
+    const [monthFilter, setMonthFilter] = useState(5);
+		
+    useEffect(()=> {
+        const weeklyMonth = async() => {
+            const rsp = await AxiosApi.getWeekly(monthFilter);
+            if(rsp.status === 200) setWeekly(rsp.data);
+        }
+        weeklyMonth();
+    }, [monthFilter])
+
     return (
       <SliderContainer>
         <h2>Weekly Best Lineup</h2>
+				{console.log(weekly)}
         <Slider {...settings}>
-          <SliderItem>
-						<div className="a">
-							<h3>1</h3>
-						</div>
-            
-          </SliderItem>
-          <SliderItem>
-						<div className="b">
-							<h3>2</h3>
-						</div>
-            
-          </SliderItem>
-          <SliderItem>
-						<div className="c">
-							<h3>3</h3>
-						</div>
-            
-          </SliderItem>
-          <SliderItem>
-						<div className="d">
-							<h3>4</h3>
-						</div>
-            
-          </SliderItem>
+				{weekly.map((weeklyItem) => (
+                        <SliderItem key={weeklyItem.id} className="date-container">
+                            
+                            <img src={weeklyItem.weekURL1} alt="/weekly" className="image"/>
+                            <img src={weeklyItem.weekURL2} alt="/weekly" className="image"/>
+                            <img src={weeklyItem.weekURL3} alt="/weekly" className="image"/>
+                            <img src={weeklyItem.weekURL4} alt="/weekly" className="image"/>
+                        </SliderItem>
+                    ))}
         </Slider>
       </SliderContainer>
     );
   }
-}
+
+	export default Slide;

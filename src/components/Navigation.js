@@ -133,20 +133,20 @@ const NavigationWrapper = styled.div`
     margin-top: 0;
     margin-right: 50px;
     display: flex;
-    font-family: 'Inter', sans-serif
+    font-family: 'Inter', sans-serif;
     font-weight: 800;
-    
     font-size: 20px;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     transform: skew(-10deg);
   }
-.menu__item:hover {
-    transition: all 0.05s linear;
-    font-size: 25px;
-    text-shadow: black 1px 1px;
-}
+
+  .menu__item:hover {
+      transition: all 0.05s linear;
+      font-size: 25px;
+      text-shadow: black 1px 1px;
+  } 
 }
 `;
 
