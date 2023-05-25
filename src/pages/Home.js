@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import SimpleSlider from "../components/Slick";
+import { useNavigate } from "react-router-dom";
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
@@ -81,6 +82,10 @@ const NoticeBlock = styled.div`
     th {
       border-bottom: 1px solid #c6c6c6;
     }
+    th:hover {
+      color: navy;
+      cursor: pointer;
+    }
     tr {
       height: 30px;
     }
@@ -90,16 +95,22 @@ const NoticeBlock = styled.div`
 `;
 
 const WeeklyLineup = styled.div`
-  width: 600px;
-  height: 600px;
-  border: 1px solid #c6c6c6;
-  border-radius: 8px;
-  position: absolute;
-  left: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   
+  width: 90vw;
+  position: absolute;
+  left: 10px;
+
+  @media(min-width: 768px) {
+    width: 600px;
+    height: 600px;
+    border: 1px solid #c6c6c6;
+    border-radius: 8px;
+    position: absolute;
+    left: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const TeamShortcut = styled.div`
@@ -125,19 +136,23 @@ const MobileHomeBlock = styled.div`
     @media(min-width: 768px) {
         display: none;
     }
+    max-width: 768px;
+    margin-top: 600px;
     display: flex;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 `;
 
 
 
 const Home = () => {
   const [latestBoard, setLatestBoard] = useState();
-
+  const navigate = useNavigate();
+  
   useEffect(()=>{
     const getLatestBoard = async() =>{
       const rsp = await AxiosApi.getLatestBoard("All");
@@ -145,7 +160,12 @@ const Home = () => {
     }
     getLatestBoard();
     console.log("LatestBoard active")
+
+    
   },[])
+    const getTheValue = (id) => {
+      navigate("/homeplate/View",{state:{id:id}});
+    }
   
 
      return (
@@ -172,7 +192,7 @@ const Home = () => {
                               {latestBoard && latestBoard.map((latestBoard) => {
                                 return (
                                   <tr key={latestBoard.boardNo}>
-                                    <th>{latestBoard.boardTitle}</th>
+                                    <th onClick = {() => {getTheValue(latestBoard.boardNo)}}>{latestBoard.boardTitle}</th>
                                     <th>{latestBoard.nickName}</th>
                                   </tr>
                                 );

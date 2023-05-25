@@ -17,11 +17,11 @@ const ScheduleDiv = styled.div`
   
 
   .schedule {
-    font-family: "inter";
+    font-family: 'Inter', sans-serif;
+    color: #395144;
     font-size: 45px;
     transform: skew(-10deg);
     text-align: center;
-    color: #6f2727;
   }
 
   table {
