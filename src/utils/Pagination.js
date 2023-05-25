@@ -7,7 +7,7 @@ const PageNaviUl = styled.ul`
   li {
     font-family: 'Noto Sans KR', sans-serif;
     list-style: none;
-    font-size: 27px;
+    font-size: 23px;
     font-weight: bold;
     color: #395144;
     border-right: 3px solid #395144;

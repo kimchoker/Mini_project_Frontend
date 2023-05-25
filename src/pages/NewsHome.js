@@ -45,7 +45,6 @@ const NewsHome = () => {
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
-
   useEffect(() => {
     const getShortDetailNews = async () => {
       const rsp = await AxiosApi.getShortDetailNews(category ,currentPage);
@@ -71,6 +70,7 @@ const NewsHome = () => {
     setMinPageNumberLimit(0);
     console.log("onSelect inti");
   }, []);
+
   const onEnter = useCallback(category =>{
       setCategory(category);
       setCurrentPage(1);
@@ -78,13 +78,10 @@ const NewsHome = () => {
       setMinPageNumberLimit(0);
       console.log("onEnter inti");
   },[])
-
-
     
   return (
     <NewsBlock>
       <h1 className="News">NEWS</h1>
-      <p>{category}</p>
       <NewsNavi category={category} onSelect={onSelect} onEnter={onEnter}/>
       <NewsGrey>
       {news.length === 0 ? (
@@ -103,7 +100,14 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <Pagination currentPage={currentPage} totalData={totalData} setCurrentPage={setCurrentPage} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} setMaxPageNumberLimit={setMaxPageNumberLimit} setMinPageNumberLimit={setMinPageNumberLimit}/>
+      <Pagination 
+        currentPage={currentPage} 
+        totalData={totalData} 
+        setCurrentPage={setCurrentPage} 
+        maxPageNumberLimit={maxPageNumberLimit} 
+        minPageNumberLimit={minPageNumberLimit} 
+        setMaxPageNumberLimit={setMaxPageNumberLimit} 
+        setMinPageNumberLimit={setMinPageNumberLimit}/>
     </NewsBlock>
   );
 }
