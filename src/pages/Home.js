@@ -38,6 +38,13 @@ const Container = styled.div`
 `;
 
 const NoticeBlock = styled.div`
+  @media(max-width: 768px) {
+    top: 150px;
+    left: 10px;
+    border: 1px solid transparent;
+    
+    
+  }
   display: flex;
   justify-content: center;
   text-align: center;
@@ -50,7 +57,8 @@ const NoticeBlock = styled.div`
   border-radius: 8px;
   position: absolute;
   left: 900px;
-
+  
+    
 
   h3{
     
@@ -72,7 +80,8 @@ const NoticeBlock = styled.div`
       align-items: center;
       text-align: center;
     }
-    
+
+ 
   }
 
   table {
@@ -82,7 +91,7 @@ const NoticeBlock = styled.div`
     th {
       border-bottom: 1px solid #c6c6c6;
     }
-    th:hover {
+    .board:hover {
       color: navy;
       cursor: pointer;
     }
@@ -178,14 +187,13 @@ const Home = () => {
                     </SimpleSlider>
                   </WeeklyLineup>
                     <NoticeBlock>
-                    
-                    <div className="divline"></div>
+
                         <div className="noticeNew">
                             
                             <table>
                               <thead>
                                 <tr>
-                                  <th colSpan="2"><h2>홈플레이트 최신글 보기</h2></th>
+                                  <th colSpan="2"><h2>홈플레이트 최신글</h2></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -218,11 +226,30 @@ const Home = () => {
             </DesktopHomeBlock>
 
             <MobileHomeBlock>
-              <WeeklyLineup>
-                <SimpleSlider>
-
-                </SimpleSlider>
-              </WeeklyLineup>
+              <NoticeBlock>
+                    
+                
+                  <div className="noticeNew">
+                            
+                    <table>
+                      <thead>
+                        <tr>
+                          <th colSpan="2"><h2>홈플레이트 최신글</h2></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {latestBoard && latestBoard.map((latestBoard) => {
+                          return (
+                            <tr key={latestBoard.boardNo} className="board">
+                              <th onClick = {() => {getTheValue(latestBoard.boardNo)}}>{latestBoard.boardTitle}</th>
+                              <th>{latestBoard.nickName}</th>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>                            
+                  </div>
+              </NoticeBlock>
             </MobileHomeBlock>
         </Homeblock>
     )
