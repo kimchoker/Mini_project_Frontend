@@ -92,6 +92,46 @@ const ScheduleDiv = styled.div`
   .date, .time, .match, .stadium {
      width: 200px;
   }
+
+  @media(max-width:768px) {
+    .schedule {
+      font-size: 30px;
+    }
+
+    table {
+      width: 90%;
+    }
+
+    th, td {
+      font-size: 14px;
+    }
+
+    .optionMon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      gap: 30px;
+      font-weight: bold;
+      font-size: 18px; /* 변경된 값: 24px */
+      margin-bottom: 30px;
+
+      li {
+        border-right: 5px solid #395144;
+        padding-right: 20px; /* 변경된 값: 20px */
+      }
+
+      li:last-child {
+        border: none;
+      }
+
+      li:hover {
+        cursor: pointer;
+        color: #395144;
+        transform: scale(1.05);
+      }
+    }
+  }
 `;
 
 const Schedule = () => {
