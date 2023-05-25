@@ -53,15 +53,6 @@ export default function App() {
           <HomePlate />
           <Footer />
         </>} />
-        <Route path="/homeplate/contents/:selectBoardNo" element={<>
-          <Navigation />
-          
-          <Footer />
-        </>} />
-        <Route path="/homeplate/write" element={<>
-          <Navigation />
-          
-        </>}/>
         <Route path="/signup" element={<>
           <Navigation />
           <SignUp />
