@@ -10,13 +10,14 @@ import Pagination from "../utils/Pagination"
 const NewsBlock = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 150px;
   margin-bottom: 100px;
   width: auto;
   height: auto;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  font-family: 'Noto Sans KR', sans-serif;
+  gap: 50px;
   .News {
     font-family: 'inter';
     font-size: 45px;
@@ -29,7 +30,7 @@ const NewsGrey = styled.div`
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto;
-    width: 1200px;
+    width: 1300px;
     display: flex;
     flex-direction: column;
     align-items: center;

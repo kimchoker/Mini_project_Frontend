@@ -5,15 +5,20 @@ import AxiosApi from "../Api/AxiosApi";
 const WeeklyDiv = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 150px;
     margin-bottom: 100px;
     width: auto;
     height: auto;
     justify-content: center;
     align-items: center;
-    background-color: #f2f2f2;
     font-family: 'Noto Sans KR', sans-serif;
-    
+    gap: 50px;
+    .Title{
+        font-family: 'inter';
+        font-size: 45px;
+        transform: skew(-10deg);
+        color: #395144;
+    }
     .weekBest {
         display: flex;
         justify-content: center;
@@ -30,13 +35,6 @@ const WeeklyDiv = styled.div`
         text-align: center;
         border-radius: 5px;
     }
-
-    h2 {
-        color: #395144;
-        transform: skew(-10deg);
-        font-size: 30px;
-    }
-
     .image-container {
         display: flex;
         flex-direction: column;
@@ -116,8 +114,7 @@ const Weekly = () => {
 
     return (
         <WeeklyDiv>
-            <br/>
-            <h2>Weekly Best Line-Up</h2>
+            <h1 className="Title">Weekly Best Line-Up</h1>
             
             <select className="month" value={monthFilter} onChange={(e)=>setMonthFilter(e.target.value)}>
                 <option value="4">4월</option>

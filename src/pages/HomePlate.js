@@ -129,9 +129,9 @@ const HomePlate = () => {
     if(userId === ""){
       setModalopen(true);
     }else{
-      navigate("/homeplate/Write");
+        navigate("/homeplate/Write");
+      }
     }
-  }
 
   const closeModal = () => {
     setModalopen(false);

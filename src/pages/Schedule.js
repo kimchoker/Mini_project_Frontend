@@ -6,16 +6,14 @@ import styled from "styled-components";
 const ScheduleDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 150px;
   margin-bottom: 100px;
   width: auto;
   height: auto;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 50px;
   font-family: 'Noto Sans KR', sans-serif;
-  
-
   .schedule {
     font-family: 'Inter', sans-serif;
     color: #395144;
@@ -51,17 +49,8 @@ const ScheduleDiv = styled.div`
     align-items: center;
     list-style: none;
     gap: 50px;
-    font-weight: bold;
-    font-size: x-large;
+    font-size: 23px;
     margin-bottom: 30px;
-
-    li{
-        border-right: 5px solid #395144;
-        padding-right: 40px;
-    }
-    li:last-child{
-        border: none;
-    }
     li:hover{
         cursor: pointer;
         color: #395144;
@@ -114,12 +103,12 @@ const ScheduleDiv = styled.div`
       list-style: none;
       gap: 30px;
       font-weight: bold;
-      font-size: 18px; /* 변경된 값: 24px */
+      font-size: 18px; 
       margin-bottom: 30px;
 
       li {
         border-right: 5px solid #395144;
-        padding-right: 20px; /* 변경된 값: 20px */
+        padding-right: 20px; 
       }
 
       li:last-child {
@@ -216,16 +205,17 @@ const Schedule = () => {
         return newDate[2] + getMonthByName(newDate[1]) + newDate[0];
     }
 
+
     return(
         <ScheduleDiv>
                 <h1 className="schedule">SCHEDULE</h1>
                 <div className="optionMon">
-                    <li onClick={() => getTheValue(4)}>4월</li>
-                    <li onClick={() => getTheValue(5)}>5월</li>
-                    <li onClick={() => getTheValue(6)}>6월</li>
-                    <li onClick={() => getTheValue(7)}>7월</li>
-                    <li onClick={() => getTheValue(8)}>8월</li>
-                    <li onClick={() => getTheValue(9)}>9월</li>
+                <li onClick={() => getTheValue(4)}>4월</li>
+                <li onClick={() => getTheValue(5)}>5월</li>
+                <li onClick={() => getTheValue(6)}>6월</li>
+                <li onClick={() => getTheValue(7)}>7월</li>
+                <li onClick={() => getTheValue(8)}>8월</li>
+                <li onClick={() => getTheValue(9)}>9월</li>
                 </div>
                 <table>
                     <tbody>

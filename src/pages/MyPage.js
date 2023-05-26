@@ -353,11 +353,8 @@ const MyWriting = styled.div`
 
 
 const MyPage = () => {
-
-    
-
     const context = useContext(UserContext);
-    const { userId, setUserId, password, favTeam,  nickname, handleLogout } = context;
+    const { memberNo, setMemberNo, userId, setUserId, password, favTeam,  nickname, handleLogout } = context;
 		const [inputNowPw, setInputNowPw] = useState("");
 		const [inputNewPw, setInputNewPw] = useState("");
 		const [inputConPw, setInputConPw] = useState("");
@@ -367,11 +364,13 @@ const MyPage = () => {
     const [originNickname, setOriginNickname] = useState("");
     const originPwd = password;
 
+
     const restoreSession = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
           const response = await TokenAxiosApi.userInfo(token);
+            setMemberNo(response.data[0].memberNo);
             setUserId(response.data[0].id);
             setInputNickname(response.data[0].nickname)
             setOriginNickname(response.data[0].nickname);
@@ -390,10 +389,6 @@ const MyPage = () => {
       }
       fetchData(); // fetchData 함수 호출
     }, []); 
-
-    
-
-    
 
     // 오류 메시지
       

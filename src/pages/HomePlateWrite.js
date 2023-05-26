@@ -112,7 +112,6 @@ const Write = () => {
         setType("open");
         setModalText("작성중인 글은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
         setModalOpen(true);
-        
     }
     
     const writeGo = async() => {
@@ -120,7 +119,7 @@ const Write = () => {
         console.log("this is board Contnet : " + boardContent);
         const board = await AxiosApi.writeBoard(memberNo, boardTitle, boardContent)
         if(board.data === true){
-            navigate("/");
+            navigate("/Homeplate");
         }else{
             setModalOpen(true);
             setModalText("잘못 사용");
