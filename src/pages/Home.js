@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Doosan from "../images/Doosan.png"
 import SSG from "../images/SSG.png"
@@ -9,11 +11,9 @@ import LG from "../images/LG.png"
 import NC from "../images/NC.png"
 import Samsung from "../images/Samsung.png"
 import Lotte from "../images/Lotte.png"
-import { useState } from "react";
-import { useEffect } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import SimpleSlider from "../components/Slick";
-import { useNavigate } from "react-router-dom";
+import HomeNewsContainer from "../components/HomeNewsContainer"
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
@@ -44,6 +44,7 @@ const NoticeBlock = styled.div`
     top: 250px;
     left: 10px;
     border: 1px solid transparent;
+    
 
     table {
       width: 80vw;
@@ -80,11 +81,12 @@ const NoticeBlock = styled.div`
     
     tr {
       height: 30px;
-      &:hover {
+      
+    }
+    .view:hover {
         cursor: pointer;
         color: navy;
       }
-    }
 
     td {
       border-bottom: 1px solid #c6c6c6;
@@ -135,15 +137,15 @@ const MobileHomeBlock = styled.div`
  
 `;
 
-const SliderBox = styled.div`
-  position: absolute;
-  top: 50px;
-  left: 50px;
-`;
+const NewsBlock = styled.div`
 
+`;
 
 const Home = () => {
   const [latestBoard, setLatestBoard] = useState();
+  const [news, setNews] = useState([]);
+  const [category, setCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1)
   const navigate = useNavigate();
   
   useEffect(()=>{
@@ -151,8 +153,12 @@ const Home = () => {
       const rsp = await AxiosApi.getLatestBoard("All");
       if(rsp.status === 200) setLatestBoard(rsp.data);
     }
+    const getShortDetailNews = async () => {
+      const rsp = await AxiosApi.getShortDetailNews("All" , 1);
+      if (rsp.status === 200) setNews(rsp.data);
+    }
+    getShortDetailNews();
     getLatestBoard();
-    console.log("LatestBoard active")
 
     
   },[])
@@ -183,7 +189,7 @@ const Home = () => {
                               <tbody>
                               {latestBoard && latestBoard.map((latestBoard) => {
                                 return (
-                                  <tr key={latestBoard.boardNo}>
+                                  <tr key={latestBoard.boardNo} className="view">
                                     <th onClick = {() => {getTheValue(latestBoard.boardNo)}}>{latestBoard.boardTitle}</th>
                                     <th>{latestBoard.nickName}</th>
                                   </tr>
@@ -195,6 +201,23 @@ const Home = () => {
                     </NoticeBlock>
 
                 </Container>
+                <NewsBlock>
+                  {news.length === 0 ? (
+                    <h4>{category}와 일치하는 검색결과는 없습니다.</h4>
+                      ) : (
+                      news.map((newsItem) => (
+                      <HomeNewsContainer
+                        key={newsItem.news_No}
+                          exp={{
+                            news_No: newsItem.news_No,
+                            news_Title: newsItem.news_Title,
+                            news_Image_Url: newsItem.news_Image_Url,
+                            news_Short_Content: newsItem.news_Short_Content
+                        }}
+                      />
+                    ))
+                  )}
+                </NewsBlock>
                 <TeamShortcut>
                     <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
                     <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
@@ -232,11 +255,7 @@ const Home = () => {
                     </table>                            
                   </div>
               </NoticeBlock>
-                <SliderBox>
-                  <SimpleSlider>
-
-                  </SimpleSlider>
-                </SliderBox>
+                
               
             </MobileHomeBlock>
         </Homeblock>
