@@ -17,36 +17,43 @@ import { useNavigate } from "react-router-dom";
 
 const Homeblock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
-  display: block;
-  text-align: center;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   min-width: 1500px;
   height: 1000px;
   margin-top: 50px;
- `;
+`;
 
 const DesktopHomeBlock = styled.div`
-    @media(max-width: 768px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
 
 const Container = styled.div`
-	display: flex;
-	justify-content: center;
-	margin: 175px 100px 0;
+  display: flex;
+  justify-content: center;
+  margin: 175px 100px 0;
 `;
 
 const NoticeBlock = styled.div`
-  @media(max-width: 768px) {
-    top: 150px;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 250px;
     left: 10px;
     border: 1px solid transparent;
-    
-    
+
+    table {
+      width: 80vw;
+      left: 25px;
+      right: 25px;
+    }
   }
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   width: 440px;
   min-width: 440px;
@@ -55,85 +62,60 @@ const NoticeBlock = styled.div`
   margin-bottom: 20px;
   border: 1px solid #c6c6c6;
   border-radius: 8px;
-  position: absolute;
-  left: 900px;
-  
-    
-
-  h3{
-    
-    top: 10px;
-    
-  }
-
-  .noticeNew {
-    width: 400px;
-    height: 460px;
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-    table {
-      margin-top: -25px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
- 
-  }
+  position: relative;
 
   table {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
+    border-collapse: collapse;
+    position: absolute;
+    top: -90px;
+    left: 25px;
+    right: 25px;
+    
 
     th {
       border-bottom: 1px solid #c6c6c6;
     }
-    .board:hover {
-      color: navy;
-      cursor: pointer;
-    }
+    
     tr {
       height: 30px;
+      &:hover {
+        cursor: pointer;
+        color: navy;
+      }
     }
+
+    td {
+      border-bottom: 1px solid #c6c6c6;
+    }
+    .name {
+      padding: 25px;
+    }
+
   }
-
-
 `;
 
 const WeeklyLineup = styled.div`
   
-  width: 90vw;
-  position: absolute;
-  left: 10px;
-
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     width: 600px;
     height: 600px;
     border: 1px solid #c6c6c6;
     border-radius: 8px;
-    position: absolute;
-    left: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: 100px;
+    
+    position: relative;
   }
 `;
 
 const TeamShortcut = styled.div`
-  position: absolute;
-  top: 850px; /* 원하는 수직 위치를 여기에 설정하세요 */
-  left: 51%;
-  transform: translateX(-50%);
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  
+  margin-left: 80px;
+
   .image {
     width: 90px;
     height: 65px;
@@ -142,20 +124,22 @@ const TeamShortcut = styled.div`
 `;
 
 const MobileHomeBlock = styled.div`
-    @media(min-width: 768px) {
-        display: none;
-    }
-    max-width: 768px;
-    margin-top: 600px;
-    display: flex;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+  @media (min-width: 768px) {
+    display: none;
+  }
+  width: 768px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
 `;
 
+const SliderBox = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50px;
+`;
 
 
 const Home = () => {
@@ -193,7 +177,7 @@ const Home = () => {
                             <table>
                               <thead>
                                 <tr>
-                                  <th colSpan="2"><h2>홈플레이트 최신글</h2></th>
+                                  <th colSpan="2" className="name"><h2>홈플레이트 최신글</h2></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -227,8 +211,6 @@ const Home = () => {
 
             <MobileHomeBlock>
               <NoticeBlock>
-                    
-                
                   <div className="noticeNew">
                             
                     <table>
@@ -250,6 +232,12 @@ const Home = () => {
                     </table>                            
                   </div>
               </NoticeBlock>
+                <SliderBox>
+                  <SimpleSlider>
+
+                  </SimpleSlider>
+                </SliderBox>
+              
             </MobileHomeBlock>
         </Homeblock>
     )

@@ -11,18 +11,21 @@ const SliderContainer = styled.div`
   font-family: 'Inter', sans-serif;
 	width: 550px; /* 슬라이더의 너비 */
   height: 500px; /* 슬라이더의 높이 */
-  margin-top: -100px;
-
+  margin-left: 40px;
+  margin-top: -65px;
+  
 	h2 {
 		transform: skew(-10deg);
 		color: #395144;
+    margin-bottom: 70px;
+    margin-left: 150px;
 	}
 
 	@media(max-width: 768px) {
 		
 		margin-left: 25px;
 		width: 100%;
-		padding-bottom: 80%;
+		
 	}
 `;
 
@@ -30,7 +33,7 @@ const SliderContainer = styled.div`
 const SliderItem = styled.div`
   width: 480px;
   height: 480px;
-	margin-left: 15px;
+	
 
 	div {
 		width: 480px;
