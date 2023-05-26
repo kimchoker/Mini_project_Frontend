@@ -1,8 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate} from "react-router-dom";
 import AxiosApi from "../Api/AxiosApi";
 import Modal from "../utils/Modal";
+import { UserContext } from "../context/UserStore";
+
 
 const BoardBlock = styled.div`
   display: flex;
@@ -64,9 +66,14 @@ const BoardBlock = styled.div`
 
 const Write = () => {
     const navigate = useNavigate();
+    const [boardTitle, setBoardTitle] = useState("");
+    const [boardContent, setBoardContent] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [modalText, setModalText] = useState("작성이 완료되었습니다.");
     const [type, setType] = useState("");
+    const context = useContext(UserContext);
+    const { memberNo } = context;
+
     const openModal = () => {
         setModalOpen(true);
     }
@@ -87,22 +94,39 @@ const Write = () => {
         
     }
     
-    const writeGo = () => {
-        
+    const writeGo = async() => {
+        console.log("this is board title : " + boardTitle);
+        console.log("this is board Contnet : " + boardContent);
+        const board = await AxiosApi.writeBoard(memberNo, boardTitle, boardContent)
+        if(board.data === true){
+            navigate("/");
+        }else{
+            setModalOpen(true);
+            setModalText("잘못 사용");
+        }
+    }
+
+    const handleTitle = (event) =>{
+        setBoardTitle(event.target.value);
+    }
+
+    const handleContent = (event) =>{
+        setBoardContent(event.target.value);
     }
 
     return(
         <BoardBlock>
             <h3 className="Board">글쓰기</h3>
                 <div className="write_header">
-                    <input type="text" class="input_title" placeholder="제목을 입력하세요." />
+                    <p>This is : {memberNo}</p>
+                    <input type="text" class="input_title" placeholder="제목을 입력하세요." value={boardTitle} onChange={handleTitle}/>
                         <button type="submit" onClick={writeGo}>작성 완료</button>
                         <button onClick={handleBack}>목록 보기</button>
                         <Modal open={modalOpen} type={type} close={closeModal} confirm={nav} header="BENCH CLEARING">
                             {modalText}
                         </Modal>
                 </div>
-                    <textarea class="contents" placeholder="글 내용"></textarea>
+                    <textarea class="contents" placeholder="글 내용" value={boardContent} onChange={handleContent}></textarea>
                     
             
             </BoardBlock>

@@ -81,7 +81,6 @@ const FooterDiv = styled.div`
   button:hover{
     background-color: #395144;
   }
-
 `;
 
 const HomePlate = () => {

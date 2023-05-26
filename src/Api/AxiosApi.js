@@ -31,7 +31,15 @@ const AxiosApi = {
     getLongBoard : async(boardNo) =>{
       return await axios.get(Backend + `/Homeplate/View?board_No=${boardNo}`); 
    }, 
-    
+
+   writeBoard : async(memberNo, boardTitle, boardContent) => {
+      const  board = {
+        memberNo : memberNo,
+        boardTitle : boardTitle,
+        boardContent : boardContent 
+      };
+      return await axios.post(Backend + `/Homeplate/Write`,board);
+   },
 
     getSchedule : async(monthFilter) => {
       return await axios.get(Backend + `/schedule?monthFilter=${monthFilter}`);
