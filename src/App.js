@@ -33,75 +33,76 @@ export default function App() {
 
   return (
     <UserStore>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<>
-          <Navigation />
-          <Home />
-          <Footer />
-        </>} />
-        <Route path="/newshome" element={<>
-          <Navigation />
-          <NewsHome />
-          <Footer />
-        </>} />
-        <Route path="/weekly" element={<>
-          <Navigation/>
-          <Weekly/>
-          <Footer/>
-        </>}/>
-        <Route path="/newshome/View" element={<>
-          <Navigation />
-          <View />
-          <Footer />
-        </>} />
-        <Route path="/homeplate" element={<>
-          <Navigation />
-          <HomePlate />
-          <Footer />
-        </>} />
-        <Route path="/homeplate/View" element={<>
-          <Navigation />
-          <HomePlateView />
-          <Footer />
-        </>} />
-        <Route path="/homeplate/Write" element={<>
-          <Navigation />
-          <HomePlateWrite />
-          <Footer />
-        </>} />
-        <Route path="/Schedule" element={<>
-          <Navigation />
-          <Schedule />
-          <Footer />
-        </>} />
-        <Route path="/signup" element={<>
-          <Navigation />
-          <SignUp />
-        </>} />
-        <Route path="/findpw" element={ windowWidth > 768 ? (
-        <>
-          <Navigation />
-          <FindPw />
-        </>
-        ) : ( 
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<>
+            <Navigation />
+            <Home />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/newshome" element={<>
+            <Navigation />
+            <NewsHome />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/weekly" element={<>
+            <Navigation />
+            <Weekly />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/newshome/View" element={<>
+            <Navigation />
+            <View />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/homeplate" element={<>
+            <Navigation />
+            <HomePlate />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/homeplate/View" element={<>
+            <Navigation />
+            <HomePlateView />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/homeplate/Write" element={<>
+            <Navigation />
+            <HomePlateWrite />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/schedule" element={<>
+            <Navigation />
+            <Schedule />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/signup" element={<>
+            <Navigation />
+            <SignUp />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/findpw" element={windowWidth > 768 ? (
+            <>
+              <Navigation />
+              <FindPw />
+            </>
+          ) : (
             <FindPw />
-        )} />
-        <Route path="/newshome/view" element={<>
-          <Navigation />
-          <View />
-          <Footer />
-        </>} />
-        <Route path="/mypage" element={windowWidth > 768 ? (
-        <>
-          <Navigation />
-          <MyPage />
-        </>
-      ) : (
-        <MyPage />
-      )} />
-          </Routes>
+          )} />
+          <Route path="/newshome/view" element={<>
+            <Navigation />
+            <View />
+            {windowWidth > 768 && <Footer />}
+          </>} />
+          <Route path="/mypage" element={windowWidth > 768 ? (
+            <>
+              <Navigation />
+              <MyPage />
+            </>
+          ) : (
+            <MyPage />
+          )} />
+        </Routes>
       </BrowserRouter>
     </UserStore>
   );

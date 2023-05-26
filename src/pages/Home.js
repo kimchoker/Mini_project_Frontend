@@ -22,7 +22,7 @@ const Homeblock = styled.div`
   align-items: center;
   width: 100%;
   min-width: 1500px;
-  height: 1000px;
+  height: 1200px;
   margin-top: 50px;
 `;
 
@@ -137,8 +137,36 @@ const MobileHomeBlock = styled.div`
  
 `;
 
-const NewsBlock = styled.div`
+const NewsContainerContainerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 70px;
 
+  h2 {
+    color: #395144;
+  }
+`;
+const NewsContainerContainer = styled.div`
+  display: inline-block;
+`;
+const NewsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  
+`;
+
+const LeftNewsBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+`;
+
+const RightNewsBlock = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Home = () => {
@@ -165,7 +193,17 @@ const Home = () => {
     const getTheValue = (id) => {
       navigate("/homeplate/View",{state:{id:id}});
     }
-  
+
+
+  // 뉴스를 좌우로 분할
+  const splitNews = (news) => {
+    const midIndex = Math.ceil(news.length / 2);
+    const leftNews = news.slice(0, midIndex);
+    const rightNews = news.slice(midIndex);
+    return [leftNews, rightNews];
+  };
+
+  const [leftNews, rightNews] = splitNews(news);
 
      return (
         <Homeblock>
@@ -176,14 +214,14 @@ const Home = () => {
 
                     </SimpleSlider>
                   </WeeklyLineup>
-                    <NoticeBlock>
+                  <NoticeBlock>
 
                         <div className="noticeNew">
                             
                             <table>
                               <thead>
                                 <tr>
-                                  <th colSpan="2" className="name"><h2>홈플레이트 최신글</h2></th>
+                                  <th colSpan="2" className="name"><h2 className="newsName">홈플레이트 최신글</h2></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -198,26 +236,42 @@ const Home = () => {
                               </tbody>
                             </table>                            
                         </div>
-                    </NoticeBlock>
-
+                  </NoticeBlock>
                 </Container>
-                <NewsBlock>
-                  {news.length === 0 ? (
-                    <h4>{category}와 일치하는 검색결과는 없습니다.</h4>
-                      ) : (
-                      news.map((newsItem) => (
-                      <HomeNewsContainer
-                        key={newsItem.news_No}
-                          exp={{
-                            news_No: newsItem.news_No,
-                            news_Title: newsItem.news_Title,
-                            news_Image_Url: newsItem.news_Image_Url,
-                            news_Short_Content: newsItem.news_Short_Content
-                        }}
-                      />
-                    ))
-                  )}
-                </NewsBlock>
+                <NewsContainerContainerContainer>
+                  <NewsContainerContainer>
+                  <h2>오늘의 최신뉴스</h2>
+                    <NewsContainer>
+                      
+                        <LeftNewsBlock>
+                          {leftNews.map((newsItem) => (
+                            <HomeNewsContainer
+                              key={newsItem.news_No}
+                              exp={{
+                                news_No: newsItem.news_No,
+                                news_Title: newsItem.news_Title,
+                                news_Image_Url: newsItem.news_Image_Url,
+                                news_Short_Content: newsItem.news_Short_Content,
+                              }}
+                            />
+                          ))}
+                        </LeftNewsBlock>
+                        <RightNewsBlock>
+                          {rightNews.map((newsItem) => (
+                            <HomeNewsContainer
+                              key={newsItem.news_No}
+                              exp={{
+                                news_No: newsItem.news_No,
+                                news_Title: newsItem.news_Title,
+                                news_Image_Url: newsItem.news_Image_Url,
+                                news_Short_Content: newsItem.news_Short_Content,
+                              }}
+                            />
+                          ))}
+                        </RightNewsBlock>
+                      </NewsContainer>
+                    </NewsContainerContainer>
+                </NewsContainerContainerContainer>
                 <TeamShortcut>
                     <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
                     <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
