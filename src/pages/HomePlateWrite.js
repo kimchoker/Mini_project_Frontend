@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate} from "react-router-dom";
 import AxiosApi from "../Api/AxiosApi";
 import Modal from "../utils/Modal";
 import { UserContext } from "../context/UserStore";
-
+import TokenAxiosApi from "../Api/TokenAxiosApi";
 
 const BoardBlock = styled.div`
   display: flex;
@@ -72,7 +72,28 @@ const Write = () => {
     const [modalText, setModalText] = useState("작성이 완료되었습니다.");
     const [type, setType] = useState("");
     const context = useContext(UserContext);
-    const { memberNo } = context;
+    const { memberNo, setMemberNo } = context;
+    
+    
+    const restoreSession = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await TokenAxiosApi.userInfo(token);
+            setMemberNo(response.data[0].memberNo);
+          
+        } catch (error) {
+          console.error("세션 복구 중 오류 발생 : ", error);
+        }
+      }
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        await restoreSession(); // restoreSession 비동기로 처리
+      }
+      fetchData(); // fetchData 함수 호출
+    }, []); 
 
     const openModal = () => {
         setModalOpen(true);
@@ -118,7 +139,6 @@ const Write = () => {
         <BoardBlock>
             <h3 className="Board">글쓰기</h3>
                 <div className="write_header">
-                    <p>This is : {memberNo}</p>
                     <input type="text" class="input_title" placeholder="제목을 입력하세요." value={boardTitle} onChange={handleTitle}/>
                         <button type="submit" onClick={writeGo}>작성 완료</button>
                         <button onClick={handleBack}>목록 보기</button>
