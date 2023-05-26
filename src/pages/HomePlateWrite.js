@@ -16,35 +16,48 @@ const BoardBlock = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   gap: 50px;
   .Board {
-    font-family: 'inter';
-    font-size: 45px;
-    transform: skew(-10deg);
+    font-size: 25px;
     color: #395144;
   }
   .write_header{
     display: flex;
-    gap: 50px;
+    gap: 20px;
     }
     button{
-    width: 120px;
-    height: 60px;
-    font-size: 15px;
-    font-weight: bold;
-    border: 0;
+    width: 80px;
+    height: 40px;
+    font-size: 12px;
+    
+    border: 1px solid #c6c6c6;
     border-radius: 15px;
     outline: none;
-    padding-left: 10px;
-    background-color: rgb(233, 233, 233);
+    
+    background-color: #395144;
+    color: white;
     cursor: pointer;
     }
     .input_title {
-        width: 300px;
-        height: 60px;
-        font-size: 20px;
+        width: 600px;
+        height: 30px;
+        font-size: 13px;
         font-weight: bold;
         border-radius: 15px;
+        margin-left: 20px;
+        border: 1px solid #c6c6c6;
+        padding-left: 8px;
     }
 
+    .contents {
+    width: 800px; 
+    height: 300px; 
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    outline: none;
+  }
 `;
 
 
@@ -53,33 +66,45 @@ const Write = () => {
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
     const [modalText, setModalText] = useState("작성이 완료되었습니다.");
+    const [type, setType] = useState("");
     const openModal = () => {
         setModalOpen(true);
     }
     
     const closeModal = () => {
         setModalOpen(false);
+        
+    }
+    
+    const nav = () => {
         navigate('/homeplate');
     }
 
     const handleBack = () => {
-        navigate('/homeplate');
+        setType("open");
+        setModalText("작성중인 글은 저장되지 않습니다. 목록으로 이동하시겠습니까?");
+        setModalOpen(true);
+        
     }
     
+    const writeGo = () => {
+        
+    }
 
     return(
         <BoardBlock>
-            <h1 className="Board">HOME PLATE</h1>
+            <h3 className="Board">글쓰기</h3>
                 <div className="write_header">
                     <input type="text" class="input_title" placeholder="제목을 입력하세요." />
-                        <button type="submit" onClick={openModal}>작성 완료</button>
+                        <button type="submit" onClick={writeGo}>작성 완료</button>
                         <button onClick={handleBack}>목록 보기</button>
-                        <Modal open={modalOpen} close={closeModal} header="알림">
+                        <Modal open={modalOpen} type={type} close={closeModal} confirm={nav} header="BENCH CLEARING">
                             {modalText}
                         </Modal>
                 </div>
                     <textarea class="contents" placeholder="글 내용"></textarea>
                     
+            
             </BoardBlock>
     );
 };

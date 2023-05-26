@@ -22,10 +22,13 @@ const ModalStyle = styled.div`
     outline: none;
     cursor: pointer;
     border: 0;
+    width: 60px;
+    height: 40px;
+    margin: 5px;
   }
   .modal > section {
     width: 90%;
-    max-width: 350px;
+    max-width: 400px;
     text-align: center;
     margin: 0 auto;
     border-radius: 0.3rem;
