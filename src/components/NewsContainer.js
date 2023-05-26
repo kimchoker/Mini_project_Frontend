@@ -14,6 +14,23 @@ const NewsBlock = styled.div`
     cursor: pointer;
     box-shadow: 15px 15px 15px rgb(200, 200, 200);
   }
+
+  @media(max-width: 768px) {
+    width: 400px;
+    height: 40px;
+    box-shadow: none;
+    background-color: transparent;
+    &:hover {
+    transform: scale(1.00);
+    cursor: pointer;
+    box-shadow: none;
+    left: 20px;
+  }
+
+  p {
+    display: none;
+  }
+  }
 `;
 
 
@@ -22,6 +39,10 @@ const Images = styled.img`
   height: 120px; 
   margin: 10px;
   object-fit: cover;
+
+  @media(max-width: 768px)  {
+    display: none;
+  }
 `;
 
 const Text = styled.div`
@@ -34,6 +55,14 @@ const Text = styled.div`
     display: inline-block;
     position: relative;
     margin: 10px 0px;
+  }
+
+  @media(max-width: 768px) {
+    h2 {
+      font-size: 15px;
+      position: absolute;
+      left: 20px;
+    }
   }
 `;
 
