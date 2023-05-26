@@ -7,6 +7,8 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
 import Modal from "../utils/Modal";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import X from "../images/x-mark.png"
 
 
 
@@ -18,6 +20,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   font-family: 'Noto Sans KR', sans-serif;
+
+  .xmark {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
 
 .sign {
     
@@ -559,6 +569,9 @@ const MyPage = () => {
         <Container>
         <div className="sign">
             <h2>내 정보</h2>
+            <Link to="/" className="home">
+              <img src={X} alt="xmark" className="xmark" />
+            </Link>
         </div>
 
         <div className="item2">
