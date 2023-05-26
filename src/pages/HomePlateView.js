@@ -4,25 +4,20 @@ import styled from "styled-components";
 import AxiosApi from '../Api/AxiosApi';
 
 const BoardBlock = styled.div`
-
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 150px;
     margin-bottom: 100px;
     width: auto;
     height: auto;
     justify-content: flex-start;
     align-items: center;
     gap: 30px;
-    @font-face {
-        font-family: "inter";
-        src: url(./fonts/Inter/Inter-VariableFont_slnt,wght.ttf);
-    }
     .HomePlate {
         font-family: 'inter';
         font-size: 45px;
         transform: skew(-10deg);
-        color: #6f2727;
+        color: #395144;
     }
     h2{
         font-size: 30px; 

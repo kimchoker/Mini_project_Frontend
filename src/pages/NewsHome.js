@@ -96,7 +96,8 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <Pagination 
+      <Pagination
+        postperpage={10} 
         currentPage={currentPage} 
         totalData={totalData} 
         setCurrentPage={setCurrentPage} 

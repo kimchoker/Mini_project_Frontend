@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
+import { UserContext } from "../context/UserStore";
 import { useNavigate} from "react-router-dom";
 import Pageination from "../utils/Pagination";
 import HomePlateNavi from "../components/HomePlateNavi";
 import HomePlateContainer from "../components/HomePlateContainer";
+import Modal from "../utils/Modal";
 
 const BoardBlock = styled.div`
   display: flex;
@@ -27,7 +29,7 @@ const BoardBlock = styled.div`
 
 
 const BoardTable = styled.table`
-  width: 1200px;
+  width: 1300px;
   height: auto;
   border-radius: 8px;
   border-collapse: collapse;
@@ -40,20 +42,47 @@ const BoardTable = styled.table`
 
   thead {
     font-size: 20px;
+    font-weight: bold;
     background-color: #395144;
     color: #f0ebce;
-    margin-bottom: 100px; // Apply margin-bottom to the thead element
   }
 
   tbody tr:last-child {
     border: none;
   }
-
-  h2 {
-    align-items: center;
+  .tr-with-margin {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 24px;
+  }
+  tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
   }
 `;
 
+const FooterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 250px;
+  font-family: 'Noto Sans KR', sans-serif;
+  button{
+    width: 120px;
+    height: 60px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+    cursor: pointer;
+  }
+  button:hover{
+    background-color: #395144;
+  }
+
+`;
 
 const HomePlate = () => {
   const [board, setBoard] = useState([]);
@@ -62,6 +91,10 @@ const HomePlate = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { userId, memberNo } = context;
+  const [modalOpen, setModalopen] = useState(false);
   
   useEffect(() => {
     const getShortDetailNews = async () => {
@@ -93,6 +126,22 @@ const HomePlate = () => {
       setMinPageNumberLimit(0);
   },[]);
 
+  const checkIfLoggedIn = () => {
+    if(userId === ""){
+      setModalopen(true);
+    }else{
+      navigate("/homeplate/Write");
+    }
+  }
+
+  const closeModal = () => {
+    setModalopen(false);
+  }
+
+  const confirmModel = () =>{
+    navigate("/login")
+  }
+
 return (
     <BoardBlock>
       <h1 className="Board">HOMEPLATE</h1>
@@ -108,9 +157,9 @@ return (
         </thead>
         <tbody>
         {board.length === 0 ? (
-            <tr style={{ textAlign: "center", fontSize: "24px" }}>
-              <td colSpan={6}>{`${category}와 일치하는 검색결과는 없습니다.`}</td>
-            </tr>
+          <tr className="tr-with-margin">
+            <td colSpan={6}>{`${category}와 일치하는 검색결과는 없습니다.`}</td>
+          </tr>
           ) : (
           board.map((boardItem) => (
           <HomePlateContainer
@@ -126,7 +175,10 @@ return (
       )}
       </tbody>
       </BoardTable>
+      <FooterDiv>
+      <div className="empty"></div>
       <Pageination 
+        postperpage={20}
         currentPage={currentPage} 
         totalData={totalData} 
         setCurrentPage={setCurrentPage} 
@@ -134,6 +186,14 @@ return (
         minPageNumberLimit={minPageNumberLimit} 
         setMaxPageNumberLimit={setMaxPageNumberLimit} 
         setMinPageNumberLimit={setMinPageNumberLimit}/>
+        <button onClick={checkIfLoggedIn}>글쓰기</button>
+        </FooterDiv>
+        <Modal 
+          type={"asd"}
+          confirm={confirmModel} 
+          open={modalOpen} 
+          close={closeModal} 
+          header="BENCH CLEARING">로그인 필요</Modal>
     </BoardBlock>
     
 

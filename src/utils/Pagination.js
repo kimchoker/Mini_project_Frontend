@@ -25,11 +25,11 @@ const PageNaviUl = styled.ul`
   }
 `;
 
-const Pagination = ({ currentPage, totalData, setCurrentPage, maxPageNumberLimit, minPageNumberLimit, setMinPageNumberLimit, setMaxPageNumberLimit}) => {
+const Pagination = ({ postperpage, currentPage, totalData, setCurrentPage, maxPageNumberLimit, minPageNumberLimit, setMinPageNumberLimit, setMaxPageNumberLimit}) => {
   const [pageNumberLimit, setPagerNumberLimit] = useState(5);
 
   const pages = [];
-  const TotalPage = Math.ceil(totalData / 10);
+  const TotalPage = Math.ceil(totalData / postperpage);
 
 
   for (let i = 1; i <= TotalPage; i++) {
