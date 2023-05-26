@@ -117,12 +117,29 @@ const TeamShortcut = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 80px;
-
+  margin-top: 20px;
   .image {
     width: 90px;
     height: 65px;
     margin-right: 2vw;
   }
+`;
+
+const TeamShortcutContainer = styled.div`
+  display: inline-block;
+
+  .teamshort {
+    font-family: 'Inter', sans-serif;
+    transform: skew(-10deg);
+    color: #395144;
+    margin-left: 160px;
+    margin-top: 50px;
+  }
+`;
+
+const TeamShortcutContainerContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const MobileHomeBlock = styled.div`
@@ -141,6 +158,12 @@ const NewsContainerContainerContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-left: 70px;
+
+  @media(max-width:768px) {
+    position: absolute;
+    left: -50px;
+    top: 700px;
+  }
 
   h2 {
     color: #395144;
@@ -272,18 +295,24 @@ const Home = () => {
                       </NewsContainer>
                     </NewsContainerContainer>
                 </NewsContainerContainerContainer>
-                <TeamShortcut>
-                    <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
-                    <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
-                    <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/twins_main/twins_main" ><img src={LG} alt="" className="image" /></a>
-                    <a href="https://www.ktwiz.co.kr/sports/site/baseball/main.do" ><img src={KT} alt="" className="image" /></a>
-                    <a href="https://tigers.co.kr/" ><img src={KIA} alt="" className="image" /></a>
-                    <a href="https://www.ncdinos.com/" ><img src={NC} alt="" className="image" /></a>
-                    <a href="http://www.samsunglions.com/" ><img src={Samsung} alt="" className="image" /></a>
-                    <a href="https://www.giantsclub.com/html/index.asp?" ><img src={Lotte} alt="" className="image" /></a>
-                    <a href="https://www.doosanbears.com/" ><img src={Doosan} alt="" className="image" /></a>
-                    <a href="https://www.hanwhaeagles.co.kr/index.do" ><img src={Hamhwa} alt="" className="image" /></a>
-                </TeamShortcut>
+
+                <TeamShortcutContainerContainer>
+                  <TeamShortcutContainer>
+                    <h2 className="teamshort">TEAM PAGE SHORTCUT</h2>
+                    <TeamShortcut>
+                        <a href="https://www.ssglanders.com/main" ><img src={SSG} alt="" className="image" /></a>
+                        <a href="http://www.heroesbaseball.co.kr/index.do" ><img src={Heroes} alt="" className="image" /></a>
+                        <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/twins_main/twins_main" ><img src={LG} alt="" className="image" /></a>
+                        <a href="https://www.ktwiz.co.kr/sports/site/baseball/main.do" ><img src={KT} alt="" className="image" /></a>
+                        <a href="https://tigers.co.kr/" ><img src={KIA} alt="" className="image" /></a>
+                        <a href="https://www.ncdinos.com/" ><img src={NC} alt="" className="image" /></a>
+                        <a href="http://www.samsunglions.com/" ><img src={Samsung} alt="" className="image" /></a>
+                        <a href="https://www.giantsclub.com/html/index.asp?" ><img src={Lotte} alt="" className="image" /></a>
+                        <a href="https://www.doosanbears.com/" ><img src={Doosan} alt="" className="image" /></a>
+                        <a href="https://www.hanwhaeagles.co.kr/index.do" ><img src={Hamhwa} alt="" className="image" /></a>
+                    </TeamShortcut>
+                  </TeamShortcutContainer>
+                </TeamShortcutContainerContainer>
             </DesktopHomeBlock>
 
             <MobileHomeBlock>
@@ -309,7 +338,40 @@ const Home = () => {
                     </table>                            
                   </div>
               </NoticeBlock>
-                
+              <NewsContainerContainerContainer>
+                  <NewsContainerContainer>
+                  <h2>오늘의 최신뉴스</h2>
+                    <NewsContainer>
+                      
+                        <LeftNewsBlock>
+                          {leftNews.map((newsItem) => (
+                            <HomeNewsContainer
+                              key={newsItem.news_No}
+                              exp={{
+                                news_No: newsItem.news_No,
+                                news_Title: newsItem.news_Title,
+                                news_Image_Url: newsItem.news_Image_Url,
+                                news_Short_Content: newsItem.news_Short_Content,
+                              }}
+                            />
+                          ))}
+                        </LeftNewsBlock>
+                        <RightNewsBlock>
+                          {rightNews.map((newsItem) => (
+                            <HomeNewsContainer
+                              key={newsItem.news_No}
+                              exp={{
+                                news_No: newsItem.news_No,
+                                news_Title: newsItem.news_Title,
+                                news_Image_Url: newsItem.news_Image_Url,
+                                news_Short_Content: newsItem.news_Short_Content,
+                              }}
+                            />
+                          ))}
+                        </RightNewsBlock>
+                      </NewsContainer>
+                    </NewsContainerContainer>
+                </NewsContainerContainerContainer>
               
             </MobileHomeBlock>
         </Homeblock>

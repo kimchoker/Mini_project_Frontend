@@ -12,15 +12,16 @@ const NewsBlock = styled.div`
     cursor: pointer;
    
   }
+
+  @media(max-width: 768px){
+    width: 400px;
+    height: 40px;
+    margin-left: -50px;
+  }
 `;
 
 
-const Images = styled.img`
-  width: 120px; 
-  height: 20px; 
-  
-  object-fit: cover;
-`;
+
 
 const Text = styled.div`
   display: flex;
