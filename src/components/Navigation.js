@@ -3,7 +3,10 @@ import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../context/UserStore";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import Loginpng from "../images/login.png"
+import LogoutPng from "../images/logout.png"
+import MyInfo from "../images/mypage.png"
 
 
 const LoginBarBlock = styled.div`
@@ -38,14 +41,18 @@ const LoginBarBlock = styled.div`
         cursor: pointer;
       }
 
+      .loginimg, .logoutimg, .mypage {
+        width: 30px;
+        height: 30px;
+        margin-top: 10px;
+        margin-right: -15px;
+      }
+
       @media (max-width: 768px) {
+        background-color: transparent;
         height: 0px;
-        .shortcut {
-          display: none;
-        }
-        button {
-          display: none;
-        }
+        
+        
       }
 `;
 
@@ -58,7 +65,7 @@ const MobileLogo = styled.div`
     height: 50px;
     .logo{
       width: 160px;
-    height: 75px;
+      height: 75px;
 }
 
 @media (min-width: 768px) {
@@ -175,7 +182,7 @@ const LogoStyle = styled.div`
 function Navigation() {
 
     const { isLoggedIn, handleLogout } = useContext(UserContext);
-
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const menu = [
     
@@ -190,6 +197,18 @@ function Navigation() {
       handleLogout();
       window.location.href = '/';
     }
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
   
 
   return (
@@ -202,22 +221,44 @@ function Navigation() {
         </LogoStyle>
       <LoginBarBlock>
             
-      {isLoggedIn ? (
-        
-        <>
-          <Link to="/mypage" className="shortcut">내 정보</Link>
-          <button onClick={logout}>로그아웃</button>
-        </>
-      ) : (
-        <>
-          <Link to="/signup" className="shortcut">
-            회원가입
-          </Link>
-          <Link to="/login" className="shortcut">
-            로그인
-          </Link>
-        </>
-      )}
+        {isLoggedIn ? (
+            <>
+              {windowWidth > 768 ? (
+                <>
+                  <Link to="/mypage" className="shortcut">내 정보</Link>
+                  <button onClick={logout}>로그아웃</button>
+                </>
+              ) : (
+
+                <>
+                  <Link to="/mypage" className="shortcut">
+                    <img src={MyInfo} alt="내 정보" className="mypage" />
+                  </Link>
+                  <button onClick={logout}>
+                    <img src={LogoutPng} alt="로그아웃" className="logoutimg" />
+                  </button>
+                </>
+                
+              )}
+            </>
+          ) : (
+            <>
+              {windowWidth > 768 ? (
+                <>
+                  <Link to="/signup" className="shortcut">회원가입</Link>
+                  <Link to="/login" className="shortcut">로그인</Link>
+                </>
+                
+              ) : (
+                  <>
+                    <Link to="/login" className="shortcut">
+                      <img src={Loginpng} alt="loginimg" className="loginimg"/>
+                    </Link>
+                  </>
+              )}
+            </>
+          )}
+
       </LoginBarBlock>
         <MobileLogo>
           <Link to="/">
