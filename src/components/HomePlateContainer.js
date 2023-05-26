@@ -8,7 +8,7 @@ const TrContainer = styled.tr`
     td{
         text-align: center;
         font-size: 20px;
-        padding: 10px;
+        padding: 17px;
     }
     &:hover {
     transform: scale(1.05);

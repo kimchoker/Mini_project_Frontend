@@ -30,6 +30,7 @@ const ScheduleDiv = styled.div`
     border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
   }
   thead{
     background-color: #6f2727;
@@ -152,6 +153,69 @@ const Schedule = () => {
         setMonthFilter(value);
     }
 
+    function getMonthByName(month){
+        console.log("month is " + month)
+        let monthName = ""
+        switch(month){
+            case "01": 
+            monthName = " Jan ";
+            break;
+
+            case "02": 
+            monthName = " Feb ";
+            break;
+
+            case "03": 
+            monthName = " Mar ";
+            break;
+
+            case "04": 
+            monthName = " Apr ";
+            break;
+
+            case "05": 
+            monthName = " May ";
+            break;
+
+            case "06": 
+            monthName = " Jun ";
+            break;
+
+            case "07": 
+            monthName = " Jul ";
+            break;
+
+            case "08": 
+            monthName = " Aug ";
+            break;
+
+            case "09": 
+            monthName = " Sep ";
+            break;
+            
+            case "10": 
+            monthName = " Oct ";
+            break;
+
+            case "11": 
+            monthName = " Nov ";
+            break;
+            
+            case "12": 
+            monthName = " Dec ";
+            break;
+
+            default:
+                console.log("Something spooky has happened!");
+        }
+        return monthName;
+    }
+
+    const formatDate = (val) => {
+        let newDate = val.split("-");
+        return newDate[2] + getMonthByName(newDate[1]) + newDate[0];
+    }
+
     return(
         <ScheduleDiv>
                 <h1 className="schedule">SCHEDULE</h1>
@@ -164,35 +228,38 @@ const Schedule = () => {
                     <li onClick={() => getTheValue(9)}>9월</li>
                 </div>
                 <table>
-
-                  <tbody>
+                    <tbody>
                     {schedule.map((scheduleItem, index) => {
+                        
                       const isGroupStart = index % 5 === 0;
                       const scheduleGroupClass = isGroupStart ? 'scheduleGroup' : '';
 
                       return (
+                        
                         <React.Fragment key={scheduleItem.id}>
+                        
                               {isGroupStart && (
                                 <tr className={scheduleGroupClass}>
                                   <th className="date">날짜</th>
-                                  <th className="time">시간</th>
                                   <th className="match">경기</th>
                                   <th className="stadium">구장</th>
+                                  <th className="time">시간</th>
                                 </tr>
                               )}
                               <tr>
                                 {isGroupStart && (
-                                  <td className="scheduleDate" rowSpan={5}>{scheduleItem.scheduleDate}</td>
+                                  <td className="scheduleDate" rowSpan={5}>
+                                    {formatDate(scheduleItem.scheduleDate)}</td>
                                 )}
-                                <td className="scheduleTime">{scheduleItem.scheduleTime}</td>
                                 <td className="scheduleScore">{scheduleItem.scheduleScore}</td>
                                 <td className="scheduleStadium">{scheduleItem.location}</td>
+                                <td className="scheduleTime">{scheduleItem.scheduleTime}</td>
                               </tr>
                         </React.Fragment>
                           );
                         })}
-                  </tbody>
-              </table>
+                        </tbody>
+                        </table>
         </ScheduleDiv>
     );
 }

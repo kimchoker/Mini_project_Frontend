@@ -12,7 +12,9 @@ import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
 import View from "./pages/NewsView";
 import MyPage from "./pages/MyPage";
+import HomePlateView from "./pages/HomePlateView";
 import Weekly from "./pages/Weekly";
+import HomePlateWrite from "./pages/HomePlateWrite";
 
 export default function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -49,11 +51,6 @@ export default function App() {
           <Weekly/>
           <Footer/>
         </>}/>
-        <Route path="/schedule" element={<>
-          <Navigation/>
-          <Schedule/>
-          <Footer/>
-        </>}/>
         <Route path="/newshome/View" element={<>
           <Navigation />
           <View />
@@ -62,6 +59,21 @@ export default function App() {
         <Route path="/homeplate" element={<>
           <Navigation />
           <HomePlate />
+          <Footer />
+        </>} />
+        <Route path="/homeplate/View" element={<>
+          <Navigation />
+          <HomePlateView />
+          <Footer />
+        </>} />
+        <Route path="/homeplate/Write" element={<>
+          <Navigation />
+          <HomePlateWrite />
+          <Footer />
+        </>} />
+        <Route path="/Schedule" element={<>
+          <Navigation />
+          <Schedule />
           <Footer />
         </>} />
         <Route path="/signup" element={<>

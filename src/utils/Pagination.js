@@ -7,8 +7,9 @@ const PageNaviUl = styled.ul`
   li {
     font-family: 'Noto Sans KR', sans-serif;
     list-style: none;
-    font-size: 20px;
+    font-size: 23px;
     font-weight: bold;
+    color: #395144;
     border-right: 3px solid #395144;
     padding-right: 30px;
     cursor: pointer;
@@ -20,17 +21,16 @@ const PageNaviUl = styled.ul`
     transform: scale(1.05);
   }
   .selected {
-    color: #395144;
-    transform: scale(1.05);
+    color: #704F4F;
   }
 `;
 
-const Pagination = ({ currentPage, totalData, setCurrentPage }) => {
+const Pagination = ({ postperpage, currentPage, totalData, setCurrentPage, maxPageNumberLimit, minPageNumberLimit, setMinPageNumberLimit, setMaxPageNumberLimit}) => {
   const [pageNumberLimit, setPagerNumberLimit] = useState(5);
-  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
-  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
   const pages = [];
-  const TotalPage = Math.ceil(totalData / 10);
+  const TotalPage = Math.ceil(totalData / postperpage);
+
 
   for (let i = 1; i <= TotalPage; i++) {
     pages.push(i);

@@ -40,36 +40,39 @@ const NewsGrey = styled.div`
 const NewsHome = () => {
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState('All');
-  const [resetNews, setResetNews] = useState(false);
-  const [totalPage, setTotlaPage] = useState();
-  const [page, setPage] = useState(1);
-
+  const [totalData, setTotlaData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   useEffect(() => {
     const getShortDetailNews = async () => {
-      const rsp = await AxiosApi.getShortDetailNews(category ,page);
+      const rsp = await AxiosApi.getShortDetailNews(category ,currentPage);
       if (rsp.status === 200) setNews(rsp.data);
     }
     getShortDetailNews();
-  }, [category,resetNews, page]);
+  }, [category, currentPage]);
 
   useEffect(() => {
     const getNewsPages = async () => {
       const rsp = await AxiosApi.getNewsPages(category);
-      if(rsp.status===200)  setTotlaPage(rsp.data);
+      if(rsp.status===200)  setTotlaData(rsp.data);
     }
     getNewsPages();
-  },[category,resetNews]);
+  },[category]);
 
   const onSelect = useCallback(category => {
     setCategory(category);
-    setResetNews(true); 
-    setPage(1);
+    setCurrentPage(1);
+    setMaxPageNumberLimit(5);
+    setMinPageNumberLimit(0);
   }, []);
+
   const onEnter = useCallback(category =>{
       setCategory(category);
-      setResetNews(true)
-      setPage(1);
+      setCurrentPage(1);
+      setMaxPageNumberLimit(5);
+      setMinPageNumberLimit(0);
   },[])
     
   return (
@@ -93,7 +96,15 @@ const NewsHome = () => {
         ))
       )}
       </NewsGrey>
-      <Pagination currentPage={page} totalData={totalPage} setCurrentPage={setPage}/>
+      <Pagination
+        postperpage={10} 
+        currentPage={currentPage} 
+        totalData={totalData} 
+        setCurrentPage={setCurrentPage} 
+        maxPageNumberLimit={maxPageNumberLimit} 
+        minPageNumberLimit={minPageNumberLimit} 
+        setMaxPageNumberLimit={setMaxPageNumberLimit} 
+        setMinPageNumberLimit={setMinPageNumberLimit}/>
     </NewsBlock>
   );
 }

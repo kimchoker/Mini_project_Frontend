@@ -8,6 +8,7 @@ import Modal from "../utils/Modal";
 export const UserContext = createContext(null);
 
 const UserStore = (props) => {
+    const [memberNo, setMemberNo] = useState();
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 중인지
@@ -23,6 +24,7 @@ const UserStore = (props) => {
       if (token) {
         try {
           const response = await TokenAxiosApi.userInfo(token);
+          setMemberNo(response.data[0].memberNo)
           setUserId(response.data[0].id);
           setPassword(response.data[0].pwd);
           setNickname(response.data[0].nickname);
@@ -60,7 +62,7 @@ const UserStore = (props) => {
   
     return (
       <UserContext.Provider
-        value={{ userId, setUserId, password, setPassword, favTeam, setFavTeam, nickname, setNickname, isLoggedIn, handleLogin, handleLogout }}
+        value={{ memberNo, setMemberNo, userId, setUserId, password, setPassword, favTeam, setFavTeam, nickname, setNickname, isLoggedIn, handleLogin, handleLogout }}
       >
             {props.children}
         </UserContext.Provider>
