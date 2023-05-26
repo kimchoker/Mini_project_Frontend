@@ -21,12 +21,7 @@ const NewsBlock = styled.div`
 `;
 
 
-const Images = styled.img`
-  width: 120px; 
-  height: 20px; 
-  
-  object-fit: cover;
-`;
+
 
 const Text = styled.div`
   display: flex;
