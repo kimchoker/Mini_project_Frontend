@@ -27,7 +27,6 @@ const BoardBlock = styled.div`
   }
 `;
 
-
 const BoardTable = styled.table`
   width: 1300px;
   height: auto;
@@ -75,8 +74,12 @@ const FooterDiv = styled.div`
     border-radius: 15px;
     outline: none;
     padding-left: 10px;
-    background-color: rgb(233, 233, 233);
+    background-color: #395144;
+    color: #F0EBCE;
     cursor: pointer;
+    &:hover{
+         background-color: #704F4F;
+    }
   }
   button:hover{
     background-color: #395144;
@@ -92,7 +95,7 @@ const HomePlate = () => {
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { userId, memberNo } = context;
+  const { isLoggedIn } = context;
   const [modalOpen, setModalopen] = useState(false);
   
   useEffect(() => {
@@ -126,7 +129,7 @@ const HomePlate = () => {
   },[]);
 
   const checkIfLoggedIn = () => {
-    if(userId === ""){
+    if(!isLoggedIn){
       setModalopen(true);
     }else{
         navigate("/homeplate/Write");

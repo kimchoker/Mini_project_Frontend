@@ -70,17 +70,16 @@ const NewsContainer = (props) => {
   const navigate = useNavigate();
   
   const getTheValue = (id) => {
-    console.log(id);
-    navigate("/newshome/View",{state:{id:id}});
+    navigate(`/newshome/${id}`);
   };
   
   return (
-    <NewsBlock>
+    <NewsBlock onClick={()=>{getTheValue(props.exp.news_No)}}>
       <Images
         src={props.exp.news_Image_Url}
         alt="Error"
       />
-      <Text onClick={()=>{getTheValue(props.exp.news_No)}}>
+      <Text>
         <h2>{props.exp.news_Title}</h2>
         <p>{props.exp.news_Short_Content}</p>
       </Text>

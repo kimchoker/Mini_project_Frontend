@@ -1,8 +1,7 @@
 import { createContext, useState } from "react";
 import { useEffect } from "react";
-import TokenAxiosApi from "../Api/TokenAxiosApi";
+import TokenAxiosApi from "../Api/MemberApi";
 import { Navigate } from "react-router-dom";
-import Modal from "../utils/Modal";
 
 
 export const UserContext = createContext(null);
@@ -10,25 +9,18 @@ export const UserContext = createContext(null);
 const UserStore = (props) => {
     const [memberNo, setMemberNo] = useState();
     const [userId, setUserId] = useState("");
-    const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 중인지
     const [favTeam, setFavTeam] = useState("");
     const [nickname, setNickname]  = useState("");
-
-    const [modalOpen, setModalOpen] = useState(false);
-		const [modalText, setModalText] = useState("");
-
 
     const restoreSession = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
           const response = await TokenAxiosApi.userInfo(token);
-          setMemberNo(response.data[0].memberNo)
-          setUserId(response.data[0].id);
-          setPassword(response.data[0].pwd);
-          setNickname(response.data[0].nickname);
-          setFavTeam(response.data[0].favTeam);
+          setMemberNo(response.data.setMemberNo);
+          setNickname(response.data.nickname);
+          setFavTeam(response.data.favTeam);
           handleLogin();          // restoreSession 처리 완료 후 handleLogin 호출
         } catch (error) {
           console.log("세션 복구 중 오류 발생 : ", error);
@@ -37,8 +29,6 @@ const UserStore = (props) => {
         }
       }
     };
-
-    
 
     const handleLogin = () => {
           setIsLoggedIn(true);
@@ -56,13 +46,11 @@ const UserStore = (props) => {
       localStorage.removeItem('token');
       setIsLoggedIn(false);
       setUserId("");
-      setPassword("");
-      
     };
   
     return (
       <UserContext.Provider
-        value={{ memberNo, setMemberNo, userId, setUserId, password, setPassword, favTeam, setFavTeam, nickname, setNickname, isLoggedIn, handleLogin, handleLogout }}
+        value={{ memberNo, setMemberNo, userId, setUserId, favTeam, setFavTeam, nickname, setNickname, isLoggedIn, handleLogin, handleLogout}}
       >
             {props.children}
         </UserContext.Provider>

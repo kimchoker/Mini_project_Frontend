@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import UserStore from "./context/UserStore";
 import SignUp from "./pages/SignUp";
 import FindPw from "./pages/FindPassword";
-import View from "./pages/NewsView";
+import NewsView from "./pages/NewsView";
 import MyPage from "./pages/MyPage";
 import HomePlateView from "./pages/HomePlateView";
 import Weekly from "./pages/Weekly";
@@ -51,9 +51,9 @@ export default function App() {
             <Weekly />
             {windowWidth > 768 && <Footer />}
           </>} />
-          <Route path="/newshome/View" element={<>
+          <Route path="/newshome/:id" element={<>
             <Navigation />
-            <View />
+            <NewsView />
             {windowWidth > 768 && <Footer />}
           </>} />
           <Route path="/homeplate" element={<>
@@ -61,7 +61,7 @@ export default function App() {
             <HomePlate />
             {windowWidth > 768 && <Footer />}
           </>} />
-          <Route path="/homeplate/View" element={<>
+          <Route path="/homeplate/:id" element={<>
             <Navigation />
             <HomePlateView />
             {windowWidth > 768 && <Footer />}
@@ -89,11 +89,6 @@ export default function App() {
           ) : (
             <FindPw />
           )} />
-          <Route path="/newshome/view" element={<>
-            <Navigation />
-            <View />
-            {windowWidth > 768 && <Footer />}
-          </>} />
           <Route path="/mypage" element={windowWidth > 768 ? (
             <>
               <Navigation />

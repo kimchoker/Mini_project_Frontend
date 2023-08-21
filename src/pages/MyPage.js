@@ -3,7 +3,7 @@ import { useState } from "react";
 import { UserContext } from "../context/UserStore";
 import { useContext } from "react";
 import { useEffect } from "react";
-import TokenAxiosApi from "../Api/TokenAxiosApi";
+import TokenAxiosApi from "../Api/MemberApi";
 import Modal from "../utils/Modal";
 import AxiosApi from "../Api/AxiosApi";
 import styled from "styled-components";
@@ -637,10 +637,7 @@ const MyPage = () => {
         <div className="item1">
           <button className="delete-button" onClick={onclickDelete}>회원탈퇴</button>
         </div>
-        <h2>내 작성글</h2>
-        <MyWriting>
 
-        </MyWriting>
         </Container>
     );
 };

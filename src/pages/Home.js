@@ -93,6 +93,7 @@ const NoticeBlock = styled.div`
     }
     .name {
       padding: 25px;
+      color: #395144;
     }
 
   }
@@ -162,16 +163,18 @@ const NewsContainerContainerContainer = styled.div`
   @media(max-width:768px) {
     position: absolute;
     left: -50px;
-    top: 700px;
+    top: 900px;
   }
 
   h2 {
     color: #395144;
   }
 `;
+
 const NewsContainerContainer = styled.div`
   display: inline-block;
 `;
+
 const NewsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -195,8 +198,6 @@ const RightNewsBlock = styled.div`
 const Home = () => {
   const [latestBoard, setLatestBoard] = useState();
   const [news, setNews] = useState([]);
-  const [category, setCategory] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1)
   const navigate = useNavigate();
   
   useEffect(()=>{
@@ -318,7 +319,6 @@ const Home = () => {
             <MobileHomeBlock>
               <NoticeBlock>
                   <div className="noticeNew">
-                            
                     <table>
                       <thead>
                         <tr>

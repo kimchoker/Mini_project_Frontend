@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "../Api/AxiosApi";
 import NewsDetailContainer from "../components/NewsDetailContainer";
+import NewsLikeDisLikeContainer from "../components/NewsLikeDislikeContainer";
+import NewsCommentConatiner from "../components/NewsCommnetContainer";
 
 const NewsBlock = styled.div`
   display: flex;
@@ -46,61 +48,51 @@ const NewsViewNavi = styled.div`
   cursor: pointer;
 
   li:hover {
-    transform: scale(1.05);
+    color: #704F4F;
   }
 `;
 
-const View = () => {
-  const location = useLocation();
-  const [news, setNews] = useState([]);
+const NewsView = () => {
   const navigate = useNavigate();
-  const [newsId, setNewsId] = useState(location.state.id);
+  const {id} = useParams();
+  const [news, setNews] = useState();
 
   useEffect(() => {
     const fetchNews = async () => {
-      const rsp = await AxiosApi.getLongDetailNews(newsId);
-      if (rsp.status === 200) setNews(rsp.data);
+      const response = await AxiosApi.getLongDetailNews(id);
+      if (response.status === 200){
+        setNews(response.data);
+      }
     };
     fetchNews();
-  }, [newsId]);
+  }, []);
 
   const goBacktoNews = () => {
     navigate("/newshome");
   };
 
-  const goBack = () => {
-    setNewsId(newsId - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const goForward = () => {
-    setNewsId(newsId + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <NewsBlock>
       <h1 className="News">NEWS</h1>
-      {news.length === 0 ? (
-        <h1>해당 기사가 없습니다</h1>
-      ) : (
         <NewsGrey>
-          <NewsDetailContainer
-            exp={{
-              news_Title: news[0].news_Title,
-              news_Image_Url: news[0].news_Image_Url,
-              news_Long_Content: news[0].news_Long_Content,
-            }}
-          />
+          {news && 
+            <NewsDetailContainer
+              exp={{
+                news_Title : news.news_Title,
+                news_Image_Url : news.news_Image_Url,
+                news_Long_Content : news.news_Long_Content
+              }}
+            />
+
+          }
           <NewsViewNavi>
-            <li onClick={goBack}>&lt;</li>
             <li onClick={goBacktoNews}>목록으로 가기</li>
-            <li onClick={goForward}>&gt;</li>
           </NewsViewNavi>
+          <NewsLikeDisLikeContainer newsNo={id}/>
+          <NewsCommentConatiner newsNo={id}/>
         </NewsGrey>
-      )}
     </NewsBlock>
   );
 };
 
-export default View;
+export default NewsView;

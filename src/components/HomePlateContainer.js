@@ -18,10 +18,13 @@ const TrContainer = styled.tr`
 
 
 const BoardContainer = (props) => {
+
     const navigate = useNavigate();
+    
     const getTheValue = (id) => {
-        navigate("/homeplate/View",{state:{id:id}});
+        navigate(`/homeplate/${id}`);
     };
+    
     return(
         <TrContainer onClick={()=>{getTheValue(props.exp.boardNo)}}>
             <td>{props.exp.boardNo}</td>

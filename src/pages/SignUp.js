@@ -86,13 +86,6 @@ const Container = styled.div`
   font-size: 12px;
   color: #999;
 }
-  /* .success {
-    color: royalblue;
-  }
-  .error {
-    color: red;
-  } */
-
   .enable-button {
     margin-top: 50px;
     margin-left: 30px;

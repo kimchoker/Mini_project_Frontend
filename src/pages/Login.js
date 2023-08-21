@@ -6,10 +6,7 @@ import { UserContext } from "../context/UserStore";
 import Modal from "../utils/Modal";
 import Logo from "../images/logo-big.png"
 import Field from "../images/field2.jpg"
-import TokenAxiosApi from "../Api/TokenAxiosApi";
-
-   
-  
+import TokenAxiosApi from "../Api/MemberApi";
 
     const LoginBlock = styled.div`
         position: relative;
@@ -123,8 +120,8 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
     const Login = () => {
 
         const context = useContext(UserContext);
-        const { setUserId, setPassword,  setFavTeam, setNickname, handleLogin, nickname, favTeam } = context;
-        const navigate = useNavigate(); // 라우터 이동을 하기 위해서 
+        const { setMemberNo, setFavTeam, setNickname, handleLogin} = context;
+        const navigate = useNavigate();  
 
         // 키보드 입력 
         const [inputId, setInputId] = useState("");
@@ -138,32 +135,20 @@ import TokenAxiosApi from "../Api/TokenAxiosApi";
 
         const onClickLogin = async () => {
             try {
-            const response = await TokenAxiosApi.getToken(inputId, inputPw);
-						console.log(inputId);
-						console.log(inputPw);
-            if (response.status === 200) {
-              localStorage.setItem('token', response.data);
-              const token = localStorage.getItem('token');
-              console.log(token);  
-        
-              const userInfoResponse = await TokenAxiosApi.userInfo(token);
-              const userData = JSON.stringify(userInfoResponse, null, 2);
-              const userDataObject = JSON.parse(userData);
-              
-              setUserId(inputId);
-              setPassword(inputPw);
-              setNickname(userDataObject.data[0].nickname);
-              setFavTeam(userDataObject.data[0].favTeam);
-							console.log(nickname);
-							console.log(favTeam);
-							handleLogin();
-              navigate("/");
+                const response = await TokenAxiosApi.getToken(inputId, inputPw);
+                if (response.status === 200) {
+                    localStorage.setItem('token', response.data);
+                    const token = localStorage.getItem('token');
+                    const userInfoResponse = await TokenAxiosApi.userInfo(token);
+                    setMemberNo(userInfoResponse.data.setMemberNo);
+                    setNickname(userInfoResponse.data.nickname);
+                    setFavTeam(userInfoResponse.data.favTeam);
+			        handleLogin();
+                    navigate("/");
             } else {
-              
               setModalopen(true);
             }
           } catch (error) {
-            
             setModalopen(true);
           }
         };
