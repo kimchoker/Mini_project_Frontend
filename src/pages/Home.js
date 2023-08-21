@@ -204,6 +204,7 @@ const Home = () => {
     const getLatestBoard = async() =>{
       const rsp = await AxiosApi.getLatestBoard("All");
       if(rsp.status === 200) setLatestBoard(rsp.data);
+      console.log(rsp.data);
     }
     const getShortDetailNews = async () => {
       const rsp = await AxiosApi.getShortDetailNews("All" , 1);

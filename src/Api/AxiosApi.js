@@ -100,6 +100,10 @@ const AxiosApi = {
       return await axios.get(Backend + `/Homeplate/View?board_No=${boardNo}`); 
    }, 
 
+   getLatestBoard : async() =>{
+    return await axios.get(Backend + "/Latest");
+    },
+
    writeBoard : async(data, token) => {
     return await axios.post(Backend + "/Homeplate/Write",data,{
       headers: {
